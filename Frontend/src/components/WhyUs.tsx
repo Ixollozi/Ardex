@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Award, Users, Shield, Lightbulb } from 'lucide-react';
+import { Award, Users, Shield, Lightbulb, Target, Eye } from 'lucide-react';
 
-const icons = [Award, Users, Shield, Lightbulb];
+const icons = [Award, Users, Shield, Lightbulb, Target, Eye];
 
 export default function WhyUs() {
   const { t } = useLanguage();

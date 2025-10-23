@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, MapPin } from 'lucide-react';
-import { FaTelegram } from 'react-icons/fa';
-import { apiClient, CompanyContact } from '@/lib/api';
+import { Send } from 'lucide-react';
+import { apiClient } from '@/lib/api';
 
 export default function Contact() {
   const { language, t } = useLanguage();
@@ -19,23 +18,6 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [contactInfo, setContactInfo] = useState<CompanyContact | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchContactInfo = async () => {
-      try {
-        const data = await apiClient.getContacts();
-        setContactInfo(data);
-      } catch (error) {
-        console.error('Failed to fetch contact info:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContactInfo();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -162,77 +144,8 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div className="lg:col-span-5 space-y-8">
-            {loading ? (
-              <div className="text-center py-12">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#1F6B5E]"></div>
-                <p className="mt-4 text-grey-600">Загрузка контактов...</p>
-              </div>
-            ) : contactInfo ? (
-              <div className="bg-grey-50 rounded-2xl p-8 space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#E6F2F0] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-[#1F6B5E]" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-grey-900 mb-2">
-                      {t.contact.address}
-                    </h3>
-                    <p className="text-grey-600">
-                      {contactInfo.address || t.contact.addressText}
-                    </p>
-                  </div>
-                </div>
-
-                {contactInfo.phone && (
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[#E6F2F0] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#1F6B5E] font-bold">📞</span>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-grey-900 mb-2">
-                        {language === 'ru' ? 'Телефон' : 'Telefon'}
-                      </h3>
-                      <p className="text-grey-600">{contactInfo.phone}</p>
-                    </div>
-                  </div>
-                )}
-
-                {contactInfo.email && (
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[#E6F2F0] rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#1F6B5E] font-bold">✉️</span>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-grey-900 mb-2">
-                        Email
-                      </h3>
-                      <p className="text-grey-600">{contactInfo.email}</p>
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-6 border-t border-grey-200">
-                  <a
-                    href={contactInfo.telegram || "https://t.me/eneca_uz"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-3 bg-[#0088cc] hover:bg-[#006699] text-white px-6 py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg group"
-                  >
-                    <FaTelegram size={24} />
-                    <span className="font-medium">{t.contact.telegram}</span>
-                  </a>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-grey-500 italic text-lg">
-                  На данный момент информация отсутствует
-                </p>
-              </div>
-            )}
-
+          {/* Working Hours */}
+          <div className="lg:col-span-5">
             <div className="bg-grey-50 rounded-2xl p-8">
               <h3 className="text-lg font-bold text-grey-900 mb-4">
                 {language === 'ru' ? 'Режим работы' : 'Ish vaqti'}

@@ -30,6 +30,10 @@ media/
 staticfiles/
 static/
 
+# Django Migrations
+*/migrations/*.py
+!*/migrations/__init__.py
+
 # Virtual Environment
 venv/
 env/
@@ -123,6 +127,7 @@ jspm_packages/
 *.db
 *.sqlite
 *.sqlite3
+ardex.db
 
 # Backup files
 *.bak

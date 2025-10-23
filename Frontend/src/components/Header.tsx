@@ -23,9 +23,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-[#1F6B5E]">
-              ARDEX
-            </h1>
+            <img 
+              src="/logo.svg" 
+              alt="ARDEX" 
+              className="h-40 md:h-40 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}

@@ -1,11 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { FaTelegram, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { apiClient, CompanyContact, Service } from '@/lib/api';
 
 export default function Footer() {
   const { language, t } = useLanguage();
+  const [contactInfo, setContactInfo] = useState<CompanyContact | null>(null);
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log('Fetching data...');
+        const [contactData, servicesData] = await Promise.all([
+          apiClient.getContacts(),
+          apiClient.getServices()
+        ]);
+        console.log('Contact data:', contactData);
+        console.log('Services data:', servicesData);
+        setContactInfo(contactData);
+        setServices(servicesData);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -31,7 +57,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4 mt-6">
               <a
-                href="https://t.me/eneca_uz"
+                href={contactInfo?.telegram || "https://t.me/eneca_uz"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-grey-800 hover:bg-[#1F6B5E] rounded-lg flex items-center justify-center transition-colors"
@@ -105,13 +131,26 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">
               {t.nav.services}
             </h4>
-            <ul className="space-y-3 text-grey-300">
-              {t.services.items.slice(0, 4).map((service, idx) => (
-                <li key={idx}>
-                  {service.title}
-                </li>
-              ))}
-            </ul>
+            {loading ? (
+              <div className="space-y-3">
+                {[...Array(4)].map((_, idx) => (
+                  <div key={idx} className="animate-pulse bg-grey-700 h-4 rounded w-3/4"></div>
+                ))}
+              </div>
+            ) : (
+              <ul className="space-y-3 text-grey-300">
+                {services.slice(0, 4).map((service) => (
+                  <li key={service.id}>
+                    {service.title}
+                  </li>
+                ))}
+                {services.length === 0 && (
+                  <li className="text-grey-500 italic">
+                    {language === 'ru' ? 'Услуги загружаются...' : 'Xizmatlar yuklanmoqda...'}
+                  </li>
+                )}
+              </ul>
+            )}
           </div>
 
           {/* Contact */}
@@ -119,42 +158,47 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">
               {t.nav.contacts}
             </h4>
-            <ul className="space-y-3 text-grey-300">
-              <li>
-                {language === 'ru' ? 'Email:' : 'Elektron pochta:'}<br />
-                <a href="mailto:info@eneca.uz" className="hover:text-[#1F6B5E] transition-colors">
-                  info@eneca.uz
-                </a>
-              </li>
-              <li>
-                {language === 'ru' ? 'Телефон:' : 'Telefon:'}<br />
-                <a href="tel:+998901234567" className="hover:text-[#1F6B5E] transition-colors">
-                  +998 90 123 45 67
-                </a>
-              </li>
-              <li>
-                {t.contact.address}:<br />
-                {t.contact.addressText}
-              </li>
-            </ul>
+            {loading ? (
+              <div className="space-y-3 text-grey-300">
+                <div className="animate-pulse bg-grey-700 h-4 rounded w-3/4"></div>
+                <div className="animate-pulse bg-grey-700 h-4 rounded w-1/2"></div>
+                <div className="animate-pulse bg-grey-700 h-4 rounded w-2/3"></div>
+              </div>
+            ) : (
+              <ul className="space-y-3 text-grey-300">
+                {contactInfo?.email && (
+                  <li>
+                    {language === 'ru' ? 'Email:' : 'Elektron pochta:'}<br />
+                    <a href={`mailto:${contactInfo.email}`} className="hover:text-[#1F6B5E] transition-colors">
+                      {contactInfo.email}
+                    </a>
+                  </li>
+                )}
+                {contactInfo?.phone && (
+                  <li>
+                    {language === 'ru' ? 'Телефон:' : 'Telefon:'}<br />
+                    <a href={`tel:${contactInfo.phone}`} className="hover:text-[#1F6B5E] transition-colors">
+                      {contactInfo.phone}
+                    </a>
+                  </li>
+                )}
+                {contactInfo?.address && (
+                  <li>
+                    {t.contact.address}:<br />
+                    {contactInfo.address}
+                  </li>
+                )}
+                {!contactInfo?.email && !contactInfo?.phone && !contactInfo?.address && (
+                  <li className="text-grey-500 italic">
+                    {language === 'ru' ? 'Контактная информация загружается...' : 'Aloqa ma\'lumotlari yuklanmoqda...'}
+                  </li>
+                )}
+              </ul>
+            )}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-grey-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-grey-400 text-sm">
-            </p>
-            <div className="flex space-x-6 text-sm text-grey-400">
-              <a href="#" className="hover:text-[#1F6B5E] transition-colors">
-                {language === 'ru' ? 'Политика конфиденциальности' : 'Maxfiylik siyosati'}
-              </a>
-              <a href="#" className="hover:text-[#1F6B5E] transition-colors">
-                {language === 'ru' ? 'Условия использования' : 'Foydalanish shartlari'}
-              </a>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </footer>
   );
