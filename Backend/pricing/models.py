@@ -9,11 +9,10 @@ class PricingPlan(models.Model):
     features = models.TextField(help_text="One feature per line")
     order = models.PositiveIntegerField(default=0)
 
-    seo_title = models.CharField(max_length=255, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
-
     class Meta:
         ordering = ["order", "id"]
+        verbose_name = "Pricing Plan"
+        verbose_name_plural = "Pricing Plans"
 
     def __str__(self) -> str:  # pragma: no cover
         return self.title

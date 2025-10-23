@@ -8,11 +8,10 @@ class FAQ(models.Model):
     answer = models.TextField()
     order = models.PositiveIntegerField(default=0)
 
-    seo_title = models.CharField(max_length=255, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
-
     class Meta:
         ordering = ["order", "id"]
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQs"
 
     def __str__(self) -> str:  # pragma: no cover
         return self.question

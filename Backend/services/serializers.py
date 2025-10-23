@@ -12,12 +12,9 @@ class ServiceSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "icon",
             "image",
             "slug",
             "order",
-            "seo_title",
-            "meta_description",
         ]
 
 

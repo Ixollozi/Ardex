@@ -7,7 +7,7 @@ from .models import Service
 
 @register(Service)
 class ServiceTR(TranslationOptions):
-    fields = ("title", "description", "seo_title", "meta_description")
+    fields = ("title", "description")
 
 
 

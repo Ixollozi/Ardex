@@ -7,7 +7,7 @@ from .models import PricingPlan
 
 @register(PricingPlan)
 class PricingPlanTR(TranslationOptions):
-    fields = ("title", "features", "seo_title", "meta_description")
+    fields = ("title", "features")
 
 
 

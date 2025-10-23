@@ -10,8 +10,9 @@ class CompanyContact(models.Model):
     address = models.CharField(max_length=255, blank=True)
     telegram = models.CharField(max_length=100, blank=True)
 
-    seo_title = models.CharField(max_length=255, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
+    class Meta:
+        verbose_name = "Company Contact"
+        verbose_name_plural = "Company Contacts"
 
     def __str__(self) -> str:  # pragma: no cover
         return self.company_name or "Contacts"
@@ -23,6 +24,9 @@ class Feedback(models.Model):
     phone = models.CharField(max_length=50, blank=True)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
 
     def __str__(self) -> str:  # pragma: no cover
         return f"Feedback from {self.name}"

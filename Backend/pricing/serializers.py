@@ -17,8 +17,6 @@ class PricingPlanSerializer(serializers.ModelSerializer):
             "features",
             "features_list",
             "order",
-            "seo_title",
-            "meta_description",
         ]
 
     def get_features_list(self, obj: PricingPlan):

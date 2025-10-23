@@ -14,12 +14,9 @@ from .serializers import CompanyContactSerializer, FeedbackSerializer
 feedback_logger = logging.getLogger("feedback")
 
 
-class CompanyContactRetrieveAPIView(generics.RetrieveAPIView):
+class CompanyContactRetrieveAPIView(generics.ListAPIView):
     queryset = CompanyContact.objects.all()
     serializer_class = CompanyContactSerializer
-
-    def get_object(self):
-        return CompanyContact.objects.first()
 
 
 class FeedbackSendAPIView(generics.CreateAPIView):

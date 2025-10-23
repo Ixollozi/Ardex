@@ -9,13 +9,12 @@ class CompanyContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyContact
         fields = [
+            "id",
             "company_name",
             "email",
             "phone",
             "address",
             "telegram",
-            "seo_title",
-            "meta_description",
         ]
 
 

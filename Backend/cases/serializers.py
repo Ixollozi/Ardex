@@ -13,11 +13,8 @@ class CaseSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "image",
-            "client",
-            "year",
             "slug",
-            "seo_title",
-            "meta_description",
+            "created_at",
         ]
 
 

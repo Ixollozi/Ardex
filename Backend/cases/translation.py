@@ -7,7 +7,7 @@ from .models import Case
 
 @register(Case)
 class CaseTR(TranslationOptions):
-    fields = ("title", "description", "seo_title", "meta_description")
+    fields = ("title", "description")
 
 
 

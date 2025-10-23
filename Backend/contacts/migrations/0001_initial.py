@@ -20,8 +20,6 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(blank=True, max_length=50)),
                 ('address', models.CharField(blank=True, max_length=255)),
                 ('telegram', models.CharField(blank=True, max_length=100)),
-                ('seo_title', models.CharField(blank=True, max_length=255)),
-                ('meta_description', models.CharField(blank=True, max_length=300)),
             ],
         ),
         migrations.CreateModel(
