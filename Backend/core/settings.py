@@ -15,15 +15,13 @@ DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "*").split(",") if h.strip()]
 
-LANGUAGE_CODE = "ru"  # Russian default
-LANGUAGES = (
-    ("ru", "Russian"),
-    ("uz", "Uzbek"),
-)
-LOCALE_PATHS = [BASE_DIR / "locale"]
-TIME_ZONE = os.getenv("TIME_ZONE", "Asia/Tashkent")
+LANGUAGE_CODE = "ru"
+TIME_ZONE = "Asia/Tashkent"
 USE_I18N = True
 USE_TZ = True
+USE_L10N = True
+
+# Admin interface settings
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -38,7 +36,6 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",
     "corsheaders",
-    "modeltranslation",
 
     # Local apps
     "core",
@@ -48,6 +45,7 @@ INSTALLED_APPS = [
     "faq",
     "contacts",
     "pages",
+    "whyus",
 ]
 
 SITE_ID = int(os.getenv("SITE_ID", "1"))
@@ -56,13 +54,11 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "core.middleware.APILoggingMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -92,7 +88,7 @@ ASGI_APPLICATION = "core.asgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "ardex.db",
+        "NAME": BASE_DIR / "ardex_new.db",
     }
 }
 
@@ -108,6 +104,8 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_ROOT = BASE_DIR / "media"
 STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
+
+# Admin customization
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [

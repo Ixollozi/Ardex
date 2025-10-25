@@ -1,91 +1,89 @@
-# 🚀 Ardex - Корпоративный сайт
+# Ardex - Корпоративный веб-сайт
 
-Django + Next.js проект для B2B/B2C клиентов в Узбекистане с поддержкой русского и узбекского языков.
+Современный корпоративный веб-сайт с Django Backend и Next.js Frontend.
 
-## ⚡ Быстрый запуск
+## Структура проекта
 
-### Вариант 1: Автоматические скрипты (рекомендуется)
+- `Backend/` - Django REST API
+- `Frontend/` - Next.js React приложение
 
-**Windows (BAT файл):**
+## Быстрый старт
 
+### 1. Установка зависимостей
+
+**Backend:**
 ```bash
-# Двойной клик на файл:
-start-all.bat
+cd Backend
+pip install -r requirements.txt
 ```
 
-### Вариант 2: Ручной запуск
-
+**Frontend:**
 ```bash
-# Терминал 1 - Django
-cd Backend
-python manage.py runserver 0.0.0.0:8000
-
-# Терминал 2 - Next.js  
 cd Frontend
 npm install
+```
+
+### 2. Настройка базы данных
+
+```bash
+cd Backend
+python reset_and_setup.py
+```
+
+### 3. Запуск проекта
+
+**Вариант 1: Автоматический запуск**
+```bash
+start-dev.bat
+```
+
+**Вариант 2: Ручной запуск**
+
+Backend (терминал 1):
+```bash
+cd Backend
+python manage.py runserver
+```
+
+Frontend (терминал 2):
+```bash
+cd Frontend
 npm run dev
 ```
 
-## 🌐 Доступ к сайту
+## Доступные URL
 
-- **Главная страница**
-- **Админка Django**
-- **API**
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000/api/
+- **Admin панель**: http://localhost:8000/admin/
+- **API документация**: http://localhost:8000/api-docs/
 
-## 🔧 Создание администратора
+## Данные для входа в админку
 
-```bash
-cd Backend
-python manage.py createsuperuser
-```
+- **Логин**: admin
+- **Пароль**: admin123
 
-## 📁 Структура проекта
-
-```
-├── Backend/          # Django API
-│   ├── services/     # Услуги
-│   ├── cases/        # Кейсы
-│   ├── pricing/      # Цены
-│   ├── faq/          # FAQ
-│   ├── contacts/     # Контакты
-│   └── pages/        # SEO страницы
-├── Frontend/         # Next.js сайт
-└── start-all.bat     # Скрипт запуска
-```
-
-## 🌍 Многоязычность
-
-- **Русский** (по умолчанию)
-- **Узбекский** (через django-modeltranslation)
-
-## 📡 API Endpoints
+## API Endpoints
 
 - `GET /api/services/` - Список услуг
-- `GET /api/cases/` - Портфолио
-- `GET /api/pricing/` - Тарифы
-- `GET /api/faq/` - FAQ
-- `GET /api/contacts/` - Контакты
-- `POST /api/contacts/send/` - Отправка формы
-- `GET /api/pages/<slug>/` - SEO данные
+- `GET /api/cases/` - Список кейсов
+- `GET /api/pricing/` - Тарифные планы
+- `GET /api/faq/` - Часто задаваемые вопросы
+- `GET /api/contacts/` - Контактная информация
+- `POST /api/contacts/send/` - Отправка формы обратной связи
 
-## 🐳 Docker (для продакшена)
+## Технологии
 
-```bash
-cd Backend
-docker compose up --build
-```
+**Backend:**
+- Django 5.0.7
+- Django REST Framework
+- SQLite
+- Pillow (для изображений)
 
-## ⚠️ Требования
-
-- Python 3.12+
-- Node.js 18+
-- npm
-
-## 🎯 Особенности
-
-- ✅ Единый порт для фронтенда и API
-- ✅ Автоматический прокси Django → Next.js
-- ✅ Многоязычность (RU/UZ)
-- ✅ SEO-готовность
-- ✅ Telegram интеграция для форм
-- ✅ Docker готовность
+**Frontend:**
+- Next.js 15.3.5
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Radix UI

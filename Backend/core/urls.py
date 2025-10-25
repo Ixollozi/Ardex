@@ -3,6 +3,7 @@ from __future__ import annotations
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from core.admin import admin_site
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
@@ -17,7 +18,7 @@ from core.api_html_view import APIHTMLView
 router = DefaultRouter()
 
 urlpatterns = [
-    path("admin", admin.site.urls),
+    path("admin", admin_site.urls),
     path("api-docs/", APIHTMLView.as_view(), name="api-docs-html"),
     path("api/", APIDocumentationView.as_view(), name="api-docs"),
     path("api/", include("services.urls")),
@@ -26,6 +27,7 @@ urlpatterns = [
     path("api/", include("faq.urls")),
     path("api/", include("contacts.urls")),
     path("api/", include("pages.urls")),
+    path("api/whyus/", include("whyus.urls")),
     re_path(r"^sitemap\.xml$", sitemap, {"sitemaps": {"pages": StaticPagesSitemap}}, name="sitemap"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]

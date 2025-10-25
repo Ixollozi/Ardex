@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import * as Lucide from 'lucide-react';
+import Link from 'next/link';
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
@@ -17,33 +18,49 @@ export default function Header() {
     }
   };
 
+  const goToHome = () => {
+    // Если мы на главной странице, скроллим к началу
+    if (window.location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Если мы на другой странице, переходим на главную
+      window.location.href = '/';
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-grey-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <img 
-              src="/logo.svg" 
-              alt="ARDEX" 
-              className="h-40 md:h-40 w-auto"
-            />
+            <button
+              onClick={goToHome}
+              className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+            >
+              <img 
+                src="/logo.svg" 
+                alt="ARDEX" 
+                className="h-40 md:h-40 w-auto"
+              />
+            </button>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('home')}
+              onClick={goToHome}
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.home}
             </button>
-            <button
-              onClick={() => scrollToSection('services')}
+            <Link
+              href="/services"
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.services}
-            </button>
+            </Link>
             <button
               onClick={() => scrollToSection('cases')}
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
@@ -110,17 +127,18 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-grey-200">
             <nav className="flex flex-col space-y-4">
               <button
-                onClick={() => scrollToSection('home')}
+                onClick={goToHome}
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
               >
                 {t.nav.home}
               </button>
-              <button
-                onClick={() => scrollToSection('services')}
+              <Link
+                href="/services"
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.services}
-              </button>
+              </Link>
               <button
                 onClick={() => scrollToSection('cases')}
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"

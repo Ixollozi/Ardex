@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Fallback, SkeletonList } from '@/components/ui/fallback';
 import { apiClient, type FAQ } from '@/lib/api';
 
 export default function FAQ() {
@@ -43,10 +44,7 @@ export default function FAQ() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#1F6B5E]"></div>
-            <p className="mt-4 text-grey-600">Загрузка FAQ...</p>
-          </div>
+          <SkeletonList items={5} />
         ) : displayFAQ.length > 0 ? (
           <Accordion type="single" collapsible className="space-y-4">
             {displayFAQ.map((item) => {
@@ -67,11 +65,11 @@ export default function FAQ() {
             })}
           </Accordion>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-grey-500 italic text-lg">
-              На данный момент информация отсутствует
-            </p>
-          </div>
+          <Fallback
+            type="empty"
+            title="FAQ недоступен"
+            description="На данный момент часто задаваемые вопросы не добавлены"
+          />
         )}
       </div>
     </section>

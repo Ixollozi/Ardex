@@ -1,0 +1,205 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Панель управления{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Темная тема всегда активна */
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px var(--shadow);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px var(--shadow-hover);
+    }
+    
+    .stat-card h3 {
+        margin: 0 0 10px 0;
+        color: var(--text-secondary);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+    
+    .stat-card .number {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--accent-primary);
+        margin: 0;
+        line-height: 1;
+    }
+    
+    .recent-feedback {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+    
+    .recent-feedback h3 {
+        margin: 0 0 15px 0;
+        color: var(--text-primary);
+        border-bottom: 2px solid var(--accent-primary);
+        padding-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    .feedback-item {
+        border-bottom: 1px solid var(--border-light);
+        padding: 10px 0;
+    }
+    
+    .feedback-item:last-child {
+        border-bottom: none;
+    }
+    
+    .feedback-name {
+        font-weight: 600;
+        color: var(--accent-primary);
+    }
+    
+    .feedback-date {
+        color: var(--text-secondary);
+        font-size: 12px;
+    }
+    
+    .feedback-message {
+        color: var(--text-primary);
+        margin-top: 5px;
+        font-size: 14px;
+    }
+    
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .quick-action {
+        background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+    
+    .quick-action:hover {
+        background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent-primary) 100%);
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px var(--shadow-hover);
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .dashboard-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Панель управления Ardex</h1>
+    
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h3>Новые отзывы (30 дней)</h3>
+            <p class="number">{{ recent_feedback }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Всего кейсов</h3>
+            <p class="number">{{ total_cases }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Услуги</h3>
+            <p class="number">{{ total_services }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Тарифы</h3>
+            <p class="number">{{ total_pricing }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>FAQ</h3>
+            <p class="number">{{ total_faq }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Всего отзывов</h3>
+            <p class="number">{{ total_feedback }}</p>
+        </div>
+    </div>
+    
+    <div class="quick-actions">
+        <a href="{% url 'ardex_admin:contacts_feedback_changelist' %}" class="quick-action">
+            Управление отзывами
+        </a>
+        <a href="{% url 'ardex_admin:cases_case_changelist' %}" class="quick-action">
+            Управление кейсами
+        </a>
+        <a href="{% url 'ardex_admin:services_service_changelist' %}" class="quick-action">
+            Управление услугами
+        </a>
+        <a href="{% url 'ardex_admin:pricing_pricingplan_changelist' %}" class="quick-action">
+            Управление тарифами
+        </a>
+        <a href="{% url 'ardex_admin:faq_faq_changelist' %}" class="quick-action">
+            Управление FAQ
+        </a>
+        <a href="{% url 'ardex_admin:pages_page_changelist' %}" class="quick-action">
+            Управление страницами
+        </a>
+    </div>
+    
+    {% if latest_feedback %}
+    <div class="recent-feedback">
+        <h3>Последние отзывы</h3>
+        {% for feedback in latest_feedback %}
+        <div class="feedback-item">
+            <div class="feedback-name">{{ feedback.name }}</div>
+            <div class="feedback-date">{{ feedback.created_at|date:"d.m.Y H:i" }}</div>
+            <div class="feedback-message">{{ feedback.message|truncatewords:20 }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -6,6 +6,8 @@ from .models import PricingPlan
 
 
 class PricingPlanSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    features = serializers.SerializerMethodField()
     features_list = serializers.SerializerMethodField()
 
     class Meta:
@@ -19,8 +21,14 @@ class PricingPlanSerializer(serializers.ModelSerializer):
             "order",
         ]
 
+    def get_title(self, obj):
+        return obj.title_ru
+    
+    def get_features(self, obj):
+        return obj.features_ru
+
     def get_features_list(self, obj: PricingPlan):
-        return [f.strip() for f in obj.features.splitlines() if f.strip()]
+        return [f.strip() for f in obj.features_ru.splitlines() if f.strip()]
 
 
 

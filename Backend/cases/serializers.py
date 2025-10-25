@@ -6,6 +6,9 @@ from .models import Case
 
 
 class CaseSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    
     class Meta:
         model = Case
         fields = [
@@ -16,6 +19,12 @@ class CaseSerializer(serializers.ModelSerializer):
             "slug",
             "created_at",
         ]
+    
+    def get_title(self, obj):
+        return obj.title_ru
+    
+    def get_description(self, obj):
+        return obj.description_ru
 
 
 

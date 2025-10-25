@@ -1,0 +1,212 @@
+# Russian translations for Ardex Admin Panel
+# Copyright (C) 2024 Ardex
+# This file is distributed under the same license as the Ardex project.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ardex Admin Panel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: 2024-01-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# Models
+msgid "Кейс"
+msgstr "Кейс"
+
+msgid "Кейсы"
+msgstr "Кейсы"
+
+msgid "Название (Русский)"
+msgstr "Название (Русский)"
+
+msgid "Название (Узбекский)"
+msgstr "Название (Узбекский)"
+
+msgid "Описание (Русский)"
+msgstr "Описание (Русский)"
+
+msgid "Описание (Узбекский)"
+msgstr "Описание (Узбекский)"
+
+msgid "Изображение"
+msgstr "Изображение"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Дата создания"
+msgstr "Дата создания"
+
+msgid "Услуга"
+msgstr "Услуга"
+
+msgid "Услуги"
+msgstr "Услуги"
+
+msgid "Порядок"
+msgstr "Порядок"
+
+msgid "Тарифный план"
+msgstr "Тарифный план"
+
+msgid "Тарифные планы"
+msgstr "Тарифные планы"
+
+msgid "Цена"
+msgstr "Цена"
+
+msgid "Функции (Русский)"
+msgstr "Функции (Русский)"
+
+msgid "Функции (Узбекский)"
+msgstr "Функции (Узбекский)"
+
+msgid "Одна функция на строку (Русский)"
+msgstr "Одна функция на строку (Русский)"
+
+msgid "Одна функция на строку (Узбекский)"
+msgstr "Одна функция на строку (Узбекский)"
+
+msgid "Часто задаваемый вопрос"
+msgstr "Часто задаваемый вопрос"
+
+msgid "Часто задаваемые вопросы"
+msgstr "Часто задаваемые вопросы"
+
+msgid "Вопрос (Русский)"
+msgstr "Вопрос (Русский)"
+
+msgid "Вопрос (Узбекский)"
+msgstr "Вопрос (Узбекский)"
+
+msgid "Ответ (Русский)"
+msgstr "Ответ (Русский)"
+
+msgid "Ответ (Узбекский)"
+msgstr "Ответ (Узбекский)"
+
+msgid "Страница"
+msgstr "Страница"
+
+msgid "Страницы"
+msgstr "Страницы"
+
+msgid "Заголовок (Русский)"
+msgstr "Заголовок (Русский)"
+
+msgid "Заголовок (Узбекский)"
+msgstr "Заголовок (Узбекский)"
+
+msgid "SEO заголовок (Русский)"
+msgstr "SEO заголовок (Русский)"
+
+msgid "SEO заголовок (Узбекский)"
+msgstr "SEO заголовок (Узбекский)"
+
+msgid "Meta описание (Русский)"
+msgstr "Meta описание (Русский)"
+
+msgid "Meta описание (Узбекский)"
+msgstr "Meta описание (Узбекский)"
+
+msgid "Контакт компании"
+msgstr "Контакт компании"
+
+msgid "Контакты компании"
+msgstr "Контакты компании"
+
+msgid "Название компании (Русский)"
+msgstr "Название компании (Русский)"
+
+msgid "Название компании (Узбекский)"
+msgstr "Название компании (Узбекский)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Телефон"
+msgstr "Телефон"
+
+msgid "Адрес (Русский)"
+msgstr "Адрес (Русский)"
+
+msgid "Адрес (Узбекский)"
+msgstr "Адрес (Узбекский)"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Отзыв"
+msgstr "Отзыв"
+
+msgid "Отзывы"
+msgstr "Отзывы"
+
+msgid "Имя"
+msgstr "Имя"
+
+msgid "Сообщение"
+msgstr "Сообщение"
+
+# Admin interface
+msgid "Ardex Админ Панель"
+msgstr "Ardex Админ Панель"
+
+msgid "Ardex Админ"
+msgstr "Ardex Админ"
+
+msgid "Добро пожаловать в админ панель Ardex"
+msgstr "Добро пожаловать в админ панель Ardex"
+
+# Navigation
+msgid "Главная"
+msgstr "Главная"
+
+msgid "Кейсы"
+msgstr "Кейсы"
+
+msgid "Тарифы"
+msgstr "Тарифы"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+# Dashboard
+msgid "Панель управления Ardex"
+msgstr "Панель управления Ardex"
+
+msgid "Управление отзывами"
+msgstr "Управление отзывами"
+
+msgid "Управление кейсами"
+msgstr "Управление кейсами"
+
+msgid "Управление услугами"
+msgstr "Управление услугами"
+
+msgid "Управление тарифами"
+msgstr "Управление тарифами"
+
+msgid "Управление FAQ"
+msgstr "Управление FAQ"
+
+msgid "Управление страницами"
+msgstr "Управление страницами"
+
+msgid "Последние отзывы"
+msgstr "Последние отзывы"
+
+msgid "Новые отзывы (30 дней)"
+msgstr "Новые отзывы (30 дней)"
+
+msgid "Всего кейсов"
+msgstr "Всего кейсов"
+
+msgid "Всего отзывов"
+msgstr "Всего отзывов"

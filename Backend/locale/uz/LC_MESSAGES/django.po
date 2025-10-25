@@ -1,0 +1,230 @@
+# Uzbek translations for Ardex Admin Panel
+# Copyright (C) 2024 Ardex
+# This file is distributed under the same license as the Ardex project.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ardex Admin Panel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: 2024-01-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# Models
+msgid "Кейс"
+msgstr "Ish"
+
+msgid "Кейсы"
+msgstr "Ishlar"
+
+msgid "Название (Русский)"
+msgstr "Nomi (Ruscha)"
+
+msgid "Название (Узбекский)"
+msgstr "Nomi (O'zbekcha)"
+
+msgid "Описание (Русский)"
+msgstr "Tavsif (Ruscha)"
+
+msgid "Описание (Узбекский)"
+msgstr "Tavsif (O'zbekcha)"
+
+msgid "Изображение"
+msgstr "Rasm"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Дата создания"
+msgstr "Yaratilgan sana"
+
+msgid "Услуга"
+msgstr "Xizmat"
+
+msgid "Услуги"
+msgstr "Xizmatlar"
+
+msgid "Порядок"
+msgstr "Tartib"
+
+msgid "Тарифный план"
+msgstr "Tarif rejasi"
+
+msgid "Тарифные планы"
+msgstr "Tarif rejalari"
+
+msgid "Цена"
+msgstr "Narx"
+
+msgid "Функции (Русский)"
+msgstr "Funksiyalar (Ruscha)"
+
+msgid "Функции (Узбекский)"
+msgstr "Funksiyalar (O'zbekcha)"
+
+msgid "Одна функция на строку (Русский)"
+msgstr "Har bir qatorga bitta funksiya (Ruscha)"
+
+msgid "Одна функция на строку (Узбекский)"
+msgstr "Har bir qatorga bitta funksiya (O'zbekcha)"
+
+msgid "Часто задаваемый вопрос"
+msgstr "Tez-tez so'raladigan savol"
+
+msgid "Часто задаваемые вопросы"
+msgstr "Tez-tez so'raladigan savollar"
+
+msgid "Вопрос (Русский)"
+msgstr "Savol (Ruscha)"
+
+msgid "Вопрос (Узбекский)"
+msgstr "Savol (O'zbekcha)"
+
+msgid "Ответ (Русский)"
+msgstr "Javob (Ruscha)"
+
+msgid "Ответ (Узбекский)"
+msgstr "Javob (O'zbekcha)"
+
+msgid "Страница"
+msgstr "Sahifa"
+
+msgid "Страницы"
+msgstr "Sahifalar"
+
+msgid "Заголовок (Русский)"
+msgstr "Sarlavha (Ruscha)"
+
+msgid "Заголовок (Узбекский)"
+msgstr "Sarlavha (O'zbekcha)"
+
+msgid "SEO заголовок (Русский)"
+msgstr "SEO sarlavha (Ruscha)"
+
+msgid "SEO заголовок (Узбекский)"
+msgstr "SEO sarlavha (O'zbekcha)"
+
+msgid "Meta описание (Русский)"
+msgstr "Meta tavsif (Ruscha)"
+
+msgid "Meta описание (Узбекский)"
+msgstr "Meta tavsif (O'zbekcha)"
+
+msgid "Контакт компании"
+msgstr "Kompaniya kontakti"
+
+msgid "Контакты компании"
+msgstr "Kompaniya kontaktlari"
+
+msgid "Название компании (Русский)"
+msgstr "Kompaniya nomi (Ruscha)"
+
+msgid "Название компании (Узбекский)"
+msgstr "Kompaniya nomi (O'zbekcha)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Телефон"
+msgstr "Telefon"
+
+msgid "Адрес (Русский)"
+msgstr "Manzil (Ruscha)"
+
+msgid "Адрес (Узбекский)"
+msgstr "Manzil (O'zbekcha)"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Отзыв"
+msgstr "Sharh"
+
+msgid "Отзывы"
+msgstr "Sharhlar"
+
+msgid "Имя"
+msgstr "Ism"
+
+msgid "Сообщение"
+msgstr "Xabar"
+
+# Admin interface
+msgid "Ardex Админ Панель"
+msgstr "Ardex Admin Paneli"
+
+msgid "Ardex Админ"
+msgstr "Ardex Admin"
+
+msgid "Добро пожаловать в админ панель Ardex"
+msgstr "Ardex admin paneliga xush kelibsiz"
+
+# Navigation
+msgid "Главная"
+msgstr "Bosh sahifa"
+
+msgid "Отзывы"
+msgstr "Sharhlar"
+
+msgid "Кейсы"
+msgstr "Ishlar"
+
+msgid "Услуги"
+msgstr "Xizmatlar"
+
+msgid "Тарифы"
+msgstr "Tariflar"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Страницы"
+msgstr "Sahifalar"
+
+# Dashboard
+msgid "Панель управления Ardex"
+msgstr "Ardex boshqaruv paneli"
+
+msgid "Управление отзывами"
+msgstr "Sharhlarni boshqarish"
+
+msgid "Управление кейсами"
+msgstr "Ishlarni boshqarish"
+
+msgid "Управление услугами"
+msgstr "Xizmatlarni boshqarish"
+
+msgid "Управление тарифами"
+msgstr "Tariflarni boshqarish"
+
+msgid "Управление FAQ"
+msgstr "FAQ boshqarish"
+
+msgid "Управление страницами"
+msgstr "Sahifalarni boshqarish"
+
+msgid "Последние отзывы"
+msgstr "So'nggi sharhlar"
+
+msgid "Новые отзывы (30 дней)"
+msgstr "Yangi sharhlar (30 kun)"
+
+msgid "Всего кейсов"
+msgstr "Jami ishlar"
+
+msgid "Услуги"
+msgstr "Xizmatlar"
+
+msgid "Тарифы"
+msgstr "Tariflar"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Всего отзывов"
+msgstr "Jami sharhlar"

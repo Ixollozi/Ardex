@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class WhyusConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'whyus'
+    verbose_name = 'Почему выбирают нас'

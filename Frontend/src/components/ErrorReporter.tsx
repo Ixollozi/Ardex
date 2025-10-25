@@ -1,136 +1,75 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import React from 'react';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import Link from 'next/link';
 
-type ReporterProps = {
-  /*  ⎯⎯ props are only provided on the global-error page ⎯⎯ */
+interface ErrorReporterProps {
   error?: Error & { digest?: string };
   reset?: () => void;
-};
+}
 
-export default function ErrorReporter({ error, reset }: ReporterProps) {
-  /* ─ instrumentation shared by every route ─ */
-  const lastOverlayMsg = useRef("");
-  const pollRef = useRef<NodeJS.Timeout>();
-
-  useEffect(() => {
-    const inIframe = window.parent !== window;
-    if (!inIframe) return;
-
-    const send = (payload: unknown) => window.parent.postMessage(payload, "*");
-
-    const onError = (e: ErrorEvent) =>
-      send({
-        type: "ERROR_CAPTURED",
-        error: {
-          message: e.message,
-          stack: e.error?.stack,
-          filename: e.filename,
-          lineno: e.lineno,
-          colno: e.colno,
-          source: "window.onerror",
-        },
-        timestamp: Date.now(),
-      });
-
-    const onReject = (e: PromiseRejectionEvent) =>
-      send({
-        type: "ERROR_CAPTURED",
-        error: {
-          message: e.reason?.message ?? String(e.reason),
-          stack: e.reason?.stack,
-          source: "unhandledrejection",
-        },
-        timestamp: Date.now(),
-      });
-
-    const pollOverlay = () => {
-      const overlay = document.querySelector("[data-nextjs-dialog-overlay]");
-      const node =
-        overlay?.querySelector(
-          "h1, h2, .error-message, [data-nextjs-dialog-body]"
-        ) ?? null;
-      const txt = node?.textContent ?? node?.innerHTML ?? "";
-      if (txt && txt !== lastOverlayMsg.current) {
-        lastOverlayMsg.current = txt;
-        send({
-          type: "ERROR_CAPTURED",
-          error: { message: txt, source: "nextjs-dev-overlay" },
-          timestamp: Date.now(),
-        });
-      }
-    };
-
-    window.addEventListener("error", onError);
-    window.addEventListener("unhandledrejection", onReject);
-    pollRef.current = setInterval(pollOverlay, 1000);
-
-    return () => {
-      window.removeEventListener("error", onError);
-      window.removeEventListener("unhandledrejection", onReject);
-      pollRef.current && clearInterval(pollRef.current);
-    };
-  }, []);
-
-  /* ─ extra postMessage when on the global-error route ─ */
-  useEffect(() => {
-    if (!error) return;
-    window.parent.postMessage(
-      {
-        type: "global-error-reset",
-        error: {
-          message: error.message,
-          stack: error.stack,
-          digest: error.digest,
-          name: error.name,
-        },
-        timestamp: Date.now(),
-        userAgent: navigator.userAgent,
-      },
-      "*"
-    );
-  }, [error]);
-
-  /* ─ ordinary pages render nothing ─ */
-  if (!error) return null;
-
-  /* ─ global-error UI ─ */
+export default function ErrorReporter({ error, reset }: ErrorReporterProps) {
   return (
-    <html>
-      <body className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
-        <div className="max-w-md w-full text-center space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold text-destructive">
-              Something went wrong!
-            </h1>
-            <p className="text-muted-foreground">
-              An unexpected error occurred. Please try again fixing with Orchids
+    <div className="min-h-screen bg-grey-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
+        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <AlertTriangle className="w-8 h-8 text-red-600" />
+        </div>
+        
+        <h1 className="text-2xl font-bold text-grey-900 mb-4">
+          Что-то пошло не так
+        </h1>
+        
+        <p className="text-grey-600 mb-6">
+          Произошла непредвиденная ошибка. Мы уже работаем над её устранением.
+        </p>
+
+        {error && (
+          <div className="bg-grey-100 rounded-lg p-4 mb-6 text-left">
+            <p className="text-sm text-grey-700 font-mono">
+              {error.message || 'Неизвестная ошибка'}
             </p>
-          </div>
-          <div className="space-y-2">
-            {process.env.NODE_ENV === "development" && (
-              <details className="mt-4 text-left">
-                <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
-                  Error details
-                </summary>
-                <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-auto">
-                  {error.message}
-                  {error.stack && (
-                    <div className="mt-2 text-muted-foreground">
-                      {error.stack}
-                    </div>
-                  )}
-                  {error.digest && (
-                    <div className="mt-2 text-muted-foreground">
-                      Digest: {error.digest}
-                    </div>
-                  )}
-                </pre>
-              </details>
+            {error.digest && (
+              <p className="text-xs text-grey-500 mt-2">
+                ID ошибки: {error.digest}
+              </p>
             )}
           </div>
+        )}
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          {reset && (
+            <button
+              onClick={reset}
+              className="flex items-center justify-center gap-2 bg-[#1F6B5E] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Попробовать снова
+            </button>
+          )}
+          
+          <Link
+            href="/"
+            className="flex items-center justify-center gap-2 border-2 border-[#1F6B5E] text-[#1F6B5E] py-3 px-6 rounded-lg font-medium hover:bg-[#1F6B5E] hover:text-white transition-colors duration-300"
+          >
+            <Home className="w-4 h-4" />
+            На главную
+          </Link>
         </div>
-      </body>
-    </html>
+
+        <div className="mt-8 pt-6 border-t border-grey-200">
+          <p className="text-sm text-grey-500">
+            Если проблема повторяется, свяжитесь с нами
+          </p>
+          <Link
+            href="/#contact"
+            className="text-[#1F6B5E] hover:underline text-sm font-medium"
+          >
+            Связаться с поддержкой
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

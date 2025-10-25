@@ -6,6 +6,9 @@ from .models import CompanyContact, Feedback
 
 
 class CompanyContactSerializer(serializers.ModelSerializer):
+    company_name = serializers.SerializerMethodField()
+    address = serializers.SerializerMethodField()
+    
     class Meta:
         model = CompanyContact
         fields = [
@@ -16,6 +19,12 @@ class CompanyContactSerializer(serializers.ModelSerializer):
             "address",
             "telegram",
         ]
+    
+    def get_company_name(self, obj):
+        return obj.company_name_ru
+    
+    def get_address(self, obj):
+        return obj.address_ru
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
