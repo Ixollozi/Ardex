@@ -133,7 +133,7 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.id}
-                  className={`relative bg-white rounded-2xl p-8 ${
+                  className={`relative bg-white rounded-2xl p-8 flex flex-col ${
                     isPopular
                       ? 'border-2 border-[#1F6B5E] shadow-xl scale-105'
                       : 'border border-grey-200 shadow-md'
@@ -161,7 +161,7 @@ export default function Pricing() {
                     </div>
                   </div>
 
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-4 mb-8 flex-grow">
                     {planFeatures.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
                         <Check className="text-[#1F6B5E] flex-shrink-0 mt-0.5" size={20} />
@@ -171,7 +171,7 @@ export default function Pricing() {
                   </ul>
 
                   <Button
-                    className={`w-full py-6 text-lg font-medium rounded-xl transition-all duration-300 ${
+                    className={`w-full py-6 text-lg font-medium rounded-xl transition-all duration-300 mt-auto ${
                       isPopular
                         ? 'bg-[#1F6B5E] hover:bg-[#165048] text-white shadow-lg hover:shadow-xl'
                         : 'bg-grey-100 hover:bg-grey-200 text-grey-900'
