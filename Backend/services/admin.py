@@ -10,7 +10,7 @@ from .models import Service, ServiceSubcategory
 
 # Optional CKEditor widget (fallback to default Textarea if not installed)
 try:
-    from ckeditor.widgets import CKEditorWidget
+    from ckeditor.widgets import CKEditorWidget  # pyright: ignore[reportMissingImports]
     CKEDITOR_AVAILABLE = True
 except ImportError:
     CKEditorWidget = None

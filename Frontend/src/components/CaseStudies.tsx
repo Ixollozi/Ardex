@@ -88,25 +88,10 @@ export default function CaseStudies() {
                           dangerouslySetInnerHTML={{ __html: caseStudy.description }}
                         />
                       )}
-                      <Link
-                        href="/cases"
-                        className="mt-auto inline-flex items-center text-[#1F6B5E] hover:text-[#165048] font-medium group"
-                      >
-                        Подробнее
-                        <Briefcase className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                      </Link>
                     </div>
                   </div>
                 );
               })}
-            </div>
-            <div className="text-center mt-12">
-              <Link 
-                href="/cases"
-                className="inline-flex items-center bg-[#1F6B5E] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
-              >
-                Посмотреть все кейсы
-              </Link>
             </div>
           </>
         ) : (

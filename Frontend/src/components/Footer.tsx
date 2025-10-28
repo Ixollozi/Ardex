@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { FaTelegram, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaTelegram, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
 import { apiClient, CompanyContact, Service, PageSeo } from '@/lib/api';
 
 export default function Footer() {
@@ -113,7 +113,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/cases" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
+                <a href="/#cases" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
                   {t.nav.cases}
                 </a>
               </li>

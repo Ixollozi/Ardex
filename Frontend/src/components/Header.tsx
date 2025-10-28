@@ -56,7 +56,7 @@ export default function Header() {
               {t.nav.services}
             </Link>
             <Link
-              href="/cases"
+              href="/#cases"
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.cases}
@@ -135,7 +135,7 @@ export default function Header() {
                 {t.nav.services}
               </Link>
               <Link
-                href="/cases"
+                href="/#cases"
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
                 onClick={() => setMobileMenuOpen(false)}
               >
