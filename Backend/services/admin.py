@@ -1,10 +1,20 @@
 from __future__ import annotations
 
 from django.contrib import admin
+from django.db import models
+from django import forms
 from django.contrib.admin import AdminSite
 from django.utils.translation import gettext_lazy as _
 
 from .models import Service, ServiceSubcategory
+
+# Optional CKEditor widget (fallback to default Textarea if not installed)
+try:
+    from ckeditor.widgets import CKEditorWidget
+    CKEDITOR_AVAILABLE = True
+except ImportError:
+    CKEditorWidget = None
+    CKEDITOR_AVAILABLE = False
 
 
 class ServiceSubcategoryAdmin(admin.ModelAdmin):
@@ -26,6 +36,17 @@ class ServiceSubcategoryAdmin(admin.ModelAdmin):
         }),
     )
     list_per_page = 20
+    
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        
+        # Use CKEditor if available
+        if CKEDITOR_AVAILABLE and CKEditorWidget:
+            for field_name in ['description_ru', 'description_uz']:
+                if field_name in form.base_fields:
+                    form.base_fields[field_name].widget = CKEditorWidget()
+        
+        return form
 
 
 class ServiceAdmin(admin.ModelAdmin):
@@ -47,6 +68,17 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     list_per_page = 20
+    
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        
+        # Use CKEditor if available
+        if CKEDITOR_AVAILABLE and CKEditorWidget:
+            for field_name in ['description_ru', 'description_uz']:
+                if field_name in form.base_fields:
+                    form.base_fields[field_name].widget = CKEditorWidget()
+        
+        return form
     
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)

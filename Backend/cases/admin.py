@@ -1,8 +1,16 @@
 from __future__ import annotations
 
 from django.contrib import admin
+from django.db import models
+from django import forms
 
 from .models import Case
+
+# Optional CKEditor widget (fallback to default Textarea if not installed)
+try:
+    from ckeditor.widgets import CKEditorWidget
+except Exception:  # pragma: no cover
+    CKEditorWidget = None
 
 
 @admin.register(Case)
@@ -14,6 +22,10 @@ class CaseAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at",)
     list_filter = ("created_at",)
     date_hierarchy = "created_at"
+    if CKEditorWidget:
+        formfield_overrides = {
+            models.TextField: {"widget": CKEditorWidget()},
+        }
     fieldsets = (
         ("Русский контент", {
             "fields": ("title_ru", "description_ru")

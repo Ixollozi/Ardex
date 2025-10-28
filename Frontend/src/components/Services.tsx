@@ -36,10 +36,10 @@ export default function Services() {
   const displayServices = services;
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-grey-50">
+    <section id="services" className="py-20 md:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-grey-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             {t.services.title}
           </h2>
         </div>
@@ -68,12 +68,13 @@ export default function Services() {
                     <div className="w-16 h-16 bg-[#E6F2F0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#1F6B5E] transition-colors duration-300">
                       <Icon className="text-[#1F6B5E] group-hover:text-white transition-colors duration-300" size={32} />
                     </div>
-                    <h3 className="text-2xl font-bold text-grey-900 mb-4">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {service.title}
                     </h3>
-                    <p className="text-grey-600 leading-relaxed font-light">
-                      {service.description}
-                    </p>
+                  <div 
+                    className="text-gray-600 leading-relaxed font-light formatted-content"
+                    dangerouslySetInnerHTML={{ __html: service.description }}
+                  />
                   </div>
                 );
               })}

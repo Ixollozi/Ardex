@@ -18,9 +18,35 @@ class WhyUsItemSerializer(serializers.ModelSerializer):
         ]
 
     def get_title(self, obj):
-        # Возвращаем русский заголовок по умолчанию
-        return obj.title_ru
+        # Получаем язык из контекста запроса
+        request = self.context.get('request')
+        language = 'ru'  # По умолчанию русский
+        
+        if request:
+            # Проверяем заголовок Accept-Language
+            accept_language = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+            if 'uz' in accept_language.lower():
+                language = 'uz'
+            # Также проверяем параметр в URL
+            lang_param = request.query_params.get('lang', '')
+            if lang_param in ['ru', 'uz']:
+                language = lang_param
+        
+        return obj.get_title(language)
 
     def get_description(self, obj):
-        # Возвращаем русское описание по умолчанию
-        return obj.description_ru
+        # Получаем язык из контекста запроса
+        request = self.context.get('request')
+        language = 'ru'  # По умолчанию русский
+        
+        if request:
+            # Проверяем заголовок Accept-Language
+            accept_language = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+            if 'uz' in accept_language.lower():
+                language = 'uz'
+            # Также проверяем параметр в URL
+            lang_param = request.query_params.get('lang', '')
+            if lang_param in ['ru', 'uz']:
+                language = lang_param
+        
+        return obj.get_description(language)

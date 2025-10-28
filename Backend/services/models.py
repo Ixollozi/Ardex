@@ -3,6 +3,7 @@ from __future__ import annotations
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+# from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class ServiceSubcategory(models.Model):

@@ -4,17 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Award, Users, Shield, Lightbulb, Target, Eye } from 'lucide-react';
 import { Fallback, SkeletonGrid } from '@/components/ui/fallback';
+import { apiClient, WhyUsItem } from '@/lib/api';
 
 const icons = [Award, Users, Shield, Lightbulb, Target, Eye];
-
-interface WhyUsItem {
-  id: number;
-  title: string;
-  description: string;
-  icon: string;
-  order: number;
-  is_active: boolean;
-}
 
 export default function WhyUs() {
   const { t, language } = useLanguage();
@@ -26,13 +18,9 @@ export default function WhyUs() {
     const fetchWhyUsItems = async () => {
       try {
         setError(null);
-        const response = await fetch('http://localhost:8000/api/whyus/');
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch WhyUs items');
-        }
-        
-        const data = await response.json();
+        console.log('Fetching WhyUs items for language:', language);
+        const data = await apiClient.getWhyUsItems(language);
+        console.log('WhyUs data received:', data);
         setWhyUsItems(data);
       } catch (err) {
         console.error('Error fetching WhyUs items:', err);
@@ -43,7 +31,7 @@ export default function WhyUs() {
     };
 
     fetchWhyUsItems();
-  }, []);
+  }, [language]);
 
   // Функция для получения иконки по имени
   const getIcon = (iconName: string) => {
@@ -63,7 +51,7 @@ export default function WhyUs() {
     <section className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-grey-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             {t.whyUs.title}
           </h2>
         </div>
@@ -85,15 +73,15 @@ export default function WhyUs() {
               return (
                 <div
                   key={item.id}
-                  className="group bg-white p-8 rounded-xl border border-grey-200 hover:border-[#1F6B5E] hover:shadow-lg transition-all duration-300"
+                  className="group bg-white p-8 rounded-xl border border-gray-200 hover:border-[#1F6B5E] hover:shadow-lg transition-all duration-300"
                 >
                   <div className="w-14 h-14 bg-[#E6F2F0] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1F6B5E] transition-colors duration-300">
                     <Icon className="text-[#1F6B5E] group-hover:text-white transition-colors duration-300" size={28} />
                   </div>
-                  <h3 className="text-xl font-bold text-grey-900 mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-grey-600 leading-relaxed font-light">
+                  <p className="text-gray-600 leading-relaxed font-light">
                     {item.description}
                   </p>
                 </div>

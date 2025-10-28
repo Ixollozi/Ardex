@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MessageSquare, Settings, Zap, Code, GraduationCap, FileSearch, ArrowLeft, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
-import { apiClient, Service, ServiceSubcategory } from '@/lib/api';
+import { apiClient, Service, ServiceSubcategory, PageSeo } from '@/lib/api';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -15,17 +15,34 @@ export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [pageSeo, setPageSeo] = useState<PageSeo | null>(null);
   const [selectedService, setSelectedService] = useState<number | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<ServiceSubcategory | null>(null);
   const [expandedServices, setExpandedServices] = useState<Set<number>>(new Set());
   const [expandedServiceSubcategories, setExpandedServiceSubcategories] = useState<Set<number>>(new Set());
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const pageSize = 6;
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         setError(null);
-        const data = await apiClient.getServices();
-        setServices(data);
+        const data = await apiClient.getServicesPaged(page);
+        setServices(data.results);
+        setTotalCount(data.count || data.results.length);
+        // SEO data for services page
+        const seo = await apiClient.getPageSeo('services');
+        setPageSeo(seo);
+        
+        // Проверяем URL hash для автоматического открытия услуги
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+          const service = data.results.find(s => s.slug === hash);
+          if (service) {
+            setSelectedService(service.id);
+          }
+        }
       } catch (error) {
         console.error('Failed to fetch services:', error);
         setError('Не удалось загрузить услуги');
@@ -35,7 +52,7 @@ export default function ServicesPage() {
     };
 
     fetchServices();
-  }, []);
+  }, [page]);
 
   const handleServiceClick = (service: Service) => {
     if (service.subcategory) {
@@ -86,23 +103,25 @@ export default function ServicesPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                  Наши услуги
+                  {pageSeo?.title || 'Наши услуги'}
                 </h1>
-                <p className="text-xl text-white/90 max-w-3xl mx-auto">
-                  Полный спектр IT-решений для вашего бизнеса. От разработки до поддержки.
-                </p>
+                {pageSeo?.description && (
+                  <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                    {pageSeo.description}
+                  </p>
+                )}
               </div>
             </div>
           </section>
 
           {/* Services Content */}
-          <section className="py-20 bg-grey-50">
+          <section className="py-20 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Sidebar Menu */}
                 <div className="lg:w-80 flex-shrink-0 lg:-ml-[calc(50vw-50%)]">
                   <div className="bg-white rounded-xl shadow-md p-6 sticky top-24 min-h-[600px] max-h-[calc(100vh-8rem)] overflow-y-auto">
-                    <h3 className="text-xl font-bold text-grey-900 mb-6">Услуги</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-6">Услуги</h3>
                     <nav className="space-y-2">
                       {services.map((service, index) => (
                         <div key={service.id}>
@@ -112,7 +131,7 @@ export default function ServicesPage() {
                              className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
                                selectedService === service.id
                                  ? 'bg-[#1F6B5E] text-white'
-                                 : 'text-grey-700 hover:bg-grey-100'
+                                 : 'text-gray-700 hover:bg-gray-100'
                              }`}
                            >
                              <div className="flex items-center gap-3">
@@ -128,10 +147,10 @@ export default function ServicesPage() {
                                        setSelectedService(service.id);
                                        setSelectedSubcategory(null);
                                      }}
-                                     className="p-1 rounded hover:bg-grey-200 transition-colors duration-200 cursor-pointer"
+                                     className="p-1 rounded hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                                      title="Открыть услугу"
                                    >
-                                     <ExternalLink className="w-4 h-4 text-grey-600" />
+                                 <ExternalLink className="w-4 h-4 text-gray-600" />
                                    </div>
                                  )}
                                  {service.subcategory && (
@@ -153,7 +172,7 @@ export default function ServicesPage() {
                                  className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
                                    selectedSubcategory?.id === service.subcategory?.id
                                      ? 'bg-[#1F6B5E] text-white'
-                                     : 'bg-grey-50 text-grey-700 hover:bg-grey-100'
+                                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                                  }`}
                                >
                                  <div className="flex items-center gap-2">
@@ -177,7 +196,7 @@ export default function ServicesPage() {
                   {loading ? (
                     <div className="text-center py-12">
                       <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#1F6B5E]"></div>
-                      <p className="mt-4 text-grey-600">Загрузка услуг...</p>
+                      <p className="mt-4 text-gray-600">Загрузка услуг...</p>
                     </div>
                   ) : error ? (
                     <div className="text-center py-12">
@@ -202,15 +221,16 @@ export default function ServicesPage() {
                               <Settings className="text-[#1F6B5E]" size={32} />
                             </div>
                             <div>
-                              <h2 className="text-3xl font-bold text-grey-900">{selectedSubcategory.title}</h2>
-                              <p className="text-grey-600">Подробная информация о подкатегории</p>
+                              <h2 className="text-3xl font-bold text-gray-900">{selectedSubcategory.title}</h2>
+                              <p className="text-gray-600">Подробная информация о подкатегории</p>
                             </div>
                           </div>
                           
                           <div className="prose max-w-none">
-                            <p className="text-lg text-grey-700 leading-relaxed mb-6">
-                              {selectedSubcategory.description}
-                            </p>
+                            <div 
+                              className="text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
+                              dangerouslySetInnerHTML={{ __html: selectedSubcategory.description }}
+                            />
                             
                             
                             <div className="flex gap-4">
@@ -241,8 +261,8 @@ export default function ServicesPage() {
                                   <Icon className="text-[#1F6B5E]" size={32} />
                                 </div>
                                 <div>
-                                  <h2 className="text-3xl font-bold text-grey-900">{service.title}</h2>
-                                  <p className="text-grey-600 mt-2">Подробная информация об услуге</p>
+                                  <h2 className="text-3xl font-bold text-gray-900">{service.title}</h2>
+                                  <p className="text-gray-600 mt-2">Подробная информация об услуге</p>
                                 </div>
                               </div>
                               
@@ -257,9 +277,10 @@ export default function ServicesPage() {
                               )}
                               
                               <div className="prose max-w-none">
-                                <p className="text-lg text-grey-700 leading-relaxed mb-6">
-                                  {service.description}
-                                </p>
+                                <div 
+                                  className="text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
+                                  dangerouslySetInnerHTML={{ __html: service.description }}
+                                />
                                 
                                 {/* Сабкатегории внутри услуги */}
                                 {service.subcategory && (
@@ -277,10 +298,10 @@ export default function ServicesPage() {
                                     </button>
                                     
                                     {expandedServiceSubcategories.has(service.id) && (
-                                      <div className="bg-grey-50 rounded-lg p-4">
+                                      <div className="bg-gray-50 rounded-lg p-4">
                                         <div className="flex items-center gap-2 mb-3">
                                           <div className="w-2 h-2 bg-[#1F6B5E] rounded-full" />
-                                          <span className="font-medium text-grey-900">{service.subcategory.title}</span>
+                                          <span className="font-medium text-gray-900">{service.subcategory.title}</span>
                                         </div>
                                         <button
                                           onClick={() => handleSubcategoryClick(service.subcategory!)}
@@ -310,6 +331,7 @@ export default function ServicesPage() {
                         })()
                       ) : (
                         // Показать все услуги
+                        <>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                           {services.map((service, index) => {
                             const Icon = icons[index % icons.length];
@@ -317,18 +339,20 @@ export default function ServicesPage() {
                             return (
                               <div
                                 key={service.id}
-                                className="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                                data-service-slug={service.slug}
+                                className="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
                                 onClick={() => handleServiceClick(service)}
                               >
                                 <div className="w-16 h-16 bg-[#E6F2F0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#1F6B5E] transition-colors duration-300">
                                   <Icon className="text-[#1F6B5E] group-hover:text-white transition-colors duration-300" size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-grey-900 mb-4">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                                   {service.title}
                                 </h3>
-                                <p className="text-grey-600 leading-relaxed font-light mb-6">
-                                  {service.description}
-                                </p>
+                                <div 
+                                  className="text-gray-600 leading-relaxed font-light mb-6 formatted-content"
+                                  dangerouslySetInnerHTML={{ __html: service.description }}
+                                />
                                 {service.image && (
                                   <div className="mb-4">
                                     <img 
@@ -344,7 +368,7 @@ export default function ServicesPage() {
                                     setSelectedService(service.id);
                                     setSelectedSubcategory(null);
                                   }}
-                                  className="w-full bg-[#1F6B5E] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
+                                  className="mt-auto w-full bg-[#1F6B5E] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
                                 >
                                   Подробнее
                                 </button>
@@ -352,11 +376,26 @@ export default function ServicesPage() {
                             );
                           })}
                         </div>
+                        {/* Pagination */}
+                        <div className="mt-10 flex items-center justify-center gap-2">
+                          {Array.from({ length: Math.max(1, Math.ceil(totalCount / pageSize)) }, (_, i) => i + 1).map((p) => (
+                            <button
+                              key={p}
+                              onClick={() => setPage(p)}
+                              className={`h-9 min-w-9 px-3 rounded-md border text-sm font-medium transition-colors ${
+                                p === page ? 'bg-[#1F6B5E] text-white border-[#1F6B5E]' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                              }`}
+                            >
+                              {p}
+                            </button>
+                          ))}
+                        </div>
+                        </>
                       )}
                     </>
                   ) : (
                     <div className="text-center py-12">
-                      <p className="text-grey-500 italic text-lg">
+                      <p className="text-gray-500 italic text-lg">
                         На данный момент услуги не добавлены
                       </p>
                     </div>

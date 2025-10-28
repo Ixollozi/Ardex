@@ -150,5 +150,92 @@
   }
 }
 
+/* Стили для форматированного текста из админки */
+.formatted-content h1 {
+  @apply text-2xl font-bold text-gray-900 mb-4;
+}
+
+.formatted-content h2 {
+  @apply text-xl font-bold text-gray-900 mb-3;
+}
+
+.formatted-content h3 {
+  @apply text-lg font-bold text-gray-900 mb-2;
+}
+
+.formatted-content h4 {
+  @apply text-base font-bold text-gray-900 mb-2;
+}
+
+.formatted-content h5 {
+  @apply text-sm font-bold text-gray-900 mb-1;
+}
+
+.formatted-content h6 {
+  @apply text-xs font-bold text-gray-900 mb-1;
+}
+
+.formatted-content p {
+  @apply text-gray-600 mb-3 leading-relaxed;
+}
+
+.formatted-content strong {
+  @apply font-semibold text-gray-900;
+}
+
+.formatted-content em {
+  @apply italic;
+}
+
+.formatted-content u {
+  @apply underline;
+}
+
+.formatted-content s {
+  @apply line-through;
+}
+
+.formatted-content code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800;
+}
+
+.formatted-content blockquote {
+  @apply border-l-4 border-green-600 pl-4 py-2 bg-gray-50 italic text-gray-700 my-4;
+}
+
+.formatted-content ul {
+  @apply list-disc list-inside mb-3 space-y-1;
+}
+
+.formatted-content ol {
+  @apply list-decimal list-inside mb-3 space-y-1;
+}
+
+.formatted-content li {
+  @apply text-gray-600;
+}
+
+.formatted-content a {
+  @apply text-green-600 hover:text-green-700 underline;
+}
+
+/* Стили для компонентов */
+.text-gray-600 h1,
+.text-gray-600 h2,
+.text-gray-600 h3,
+.text-gray-600 h4,
+.text-gray-600 h5,
+.text-gray-600 h6 {
+  @apply text-gray-900;
+}
+
+.text-gray-600 strong {
+  @apply text-gray-900 font-semibold;
+}
+
+.text-gray-600 code {
+  @apply bg-gray-100 text-gray-800;
+}
+
 /* Show Next.js error overlay portal in development for debugging */
 /* nextjs-portal { display: none !important; } */

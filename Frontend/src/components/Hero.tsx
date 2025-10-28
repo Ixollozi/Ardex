@@ -1,12 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { apiClient, PageSeo } from '@/lib/api';
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [pageSeo, setPageSeo] = useState<PageSeo | null>(null);
+
+  useEffect(() => {
+    const fetchPageSeo = async () => {
+      try {
+        const seo = await apiClient.getPageSeo('home', language);
+        setPageSeo(seo);
+      } catch (error) {
+        console.error('Failed to fetch home page SEO:', error);
+      }
+    };
+
+    fetchPageSeo();
+  }, [language]);
 
   const scrollToContacts = () => {
     const element = document.getElementById('contacts');
@@ -22,10 +37,10 @@ export default function Hero() {
           {/* Text Content */}
           <div className="lg:col-span-6 space-y-8">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-grey-900 leading-tight">
-              {t.hero.title}
+              {pageSeo?.title || t.hero.title}
             </h1>
             <p className="text-lg sm:text-xl text-grey-600 leading-relaxed font-light">
-              {t.hero.subtitle}
+              {pageSeo?.description || t.hero.subtitle}
             </p>
             <Button
               onClick={scrollToContacts}

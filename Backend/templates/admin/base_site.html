@@ -16,6 +16,133 @@
 {% block extrahead %}
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
+<script src="{% static 'admin/js/text_formatting.js' %}"></script>
+<style>
+/* Форматирование кнопок - принудительные стили */
+.formatting-toolbar {
+    display: flex !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    padding: 8px !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)) !important;
+    border: 1px solid #334155 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.3) !important;
+    flex-wrap: wrap !important;
+    max-width: 600px !important;
+}
+
+.formatting-btn {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: #334155 !important;
+    border: 1px solid #334155 !important;
+    color: #f8fafc !important;
+    height: 30px !important;
+    padding: 0 8px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1px !important;
+    transition: all 0.12s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 30px !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 0 0 rgba(255,255,255,0.03) inset !important;
+    position: relative !important;
+    user-select: none !important;
+}
+
+.formatting-btn:hover {
+    background: linear-gradient(180deg, #3b82f6, #2563eb) !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow: 0 6px 14px -6px rgba(59,130,246,0.45) !important;
+}
+
+.formatting-btn:active {
+    transform: translateY(0) scale(0.99) !important;
+}
+
+.formatting-btn.active {
+    background: linear-gradient(180deg, #3b82f6, #2563eb) !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+    box-shadow: 0 6px 14px -6px rgba(59,130,246,0.45) !important;
+}
+
+/* Специальные стили для разных типов кнопок */
+.formatting-btn.code {
+    font-family: 'Courier New', monospace !important;
+    background: #0f172a !important;
+    border-color: #2b3446 !important;
+}
+
+.formatting-btn.link {
+    color: #93c5fd !important;
+    border-color: #1e3a8a !important;
+}
+
+.formatting-btn.heading {
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    border-color: #2f4b3f !important;
+}
+
+.formatting-btn.paragraph {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #8bc4ba !important;
+    border-color: #2f4b3f !important;
+}
+
+.formatting-btn.list::before {
+    content: "•" !important;
+    margin-right: 4px !important;
+    color: #8bc4ba !important;
+}
+
+.formatting-btn.numbered-list::before {
+    content: "1." !important;
+    margin-right: 4px !important;
+    color: #8bc4ba !important;
+}
+
+/* Tooltips */
+.formatting-btn::after {
+    content: attr(data-tooltip) !important;
+    position: absolute !important;
+    bottom: -30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: #334155 !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+    border-radius: 6px !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.12s ease, transform 0.12s ease !important;
+}
+
+.formatting-btn:hover::after {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(-2px) !important;
+}
+
+/* Сепараторы */
+.formatting-toolbar > div[style*="width: 1px"] {
+    background: linear-gradient(180deg, transparent, #334155, transparent) !important;
+    height: 26px !important;
+}
+</style>
 <style>
     /* Темная тема всегда активна */
     body {

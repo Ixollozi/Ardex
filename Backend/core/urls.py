@@ -14,11 +14,13 @@ import requests
 from pages.sitemaps import StaticPagesSitemap
 from core.api_docs import APIDocumentationView
 from core.api_html_view import APIHTMLView
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 
 urlpatterns = [
     path("admin", admin_site.urls),
+    # path("ckeditor/", include('ckeditor_uploader.urls')),
     path("api-docs/", APIHTMLView.as_view(), name="api-docs-html"),
     path("api/", APIDocumentationView.as_view(), name="api-docs"),
     path("api/", include("services.urls")),

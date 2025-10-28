@@ -20,11 +20,25 @@ class CompanyContactSerializer(serializers.ModelSerializer):
             "telegram",
         ]
     
+    def _get_language(self):
+        request = self.context.get("request")
+        language = "ru"
+        if request:
+            accept_language = request.META.get("HTTP_ACCEPT_LANGUAGE", "")
+            if "uz" in accept_language.lower():
+                language = "uz"
+            lang_param = request.query_params.get("lang", "")
+            if lang_param in ["ru", "uz"]:
+                language = lang_param
+        return language
+    
     def get_company_name(self, obj):
-        return obj.company_name_ru
+        language = self._get_language()
+        return obj.company_name_uz if language == "uz" else obj.company_name_ru
     
     def get_address(self, obj):
-        return obj.address_ru
+        language = self._get_language()
+        return obj.address_uz if language == "uz" else obj.address_ru
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

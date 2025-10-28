@@ -10,13 +10,7 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
+  const anchorHref = (id: string) => `/#${id}`;
 
   const goToHome = () => {
     // Если мы на главной странице, скроллим к началу
@@ -49,42 +43,42 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={goToHome}
+            <Link
+              href="/"
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.home}
-            </button>
+            </Link>
             <Link
               href="/services"
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.services}
             </Link>
-            <button
-              onClick={() => scrollToSection('cases')}
+            <Link
+              href="/cases"
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.cases}
-            </button>
-            <button
-              onClick={() => scrollToSection('pricing')}
+            </Link>
+            <Link
+              href={anchorHref('pricing')}
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.pricing}
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
+            </Link>
+            <Link
+              href={anchorHref('faq')}
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.faq}
-            </button>
-            <button
-              onClick={() => scrollToSection('contacts')}
+            </Link>
+            <Link
+              href={anchorHref('contacts')}
               className="text-sm font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors"
             >
               {t.nav.contacts}
-            </button>
+            </Link>
           </nav>
 
           {/* Language Switcher & Mobile Menu Button */}
@@ -126,12 +120,13 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-grey-200">
             <nav className="flex flex-col space-y-4">
-              <button
-                onClick={goToHome}
+              <Link
+                href="/"
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.home}
-              </button>
+              </Link>
               <Link
                 href="/services"
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
@@ -139,30 +134,34 @@ export default function Header() {
               >
                 {t.nav.services}
               </Link>
-              <button
-                onClick={() => scrollToSection('cases')}
+              <Link
+                href="/cases"
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.cases}
-              </button>
-              <button
-                onClick={() => scrollToSection('pricing')}
+              </Link>
+              <Link
+                href={anchorHref('pricing')}
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.pricing}
-              </button>
-              <button
-                onClick={() => scrollToSection('faq')}
+              </Link>
+              <Link
+                href={anchorHref('faq')}
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.faq}
-              </button>
-              <button
-                onClick={() => scrollToSection('contacts')}
+              </Link>
+              <Link
+                href={anchorHref('contacts')}
                 className="text-base font-medium text-grey-600 hover:text-[#1F6B5E] transition-colors text-left"
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.contacts}
-              </button>
+              </Link>
             </nav>
           </div>
         )}

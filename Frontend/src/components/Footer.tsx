@@ -3,26 +3,31 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { FaTelegram, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
-import { apiClient, CompanyContact, Service } from '@/lib/api';
+import { apiClient, CompanyContact, Service, PageSeo } from '@/lib/api';
 
 export default function Footer() {
   const { language, t } = useLanguage();
   const [contactInfo, setContactInfo] = useState<CompanyContact | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pageSeo, setPageSeo] = useState<PageSeo | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         console.log('Fetching data...');
-        const [contactData, servicesData] = await Promise.all([
-          apiClient.getContacts(),
-          apiClient.getServices()
+        const [contactData, servicesData, homePageSeo] = await Promise.all([
+          apiClient.getContacts(language),
+          apiClient.getServices(),
+          apiClient.getPageSeo('home', language)
         ]);
         console.log('Contact data:', contactData);
+        console.log('Contact address:', contactData?.address);
         console.log('Services data:', servicesData);
+        console.log('Home page SEO:', homePageSeo);
         setContactInfo(contactData);
         setServices(servicesData);
+        setPageSeo(homePageSeo);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
@@ -31,7 +36,7 @@ export default function Footer() {
     };
 
     fetchData();
-  }, []);
+  }, [language]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -57,7 +62,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4 mt-6">
               <a
-                href={contactInfo?.telegram || "https://t.me/eneca_uz"}
+                href={pageSeo?.telegram_url || contactInfo?.telegram || "https://t.me/eneca_uz"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-grey-800 hover:bg-[#1F6B5E] rounded-lg flex items-center justify-center transition-colors"
@@ -65,19 +70,25 @@ export default function Footer() {
                 <FaTelegram size={20} />
               </a>
               <a
-                href="#"
+                href={pageSeo?.linkedin_url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-grey-800 hover:bg-[#1F6B5E] rounded-lg flex items-center justify-center transition-colors"
               >
                 <FaLinkedin size={20} />
               </a>
               <a
-                href="#"
+                href={pageSeo?.facebook_url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-grey-800 hover:bg-[#1F6B5E] rounded-lg flex items-center justify-center transition-colors"
               >
                 <FaFacebook size={20} />
               </a>
               <a
-                href="#"
+                href={pageSeo?.instagram_url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-grey-800 hover:bg-[#1F6B5E] rounded-lg flex items-center justify-center transition-colors"
               >
                 <FaInstagram size={20} />
@@ -92,36 +103,24 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <button
-                  onClick={() => scrollToSection('home')}
-                  className="text-grey-300 hover:text-[#1F6B5E] transition-colors"
-                >
+                <a href="/" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
                   {t.nav.home}
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection('services')}
-                  className="text-grey-300 hover:text-[#1F6B5E] transition-colors"
-                >
+                <a href="/services" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
                   {t.nav.services}
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection('cases')}
-                  className="text-grey-300 hover:text-[#1F6B5E] transition-colors"
-                >
+                <a href="/cases" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
                   {t.nav.cases}
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection('pricing')}
-                  className="text-grey-300 hover:text-[#1F6B5E] transition-colors"
-                >
+                <a href="/#pricing" className="text-grey-300 hover:text-[#1F6B5E] transition-colors">
                   {t.nav.pricing}
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -141,7 +140,23 @@ export default function Footer() {
               <ul className="space-y-3 text-grey-300">
                 {services.slice(0, 4).map((service) => (
                   <li key={service.id}>
-                    {service.title}
+                    <a 
+                      href={`/services#${service.slug}`} 
+                      className="hover:text-[#1F6B5E] transition-colors"
+                      onClick={(e) => {
+                        // Если мы уже на странице услуг, предотвращаем переход
+                        if (window.location.pathname === '/services') {
+                          e.preventDefault();
+                          // Находим элемент услуги и кликаем по нему
+                          const serviceElement = document.querySelector(`[data-service-slug="${service.slug}"]`) as HTMLElement;
+                          if (serviceElement) {
+                            serviceElement.click();
+                          }
+                        }
+                      }}
+                    >
+                      {service.title}
+                    </a>
                   </li>
                 ))}
                 {services.length === 0 && (
