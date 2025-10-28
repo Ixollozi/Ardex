@@ -48,10 +48,10 @@ export default function WhyUs() {
 
 
   return (
-    <section className="py-20 md:py-32 bg-white">
+    <section className="py-16 md:py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             {t.whyUs.title}
           </h2>
         </div>
@@ -67,21 +67,21 @@ export default function WhyUs() {
             onRetry={() => window.location.reload()}
           />
         ) : whyUsItems.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {whyUsItems.map((item) => {
               const Icon = getIcon(item.icon);
               return (
                 <div
                   key={item.id}
-                  className="group bg-white p-8 rounded-xl border border-gray-200 hover:border-[#1F6B5E] hover:shadow-lg transition-all duration-300"
+                  className="group bg-white p-6 md:p-8 rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="w-14 h-14 bg-[#E6F2F0] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1F6B5E] transition-colors duration-300">
-                    <Icon className="text-[#1F6B5E] group-hover:text-white transition-colors duration-300" size={28} />
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gray-800 transition-colors duration-300">
+                    <Icon className="text-gray-600 group-hover:text-white transition-colors duration-300" size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed font-light">
+                  <p className="text-gray-600 leading-relaxed font-light text-sm md:text-base">
                     {item.description}
                   </p>
                 </div>

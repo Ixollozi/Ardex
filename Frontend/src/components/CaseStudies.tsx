@@ -34,10 +34,10 @@ export default function CaseStudies() {
   const displayCases = cases;
 
   return (
-    <section id="cases" className="py-20 md:py-32 bg-white">
+    <section id="cases" className="py-16 md:py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             {t.cases.title}
           </h2>
         </div>
@@ -54,7 +54,7 @@ export default function CaseStudies() {
           />
         ) : displayCases.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {displayCases.map((caseStudy) => {
                 const imageUrl = caseStudy.image || 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop';
                 
@@ -63,7 +63,7 @@ export default function CaseStudies() {
                     key={caseStudy.id}
                     className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
                   >
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="relative h-48 md:h-64 overflow-hidden">
                       <img
                         src={imageUrl}
                         alt={caseStudy.title}
@@ -72,19 +72,19 @@ export default function CaseStudies() {
                           e.currentTarget.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop';
                         }}
                       />
-                      <div className="absolute top-4 left-4">
-                        <span className="px-4 py-2 bg-[#1F6B5E] text-white text-sm font-medium rounded-lg">
+                      <div className="absolute top-3 md:top-4 left-3 md:left-4">
+                        <span className="px-3 md:px-4 py-1 md:py-2 bg-accentGreen text-white text-xs md:text-sm font-medium rounded-lg">
                           Кейс
                         </span>
                       </div>
                     </div>
-                    <div className="p-6 flex flex-col h-full">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    <div className="p-4 md:p-6 flex flex-col h-full">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
                         {caseStudy.title}
                       </h3>
                       {caseStudy.description && (
                         <div 
-                          className="text-gray-600 text-sm mb-4 line-clamp-2 formatted-content"
+                          className="text-gray-600 text-xs md:text-sm mb-4 line-clamp-2 formatted-content"
                           dangerouslySetInnerHTML={{ __html: caseStudy.description }}
                         />
                       )}

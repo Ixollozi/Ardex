@@ -99,7 +99,7 @@ export default function ServicesPage() {
       <Header />
       <main>
           {/* Hero Section */}
-          <section className="pt-20 pb-16 bg-gradient-to-br from-[#1F6B5E] to-[#2A8B7A] text-white">
+          <section className="pt-24 pb-16 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
@@ -115,31 +115,31 @@ export default function ServicesPage() {
           </section>
 
           {/* Services Content */}
-          <section className="py-20 bg-gray-50">
+          <section className="py-12 md:py-20 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col lg:flex-row gap-8">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
                 {/* Sidebar Menu */}
                 <div className="lg:w-80 flex-shrink-0 lg:-ml-[calc(50vw-50%)]">
-                  <div className="bg-white rounded-xl shadow-md p-6 sticky top-24 min-h-[600px] max-h-[calc(100vh-8rem)] overflow-y-auto">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6">Услуги</h3>
+                  <div className="bg-white rounded-xl shadow-md p-4 md:p-6 sticky top-20 md:top-24 min-h-[400px] md:min-h-[600px] max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6">Услуги</h3>
                     <nav className="space-y-2">
                       {services.map((service, index) => (
                         <div key={service.id}>
                            <button
                              onClick={() => handleServiceClick(service)}
                              onDoubleClick={() => handleServiceDoubleClick(service)}
-                             className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
+                             className={`w-full text-left p-2 md:p-3 rounded-lg transition-colors duration-200 ${
                                selectedService === service.id
-                                 ? 'bg-[#1F6B5E] text-white'
+                                 ? 'bg-gray-800 text-white'
                                  : 'text-gray-700 hover:bg-gray-100'
                              }`}
                            >
-                             <div className="flex items-center gap-3">
+                             <div className="flex items-center gap-2 md:gap-3">
                                <div className={`w-2 h-2 rounded-full ${
-                                 selectedService === service.id ? 'bg-white' : 'bg-[#1F6B5E]'
+                                 selectedService === service.id ? 'bg-white' : 'bg-accentGreen'
                                }`} />
-                               <span className="font-medium flex-1">{service.title}</span>
-                               <div className="flex items-center gap-2">
+                               <span className="font-medium flex-1 text-sm md:text-base">{service.title}</span>
+                               <div className="flex items-center gap-1 md:gap-2">
                                  {service.subcategory && (
                                    <div
                                      onClick={(e) => {
@@ -166,20 +166,20 @@ export default function ServicesPage() {
                            
                            {/* Показываем сабкатегорию если услуга раскрыта */}
                            {service.subcategory && expandedServices.has(service.id) && (
-                             <div className="ml-4 mt-2">
+                             <div className="ml-3 md:ml-4 mt-2">
                                <button
                                  onClick={() => handleSubcategoryClick(service.subcategory!)}
-                                 className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
+                                 className={`w-full text-left p-2 md:p-3 rounded-lg transition-colors duration-200 ${
                                    selectedSubcategory?.id === service.subcategory?.id
-                                     ? 'bg-[#1F6B5E] text-white'
+                                     ? 'bg-gray-800 text-white'
                                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                                  }`}
                                >
                                  <div className="flex items-center gap-2">
                                    <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                                     selectedSubcategory?.id === service.subcategory?.id ? 'bg-white' : 'bg-[#1F6B5E]'
+                                     selectedSubcategory?.id === service.subcategory?.id ? 'bg-white' : 'bg-accentGreen'
                                    }`} />
-                                   <span className="font-medium truncate">{service.subcategory.title}</span>
+                                   <span className="font-medium truncate text-sm md:text-base">{service.subcategory.title}</span>
                                  </div>
                                </button>
                              </div>
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                    <div className="w-full">
                   {loading ? (
                     <div className="text-center py-12">
-                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#1F6B5E]"></div>
+                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accentGreen"></div>
                       <p className="mt-4 text-gray-600">Загрузка услуг...</p>
                     </div>
                   ) : error ? (
@@ -206,7 +206,7 @@ export default function ServicesPage() {
                       <p className="text-red-600 font-medium mb-4">{error}</p>
                       <button
                         onClick={() => window.location.reload()}
-                        className="bg-[#1F6B5E] text-white py-2 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
+                        className="bg-accentGreen text-white py-2 px-6 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300"
                       >
                         Попробовать снова
                       </button>
@@ -215,31 +215,31 @@ export default function ServicesPage() {
                     <>
                       {selectedSubcategory ? (
                         // Показать выбранную сабкатегорию
-                        <div className="bg-white rounded-xl shadow-md p-8">
-                          <div className="flex items-center gap-4 mb-6">
-                            <div className="w-16 h-16 bg-[#E6F2F0] rounded-xl flex items-center justify-center">
-                              <Settings className="text-[#1F6B5E]" size={32} />
+                        <div className="bg-white rounded-xl shadow-md p-4 md:p-8">
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+                            <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                              <Settings className="text-gray-600" size={24} />
                             </div>
                             <div>
-                              <h2 className="text-3xl font-bold text-gray-900">{selectedSubcategory.title}</h2>
-                              <p className="text-gray-600">Подробная информация о подкатегории</p>
+                              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{selectedSubcategory.title}</h2>
+                              <p className="text-gray-600 text-sm md:text-base">Подробная информация о подкатегории</p>
                             </div>
                           </div>
                           
                           <div className="prose max-w-none">
                             <div 
-                              className="text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
+                              className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
                               dangerouslySetInnerHTML={{ __html: selectedSubcategory.description }}
                             />
                             
                             
-                            <div className="flex gap-4">
-                              <button className="bg-[#1F6B5E] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                              <button className="bg-accentGreen text-black py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300 text-sm md:text-base">
                                 Заказать услугу
                               </button>
                               <button 
                                 onClick={() => setSelectedSubcategory(null)}
-                                className="border-2 border-[#1F6B5E] text-[#1F6B5E] py-3 px-8 rounded-lg font-medium hover:bg-[#1F6B5E] hover:text-white transition-colors duration-300"
+                                className="border-2 border-accentGreen text-accentGreen py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-accentGreen hover:text-black transition-colors duration-300 text-sm md:text-base"
                               >
                                 Все услуги
                               </button>
@@ -255,14 +255,14 @@ export default function ServicesPage() {
                           const Icon = icons[index % icons.length];
                           
                           return (
-                            <div className="bg-white rounded-xl shadow-md p-8">
-                              <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 bg-[#E6F2F0] rounded-xl flex items-center justify-center">
-                                  <Icon className="text-[#1F6B5E]" size={32} />
+                            <div className="bg-white rounded-xl shadow-md p-4 md:p-8">
+                              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                  <Icon className="text-gray-600" size={24} />
                                 </div>
                                 <div>
-                                  <h2 className="text-3xl font-bold text-gray-900">{service.title}</h2>
-                                  <p className="text-gray-600 mt-2">Подробная информация об услуге</p>
+                                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{service.title}</h2>
+                                  <p className="text-gray-600 mt-2 text-sm md:text-base">Подробная информация об услуге</p>
                                 </div>
                               </div>
                               
@@ -271,14 +271,14 @@ export default function ServicesPage() {
                                   <img 
                                     src={service.image} 
                                     alt={service.title}
-                                    className="w-full h-64 object-cover rounded-lg"
+                                    className="w-full h-48 md:h-64 object-cover rounded-lg"
                                   />
                                 </div>
                               )}
                               
                               <div className="prose max-w-none">
                                 <div 
-                                  className="text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
+                                  className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 formatted-content"
                                   dangerouslySetInnerHTML={{ __html: service.description }}
                                 />
                                 
@@ -287,7 +287,7 @@ export default function ServicesPage() {
                                   <div className="mb-6">
                                     <button
                                       onClick={() => handleServiceSubcategoryToggle(service.id)}
-                                      className="flex items-center gap-2 text-[#1F6B5E] hover:text-[#2A8B7A] transition-colors duration-200 mb-4"
+                                      className="flex items-center gap-2 text-accentGreen hover:text-accentGreen-dark transition-colors duration-200 mb-4"
                                     >
                                       <span className="font-medium">Подкатегории</span>
                                       {expandedServiceSubcategories.has(service.id) ? (
@@ -300,12 +300,12 @@ export default function ServicesPage() {
                                     {expandedServiceSubcategories.has(service.id) && (
                                       <div className="bg-gray-50 rounded-lg p-4">
                                         <div className="flex items-center gap-2 mb-3">
-                                          <div className="w-2 h-2 bg-[#1F6B5E] rounded-full" />
+                                          <div className="w-2 h-2 bg-accentGreen rounded-full" />
                                           <span className="font-medium text-gray-900">{service.subcategory.title}</span>
                                         </div>
                                         <button
                                           onClick={() => handleSubcategoryClick(service.subcategory!)}
-                                          className="text-[#1F6B5E] hover:text-[#2A8B7A] text-sm font-medium transition-colors duration-200"
+                                          className="text-accentGreen hover:text-accentGreen-dark text-sm font-medium transition-colors duration-200"
                                         >
                                           Подробнее о подкатегории →
                                         </button>
@@ -314,13 +314,13 @@ export default function ServicesPage() {
                                   </div>
                                 )}
                                 
-                                <div className="flex gap-4">
-                                  <button className="bg-[#1F6B5E] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300">
+                                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                                  <button className="bg-accentGreen text-black py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300 text-sm md:text-base">
                                     Заказать услугу
                                   </button>
                                   <button 
                                     onClick={() => setSelectedService(null)}
-                                    className="border-2 border-[#1F6B5E] text-[#1F6B5E] py-3 px-8 rounded-lg font-medium hover:bg-[#1F6B5E] hover:text-white transition-colors duration-300"
+                                    className="border-2 border-accentGreen text-accentGreen py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-accentGreen hover:text-black transition-colors duration-300 text-sm md:text-base"
                                   >
                                     Все услуги
                                   </button>
@@ -332,7 +332,7 @@ export default function ServicesPage() {
                       ) : (
                         // Показать все услуги
                         <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                           {services.map((service, index) => {
                             const Icon = icons[index % icons.length];
                             
@@ -340,17 +340,17 @@ export default function ServicesPage() {
                               <div
                                 key={service.id}
                                 data-service-slug={service.slug}
-                                className="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
+                                className="group bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
                                 onClick={() => handleServiceClick(service)}
                               >
-                                <div className="w-16 h-16 bg-[#E6F2F0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#1F6B5E] transition-colors duration-300">
-                                  <Icon className="text-[#1F6B5E] group-hover:text-white transition-colors duration-300" size={32} />
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gray-800 transition-colors duration-300">
+                                  <Icon className="text-gray-600 group-hover:text-white transition-colors duration-300" size={24} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
                                   {service.title}
                                 </h3>
                                 <div 
-                                  className="text-gray-600 leading-relaxed font-light mb-6 formatted-content"
+                                  className="text-gray-600 leading-relaxed font-light mb-4 md:mb-6 formatted-content text-sm md:text-base"
                                   dangerouslySetInnerHTML={{ __html: service.description }}
                                 />
                                 {service.image && (
@@ -358,7 +358,7 @@ export default function ServicesPage() {
                                     <img 
                                       src={service.image} 
                                       alt={service.title}
-                                      className="w-full h-48 object-cover rounded-lg"
+                                      className="w-full h-40 md:h-48 object-cover rounded-lg"
                                     />
                                   </div>
                                 )}
@@ -368,7 +368,7 @@ export default function ServicesPage() {
                                     setSelectedService(service.id);
                                     setSelectedSubcategory(null);
                                   }}
-                                  className="mt-auto w-full bg-[#1F6B5E] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
+                                  className="mt-auto w-full bg-accentGreen text-black py-3 px-6 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300 text-sm md:text-base"
                                 >
                                   Подробнее
                                 </button>
@@ -377,13 +377,13 @@ export default function ServicesPage() {
                           })}
                         </div>
                         {/* Pagination */}
-                        <div className="mt-10 flex items-center justify-center gap-2">
+                        <div className="mt-8 md:mt-10 flex items-center justify-center gap-1 md:gap-2">
                           {Array.from({ length: Math.max(1, Math.ceil(totalCount / pageSize)) }, (_, i) => i + 1).map((p) => (
                             <button
                               key={p}
                               onClick={() => setPage(p)}
-                              className={`h-9 min-w-9 px-3 rounded-md border text-sm font-medium transition-colors ${
-                                p === page ? 'bg-[#1F6B5E] text-white border-[#1F6B5E]' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                              className={`h-8 md:h-9 min-w-8 md:min-w-9 px-2 md:px-3 rounded-md border text-xs md:text-sm font-medium transition-colors ${
+                                p === page ? 'bg-accentGreen text-black border-accentGreen' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                               }`}
                             >
                               {p}
@@ -407,24 +407,24 @@ export default function ServicesPage() {
            </section>
 
           {/* CTA Section */}
-          <section className="py-20 bg-[#1F6B5E] text-white">
+          <section className="py-12 md:py-20 bg-accentGreen text-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
                 Готовы начать проект?
               </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-black/80 mb-6 md:mb-8 max-w-2xl mx-auto">
                 Свяжитесь с нами для обсуждения ваших потребностей и получения персонального предложения.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <Link 
                   href="/#contact"
-                  className="bg-white text-[#1F6B5E] py-3 px-8 rounded-lg font-medium hover:bg-grey-100 transition-colors duration-300"
+                  className="bg-white text-accentGreen py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-300 text-sm md:text-base"
                 >
                   Связаться с нами
                 </Link>
                 <Link 
                   href="/#pricing"
-                  className="border-2 border-white text-white py-3 px-8 rounded-lg font-medium hover:bg-white hover:text-[#1F6B5E] transition-colors duration-300"
+                  className="bg-white text-accentGreen py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-300 text-sm md:text-base"
                 >
                   Посмотреть цены
                 </Link>

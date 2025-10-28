@@ -109,21 +109,21 @@ export default function Pricing() {
   const displayPlans = pricingPlans;
 
   return (
-    <section id="pricing" className="py-20 md:py-32 bg-grey-50">
+    <section id="pricing" className="py-16 md:py-20 lg:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-grey-900 mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             {t.pricing.title}
           </h2>
         </div>
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#1F6B5E]"></div>
-            <p className="mt-4 text-grey-600">Загрузка тарифов...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accentGreen"></div>
+            <p className="mt-4 text-gray-600">Загрузка тарифов...</p>
           </div>
         ) : displayPlans.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {displayPlans.map((plan, index) => {
               const planName = plan.title;
               const planPrice = plan.price.toString();
@@ -133,48 +133,48 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.id}
-                  className={`relative bg-white rounded-2xl p-8 flex flex-col ${
+                  className={`relative rounded-2xl p-6 md:p-8 flex flex-col ${
                     isPopular
-                      ? 'border-2 border-[#1F6B5E] shadow-xl scale-105'
-                      : 'border border-grey-200 shadow-md'
+                      ? 'border-2 border-gray-400 shadow-xl scale-105 bg-gray-50'
+                      : 'bg-white border border-gray-200 shadow-md'
                   } transition-all duration-300 hover:shadow-xl`}
                 >
                   {isPopular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="px-4 py-2 bg-[#1F6B5E] text-white text-sm font-medium rounded-full shadow-lg">
+                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2">
+                      <span className="px-3 md:px-4 py-1 md:py-2 bg-gray-600 text-white text-xs md:text-sm font-medium rounded-full shadow-lg">
                         {language === 'ru' ? 'Популярный' : 'Mashhur'}
                       </span>
                     </div>
                   )}
 
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-grey-900 mb-4">
+                  <div className="mb-6 md:mb-8">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
                       {planName}
                     </h3>
                     <div className="flex items-baseline">
-                      <span className="text-4xl font-bold text-[#1F6B5E]">
+                      <span className="text-3xl md:text-4xl font-bold text-accentGreen">
                         {planPrice}
                       </span>
-                      <span className="text-grey-600 ml-2">
+                      <span className="text-gray-600 ml-2 text-sm md:text-base">
                         {language === 'ru' ? 'сум' : 'so\'m'} {t.pricing.perMonth}
                       </span>
                     </div>
                   </div>
 
-                  <ul className="space-y-4 mb-8 flex-grow">
+                  <ul className="space-y-3 md:space-y-4 mb-6 md:mb-8 flex-grow">
                     {planFeatures.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <Check className="text-[#1F6B5E] flex-shrink-0 mt-0.5" size={20} />
-                        <span className="text-grey-600 ml-3">{feature}</span>
+                        <Check className="text-accentGreen flex-shrink-0 mt-0.5" size={16} />
+                        <span className="text-gray-600 ml-2 text-sm md:text-base">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Button
-                    className={`w-full py-6 text-lg font-medium rounded-xl transition-all duration-300 mt-auto ${
+                    className={`w-full py-4 md:py-6 text-base md:text-lg font-medium rounded-xl transition-all duration-300 mt-auto ${
                       isPopular
-                        ? 'bg-[#1F6B5E] hover:bg-[#165048] text-white shadow-lg hover:shadow-xl'
-                        : 'bg-grey-100 hover:bg-grey-200 text-grey-900'
+                        ? 'bg-accentGreen hover:bg-accentGreen-dark text-black shadow-lg hover:shadow-xl'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                     }`}
                   >
                     {t.pricing.getStarted}
@@ -185,7 +185,7 @@ export default function Pricing() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-grey-500 italic text-lg">
+            <p className="text-gray-500 italic text-lg">
               На данный момент информация отсутствует
             </p>
           </div>

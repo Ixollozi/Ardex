@@ -11,27 +11,31 @@
   --card-foreground: 0 0% 10%;
   --popover: 0 0% 100%;
   --popover-foreground: 0 0% 10%;
-  --primary: 173 58% 39%;
+  --primary: 0 0% 20%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 97%;
+  --secondary: 0 0% 95%;
   --secondary-foreground: 0 0% 10%;
-  --muted: 0 0% 97%;
-  --muted-foreground: 0 0% 42%;
-  --accent: 0 0% 97%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 95%;
   --accent-foreground: 0 0% 10%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
   --border: 0 0% 90%;
   --input: 0 0% 90%;
-  --ring: 173 58% 39%;
-  --teal: #1F6B5E;
-  --teal-dark: #165048;
-  --teal-light: #E6F2F0;
+  --ring: 0 0% 20%;
+  --accent-green: #1F6B5E;
+  --accent-green-dark: #165048;
+  --accent-green-light: #E6F2F0;
   --grey-50: #F9FAFB;
   --grey-100: #F3F4F6;
   --grey-200: #E5E7EB;
   --grey-300: #D1D5DB;
+  --grey-400: #9CA3AF;
+  --grey-500: #6B7280;
   --grey-600: #4B5563;
+  --grey-700: #374151;
+  --grey-800: #1F2937;
   --grey-900: #111827;
 }
 
@@ -122,7 +126,7 @@
 }
 
 .formatted-content blockquote {
-  @apply border-l-4 border-green-600 pl-4 py-2 bg-gray-50 italic text-gray-700 my-4;
+  @apply border-l-4 border-gray-400 pl-4 py-2 bg-gray-50 italic text-gray-700 my-4;
 }
 
 .formatted-content ul {
@@ -138,7 +142,7 @@
 }
 
 .formatted-content a {
-  @apply text-green-600 hover:text-green-700 underline;
+  @apply text-gray-700 hover:text-gray-900 underline;
 }
 
 /* Стили для компонентов */
