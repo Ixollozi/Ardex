@@ -21,20 +21,20 @@ class CompanyContact(models.Model):
         return self.company_name_ru or "Contacts"
 
 
-class Feedback(models.Model):
+class Order(models.Model):
     name = models.CharField(max_length=120, verbose_name=_("Имя"))
-    email = models.EmailField(blank=True, verbose_name=_("Email"))
+    email = models.CharField(max_length=254, blank=True, verbose_name=_("Email"))
     phone = models.CharField(max_length=50, blank=True, verbose_name=_("Телефон"))
     message = models.TextField(verbose_name=_("Сообщение"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата создания"))
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = _("Отзыв")
-        verbose_name_plural = _("Отзывы")
+        verbose_name = _("Заказ")
+        verbose_name_plural = _("Заказы")
 
     def __str__(self) -> str:
-        return f"Feedback from {self.name}"
+        return f"Order from {self.name}"
 
 
 

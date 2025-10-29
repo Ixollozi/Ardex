@@ -7,7 +7,7 @@ from django.db.models import Count
 from django.utils import timezone
 from datetime import timedelta
 
-from contacts.models import Feedback
+from contacts.models import Order
 from cases.models import Case
 from services.models import Service
 from pricing.models import PricingPlan
@@ -31,30 +31,30 @@ class CustomAdminSite(AdminSite):
         # Статистика за последние 30 дней
         thirty_days_ago = timezone.now() - timedelta(days=30)
         
-        # Количество новых отзывов за последние 30 дней
-        recent_feedback = Feedback.objects.filter(created_at__gte=thirty_days_ago).count()
+        # Количество новых заказов за последние 30 дней
+        recent_orders = Order.objects.filter(created_at__gte=thirty_days_ago).count()
         
         # Общее количество записей
         total_cases = Case.objects.count()
         total_services = Service.objects.count()
         total_pricing = PricingPlan.objects.count()
         total_faq = FAQ.objects.count()
-        total_feedback = Feedback.objects.count()
+        total_orders = Order.objects.count()
         total_whyus = WhyUsItem.objects.count()
         
-        # Последние отзывы
-        latest_feedback = Feedback.objects.select_related().order_by('-created_at')[:5]
+        # Последние заказы
+        latest_orders = Order.objects.select_related().order_by('-created_at')[:5]
         
         context = {
             'title': 'Панель управления',
-            'recent_feedback': recent_feedback,
+            'recent_orders': recent_orders,
             'total_cases': total_cases,
             'total_services': total_services,
             'total_pricing': total_pricing,
             'total_faq': total_faq,
-            'total_feedback': total_feedback,
+            'total_orders': total_orders,
             'total_whyus': total_whyus,
-            'latest_feedback': latest_feedback,
+            'latest_orders': latest_orders,
         }
         
         return render(request, 'admin/dashboard.html', context)
@@ -65,13 +65,13 @@ class CustomAdminSite(AdminSite):
         
         # Добавляем статистику
         thirty_days_ago = timezone.now() - timedelta(days=30)
-        recent_feedback = Feedback.objects.filter(created_at__gte=thirty_days_ago).count()
+        recent_orders = Order.objects.filter(created_at__gte=thirty_days_ago).count()
         
         extra_context.update({
-            'recent_feedback': recent_feedback,
+            'recent_orders': recent_orders,
             'total_cases': Case.objects.count(),
             'total_services': Service.objects.count(),
-            'total_feedback': Feedback.objects.count(),
+            'total_orders': Order.objects.count(),
             'total_whyus': WhyUsItem.objects.count(),
         })
         
@@ -82,7 +82,7 @@ class CustomAdminSite(AdminSite):
 admin_site = CustomAdminSite(name='ardex_admin')
 
 # Регистрируем модели в кастомном админ сайте
-from contacts.models import CompanyContact, Feedback
+from contacts.models import CompanyContact, Order
 from cases.models import Case
 from services.models import Service, ServiceSubcategory
 from pricing.models import PricingPlan
@@ -91,7 +91,7 @@ from pages.models import Page
 from whyus.models import WhyUsItem
 
 # Импортируем админ классы
-from contacts.admin import CompanyContactAdmin, FeedbackAdmin
+from contacts.admin import CompanyContactAdmin, OrderAdmin
 from cases.admin import CaseAdmin
 from services.admin import ServiceAdmin, ServiceSubcategoryAdmin
 from pricing.admin import PricingPlanAdmin
@@ -101,7 +101,7 @@ from whyus.admin import WhyUsItemAdmin
 
 # Регистрируем модели
 admin_site.register(CompanyContact, CompanyContactAdmin)
-admin_site.register(Feedback, FeedbackAdmin)
+admin_site.register(Order, OrderAdmin)
 admin_site.register(Case, CaseAdmin)
 admin_site.register(Service, ServiceAdmin)
 admin_site.register(ServiceSubcategory, ServiceSubcategoryAdmin)

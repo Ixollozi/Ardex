@@ -267,8 +267,8 @@
     
     <div class="dashboard-stats">
         <div class="stat-card">
-            <h3>Новые отзывы (30 дней)</h3>
-            <p class="number">{{ recent_feedback|default:0 }}</p>
+            <h3>Новые заказы (30 дней)</h3>
+            <p class="number">{{ recent_orders|default:0 }}</p>
         </div>
         
         <div class="stat-card">
@@ -282,40 +282,40 @@
         </div>
         
         <div class="stat-card">
-            <h3>Всего отзывов</h3>
-            <p class="number">{{ total_feedback|default:0 }}</p>
+            <h3>Всего заказов</h3>
+            <p class="number">{{ total_orders|default:0 }}</p>
         </div>
     </div>
     
     <div class="quick-actions">
-        <a href="{% url 'admin:contacts_feedback_changelist' %}" class="quick-action">
-            📝 Управление отзывами
+        <a href="{% url 'ardex_admin:contacts_order_changelist' %}" class="quick-action">
+            📝 Управление заказами
         </a>
-        <a href="{% url 'admin:cases_case_changelist' %}" class="quick-action">
+        <a href="{% url 'ardex_admin:cases_case_changelist' %}" class="quick-action">
             💼 Управление кейсами
         </a>
-        <a href="{% url 'admin:services_service_changelist' %}" class="quick-action">
+        <a href="{% url 'ardex_admin:services_service_changelist' %}" class="quick-action">
             🔧 Управление услугами
         </a>
-        <a href="{% url 'admin:pricing_pricingplan_changelist' %}" class="quick-action">
+        <a href="{% url 'ardex_admin:pricing_pricingplan_changelist' %}" class="quick-action">
             💰 Управление тарифами
         </a>
-        <a href="{% url 'admin:faq_faq_changelist' %}" class="quick-action">
+        <a href="{% url 'ardex_admin:faq_faq_changelist' %}" class="quick-action">
             ❓ Управление FAQ
         </a>
-        <a href="{% url 'admin:pages_page_changelist' %}" class="quick-action">
+        <a href="{% url 'ardex_admin:pages_page_changelist' %}" class="quick-action">
             📄 Управление страницами
         </a>
     </div>
     
-    {% if latest_feedback %}
+    {% if latest_orders %}
     <div class="recent-feedback">
-        <h3>Последние отзывы</h3>
-        {% for feedback in latest_feedback %}
+        <h3>Последние заказы</h3>
+        {% for order in latest_orders %}
         <div class="feedback-item">
-            <div class="feedback-name">{{ feedback.name }}</div>
-            <div class="feedback-date">{{ feedback.created_at|date:"d.m.Y H:i" }}</div>
-            <div class="feedback-message">{{ feedback.message|truncatewords:20 }}</div>
+            <div class="feedback-name">{{ order.name }}</div>
+            <div class="feedback-date">{{ order.created_at|date:"d.m.Y H:i" }}</div>
+            <div class="feedback-message">{{ order.message|truncatewords:20 }}</div>
         </div>
         {% endfor %}
     </div>

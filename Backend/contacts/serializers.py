@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from rest_framework import serializers
 
-from .models import CompanyContact, Feedback
+from .models import CompanyContact, Order
 
 
 class CompanyContactSerializer(serializers.ModelSerializer):
@@ -41,10 +41,31 @@ class CompanyContactSerializer(serializers.ModelSerializer):
         return obj.address_uz if language == "uz" else obj.address_ru
 
 
-class FeedbackSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(required=False, allow_blank=True, max_length=254)
+    phone = serializers.CharField(required=True, allow_blank=False, max_length=50)
+    
     class Meta:
-        model = Feedback
+        model = Order
         fields = ["name", "email", "phone", "message"]
+    
+    def validate(self, attrs):
+        """Очистка и обязательность телефона."""
+        # Стриппинг
+        if 'name' in attrs and isinstance(attrs['name'], str):
+            attrs['name'] = attrs['name'].strip()
+        if 'email' in attrs and isinstance(attrs['email'], str):
+            attrs['email'] = attrs['email'].strip()
+        if 'phone' in attrs and isinstance(attrs['phone'], str):
+            attrs['phone'] = attrs['phone'].strip()
+        if 'message' in attrs and isinstance(attrs['message'], str):
+            attrs['message'] = attrs['message'].strip()
+        
+        # Телефон обязателен
+        phone = attrs.get('phone')
+        if not phone:
+            raise serializers.ValidationError({"phone": "Телефон обязателен"})
+        return attrs
 
 
 

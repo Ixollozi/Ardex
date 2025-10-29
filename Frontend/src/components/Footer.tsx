@@ -47,11 +47,11 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl md:text-2xl font-bold text-accentGreen mb-3 md:mb-4">
+            <h3 className="text-xl md:text-2xl font-bold text-accentGreen mb-2 md:mb-3">
               ARDEX
             </h3>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
@@ -60,7 +60,7 @@ export default function Footer() {
                 : 'Biznesingizni rivojlantirish uchun professional konsalting va muhandislik'
               }
             </p>
-            <div className="flex space-x-3 md:space-x-4 mt-4 md:mt-6">
+            <div className="flex space-x-3 md:space-x-4 mt-3 md:mt-4">
               <a
                 href={pageSeo?.telegram_url || contactInfo?.telegram || "https://t.me/eneca_uz"}
                 target="_blank"
@@ -98,10 +98,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+            <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {language === 'ru' ? 'Быстрые ссылки' : 'Tez havolalar'}
             </h4>
-            <ul className="space-y-2 md:space-y-3">
+            <ul className="space-y-2">
               <li>
                 <a href="/" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
                   {t.nav.home}
@@ -127,17 +127,17 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+            <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {t.nav.services}
             </h4>
             {loading ? (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[...Array(4)].map((_, idx) => (
                   <div key={idx} className="animate-pulse bg-gray-700 h-4 rounded w-3/4"></div>
                 ))}
               </div>
             ) : (
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-2 text-gray-300">
                 {services.slice(0, 4).map((service) => (
                   <li key={service.id}>
                     <a 
@@ -170,17 +170,17 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+            <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {t.nav.contacts}
             </h4>
             {loading ? (
-              <div className="space-y-3 text-gray-300">
+              <div className="space-y-2 text-gray-300">
                 <div className="animate-pulse bg-gray-700 h-4 rounded w-3/4"></div>
                 <div className="animate-pulse bg-gray-700 h-4 rounded w-1/2"></div>
                 <div className="animate-pulse bg-gray-700 h-4 rounded w-2/3"></div>
               </div>
             ) : (
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-2 text-gray-300">
                 {contactInfo?.email && (
                   <li>
                     {language === 'ru' ? 'Email:' : 'Elektron pochta:'}<br />

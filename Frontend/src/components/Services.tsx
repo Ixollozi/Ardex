@@ -36,10 +36,10 @@ export default function Services() {
   const displayServices = services;
 
   return (
-    <section id="services" className="py-16 md:py-20 lg:py-32 bg-gray-50">
+    <section id="services" className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
             {t.services.title}
           </h2>
         </div>
@@ -56,33 +56,33 @@ export default function Services() {
           />
         ) : displayServices.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {displayServices.map((service, index) => {
                 const Icon = icons[index % icons.length];
                 
                 return (
                   <div
                     key={service.id}
-                    className="group bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    className="group bg-white p-6 md:p-7 rounded-xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-accentGreen/30 transition-all duration-300 hover:-translate-y-1"
                   >
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gray-800 transition-colors duration-300">
-                      <Icon className="text-gray-600 group-hover:text-white transition-colors duration-300" size={24} />
+                    <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/10 to-accentGreen/5 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110">
+                      <Icon className="text-accentGreen group-hover:text-white transition-colors duration-300" size={28} />
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
+                    <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4">
                       {service.title}
                     </h3>
                   <div 
-                    className="text-gray-600 leading-relaxed font-light formatted-content text-sm md:text-base"
+                    className="text-gray-700 leading-relaxed font-normal formatted-content text-base md:text-lg"
                     dangerouslySetInnerHTML={{ __html: service.description }}
                   />
                   </div>
                 );
               })}
             </div>
-            <div className="text-center mt-8 md:mt-12">
+            <div className="text-center mt-6 md:mt-8">
               <Link 
                 href="/services"
-                className="inline-flex items-center bg-accentGreen text-white py-3 px-6 md:px-8 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300 text-sm md:text-base"
+                className="inline-flex items-center bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
               >
                 Посмотреть все услуги
               </Link>

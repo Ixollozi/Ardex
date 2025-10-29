@@ -35,10 +35,10 @@ export default function FAQ() {
   const displayFAQ = faqItems;
 
   return (
-    <section id="faq" className="py-16 md:py-20 lg:py-32 bg-gray-50">
+    <section id="faq" className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
             {t.faq.title}
           </h2>
         </div>
@@ -52,12 +52,12 @@ export default function FAQ() {
                 <AccordionItem
                   key={item.id}
                   value={`item-${item.id}`}
-                  className="bg-white rounded-xl border border-gray-200 px-4 md:px-6 data-[state=open]:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl border-2 border-gray-200 px-5 md:px-6 data-[state=open]:shadow-xl data-[state=open]:border-accentGreen/30 transition-all"
                 >
-                  <AccordionTrigger className="text-left text-base md:text-lg font-semibold text-gray-900 hover:text-accentGreen py-4 md:py-6 hover:no-underline">
+                  <AccordionTrigger className="text-left text-lg md:text-xl font-extrabold text-gray-900 hover:text-accentGreen py-4 md:py-5 hover:no-underline">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed pb-4 md:pb-6 text-sm md:text-base">
+                  <AccordionContent className="text-gray-700 leading-relaxed pb-4 md:pb-5 text-base md:text-lg font-normal">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>

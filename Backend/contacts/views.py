@@ -7,11 +7,11 @@ from django.conf import settings
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from .models import CompanyContact, Feedback
-from .serializers import CompanyContactSerializer, FeedbackSerializer
+from .models import CompanyContact, Order
+from .serializers import CompanyContactSerializer, OrderSerializer
 
 
-feedback_logger = logging.getLogger("feedback")
+order_logger = logging.getLogger("order")
 
 
 class CompanyContactRetrieveAPIView(generics.ListAPIView):
@@ -19,13 +19,26 @@ class CompanyContactRetrieveAPIView(generics.ListAPIView):
     serializer_class = CompanyContactSerializer
 
 
-class FeedbackSendAPIView(generics.CreateAPIView):
-    serializer_class = FeedbackSerializer
+class OrderSendAPIView(generics.CreateAPIView):
+    serializer_class = OrderSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        feedback = Feedback.objects.create(**serializer.validated_data)
+        if not serializer.is_valid():
+            order_logger.error(f"Validation errors: {serializer.errors}, Data: {request.data}")
+            return Response(
+                {"ok": False, "errors": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            order = Order.objects.create(**serializer.validated_data)
+            order_logger.info(f"Order created successfully: {order.id}")
+        except Exception as e:
+            order_logger.error(f"Error creating order: {e}")
+            return Response(
+                {"ok": False, "error": "Failed to save order"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         # Send to Telegram if configured
         sent = False
@@ -33,11 +46,11 @@ class FeedbackSendAPIView(generics.CreateAPIView):
         chat_id = settings.TELEGRAM_CHAT_ID
         if token and chat_id:
             text = (
-                f"New feedback:\n"
-                f"Name: {feedback.name}\n"
-                f"Email: {feedback.email}\n"
-                f"Phone: {feedback.phone}\n"
-                f"Message: {feedback.message}"
+                f"Новый заказ:\n"
+                f"Имя: {order.name}\n"
+                f"Email: {order.email}\n"
+                f"Телефон: {order.phone}\n"
+                f"Сообщение: {order.message}"
             )
             try:
                 resp = requests.post(
@@ -49,11 +62,11 @@ class FeedbackSendAPIView(generics.CreateAPIView):
             except Exception:
                 sent = False
 
-        feedback_logger.info(
+        order_logger.info(
             {
-                "name": feedback.name,
-                "email": feedback.email,
-                "phone": feedback.phone,
+                "name": order.name,
+                "email": order.email,
+                "phone": order.phone,
                 "sent_to_telegram": sent,
             }
         )

@@ -109,10 +109,10 @@ export default function Pricing() {
   const displayPlans = pricingPlans;
 
   return (
-    <section id="pricing" className="py-16 md:py-20 lg:py-32 bg-gray-50">
+    <section id="pricing" className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
             {t.pricing.title}
           </h2>
         </div>
@@ -123,45 +123,47 @@ export default function Pricing() {
             <p className="mt-4 text-gray-600">Загрузка тарифов...</p>
           </div>
         ) : displayPlans.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {displayPlans.map((plan, index) => {
               const planName = plan.title;
-              const planPrice = plan.price.toString();
+              // Форматируем цену: убираем десятичные, добавляем запятые для тысяч
+              const priceNum = typeof plan.price === 'number' ? plan.price : parseFloat(plan.price.toString());
+              const formattedPrice = Math.floor(priceNum).toLocaleString('ru-RU');
               const planFeatures = plan.features.split('\n').filter(f => f.trim());
               const isPopular = index === 1;
               
               return (
                 <div
                   key={plan.id}
-                  className={`relative rounded-2xl p-6 md:p-8 flex flex-col ${
+                  className={`relative rounded-2xl p-6 md:p-7 flex flex-col ${
                     isPopular
-                      ? 'border-2 border-gray-400 shadow-xl scale-105 bg-gray-50'
-                      : 'bg-white border border-gray-200 shadow-md'
-                  } transition-all duration-300 hover:shadow-xl`}
+                      ? 'border-2 border-accentGreen/50 shadow-2xl scale-105 bg-gradient-to-br from-accentGreen/5 to-white ring-4 ring-accentGreen/10'
+                      : 'bg-white border-2 border-gray-200 shadow-lg hover:border-accentGreen/30'
+                  } transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
                 >
                   {isPopular && (
-                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2">
-                      <span className="px-3 md:px-4 py-1 md:py-2 bg-gray-600 text-white text-xs md:text-sm font-medium rounded-full shadow-lg">
+                    <div className="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2">
+                      <span className="px-4 md:px-5 py-2 bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white text-sm md:text-base font-bold rounded-full shadow-xl">
                         {language === 'ru' ? 'Популярный' : 'Mashhur'}
                       </span>
                     </div>
                   )}
 
-                  <div className="mb-6 md:mb-8">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
+                  <div className="mb-5 md:mb-6">
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4 md:mb-5">
                       {planName}
                     </h3>
-                    <div className="flex items-baseline">
-                      <span className="text-3xl md:text-4xl font-bold text-accentGreen">
-                        {planPrice}
+                    <div className="flex flex-col">
+                      <span className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-accentGreen to-accentGreen-dark bg-clip-text text-transparent leading-none mb-1">
+                        {formattedPrice}
                       </span>
-                      <span className="text-gray-600 ml-2 text-sm md:text-base">
-                        {language === 'ru' ? 'сум' : 'so\'m'} {t.pricing.perMonth}
+                      <span className="text-gray-600 text-base md:text-lg font-medium">
+                        {language === 'ru' ? 'сум' : 'so\'m'}
                       </span>
                     </div>
                   </div>
 
-                  <ul className="space-y-3 md:space-y-4 mb-6 md:mb-8 flex-grow">
+                  <ul className="space-y-3 md:space-y-4 mb-5 md:mb-6 flex-grow">
                     {planFeatures.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
                         <Check className="text-accentGreen flex-shrink-0 mt-0.5" size={16} />

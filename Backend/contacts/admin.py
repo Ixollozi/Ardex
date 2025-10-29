@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django.contrib import admin
 
-from .models import CompanyContact, Feedback
+from .models import CompanyContact, Order
 
 
 @admin.register(CompanyContact)
@@ -24,8 +24,8 @@ class CompanyContactAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
-@admin.register(Feedback)
-class FeedbackAdmin(admin.ModelAdmin):
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "phone", "created_at")
     list_display_links = ("name",)
     readonly_fields = ("name", "email", "phone", "message", "created_at")

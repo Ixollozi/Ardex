@@ -48,10 +48,10 @@ export default function WhyUs() {
 
 
   return (
-    <section className="py-16 md:py-20 lg:py-32 bg-white">
+    <section className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
             {t.whyUs.title}
           </h2>
         </div>
@@ -67,21 +67,21 @@ export default function WhyUs() {
             onRetry={() => window.location.reload()}
           />
         ) : whyUsItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {whyUsItems.map((item) => {
               const Icon = getIcon(item.icon);
               return (
                 <div
                   key={item.id}
-                  className="group bg-white p-6 md:p-8 rounded-xl border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300"
+                  className="group bg-white p-6 md:p-7 rounded-xl border-2 border-gray-200 hover:border-accentGreen/50 hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50/50"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gray-800 transition-colors duration-300">
-                    <Icon className="text-gray-600 group-hover:text-white transition-colors duration-300" size={24} />
+                  <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/15 to-accentGreen/5 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
+                    <Icon className="text-accentGreen group-hover:text-white transition-colors duration-300" size={28} />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3">
+                  <h3 className="text-lg md:text-xl font-extrabold text-gray-900 mb-2 md:mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed font-light text-sm md:text-base">
+                  <p className="text-gray-700 leading-relaxed font-normal text-sm md:text-base">
                     {item.description}
                   </p>
                 </div>
