@@ -119,7 +119,7 @@ export default function Pricing() {
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accentGreen"></div>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
             <p className="mt-4 text-gray-600">Загрузка тарифов...</p>
           </div>
         ) : displayPlans.length > 0 ? (
@@ -137,13 +137,13 @@ export default function Pricing() {
                   key={plan.id}
                   className={`relative rounded-2xl p-6 md:p-7 flex flex-col ${
                     isPopular
-                      ? 'border-2 border-accentGreen/50 shadow-2xl scale-105 bg-gradient-to-br from-accentGreen/5 to-white ring-4 ring-accentGreen/10'
-                      : 'bg-white border-2 border-gray-200 shadow-lg hover:border-accentGreen/30'
+                      ? 'border-2 border-gray-400 shadow-2xl scale-105 bg-gradient-to-br from-gray-50 to-white ring-4 ring-gray-200'
+                      : 'bg-white border-2 border-gray-200 shadow-lg hover:border-gray-400'
                   } transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
                 >
                   {isPopular && (
                     <div className="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2">
-                      <span className="px-4 md:px-5 py-2 bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white text-sm md:text-base font-bold rounded-full shadow-xl">
+                      <span className="px-4 md:px-5 py-2 bg-gradient-to-r from-gray-700 to-gray-900 text-white text-sm md:text-base font-bold rounded-full shadow-xl">
                         {language === 'ru' ? 'Популярный' : 'Mashhur'}
                       </span>
                     </div>
@@ -166,7 +166,7 @@ export default function Pricing() {
                   <ul className="space-y-3 md:space-y-4 mb-5 md:mb-6 flex-grow">
                     {planFeatures.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <Check className="text-accentGreen flex-shrink-0 mt-0.5" size={16} />
+                        <Check className="text-gray-900 flex-shrink-0 mt-0.5" size={16} />
                         <span className="text-gray-600 ml-2 text-sm md:text-base">{feature}</span>
                       </li>
                     ))}
@@ -175,7 +175,7 @@ export default function Pricing() {
                   <Button
                     className={`w-full py-4 md:py-6 text-base md:text-lg font-medium rounded-xl transition-all duration-300 mt-auto ${
                       isPopular
-                        ? 'bg-accentGreen hover:bg-accentGreen-dark text-black shadow-lg hover:shadow-xl'
+                        ? 'bg-gray-900 hover:bg-black text-white shadow-lg hover:shadow-xl'
                         : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                     }`}
                   >

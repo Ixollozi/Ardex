@@ -73,7 +73,7 @@ export default function WhyUs() {
               return (
                 <div
                   key={item.id}
-                  className="group bg-white p-6 md:p-7 rounded-xl border-2 border-gray-200 hover:border-accentGreen/50 hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50/50"
+                  className="group bg-white p-6 md:p-7 rounded-xl border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50/50"
                 >
                   <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/15 to-accentGreen/5 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
                     <Icon className="text-accentGreen group-hover:text-white transition-colors duration-300" size={28} />

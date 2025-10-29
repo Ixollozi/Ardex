@@ -44,7 +44,7 @@ export default function Hero() {
             </p>
             <Button
               onClick={scrollToContacts}
-              className="bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white px-8 md:px-10 py-5 md:py-6 text-lg md:text-xl font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105"
+              className="bg-gradient-to-r from-gray-900 to-black text-white px-8 md:px-10 py-5 md:py-6 text-lg md:text-xl font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:scale-105"
             >
               {t.hero.cta}
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
@@ -53,7 +53,7 @@ export default function Hero() {
 
           {/* Hero Image */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-accentGreen/10">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-gray-200/50">
               <img
                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop"
                 alt="Modern office building"

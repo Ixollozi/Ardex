@@ -130,8 +130,8 @@ export default function ServicesPage() {
                              onDoubleClick={() => handleServiceDoubleClick(service)}
                              className={`w-full text-left p-3 md:p-4 rounded-xl transition-all duration-200 ${
                                selectedService === service.id
-                                 ? 'bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white shadow-lg'
-                                 : 'text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-accentGreen/30 hover:shadow-md'
+                                 ? 'bg-gradient-to-r from-gray-900 to-black text-white shadow-lg'
+                                 : 'text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md'
                              }`}
                            >
                              <div className="flex items-center gap-2 md:gap-3">
@@ -171,8 +171,8 @@ export default function ServicesPage() {
                                  onClick={() => handleSubcategoryClick(service.subcategory!)}
                                  className={`w-full text-left p-3 md:p-4 rounded-xl transition-all duration-200 ${
                                    selectedSubcategory?.id === service.subcategory?.id
-                                     ? 'bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white shadow-lg'
-                                     : 'text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-accentGreen/30 hover:shadow-md'
+                                     ? 'bg-gradient-to-r from-gray-900 to-black text-white shadow-lg'
+                                     : 'text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-400 hover:shadow-md'
                                  }`}
                                >
                                  <div className="flex items-center gap-2">
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                    <div className="w-full">
                   {loading ? (
                     <div className="text-center py-12">
-                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accentGreen"></div>
+                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
                       <p className="mt-4 text-gray-600">Загрузка услуг...</p>
                     </div>
                   ) : error ? (
@@ -206,7 +206,7 @@ export default function ServicesPage() {
                       <p className="text-red-600 font-medium mb-4">{error}</p>
                       <button
                         onClick={() => window.location.reload()}
-                        className="bg-accentGreen text-white py-2 px-6 rounded-lg font-medium hover:bg-accentGreen-dark transition-colors duration-300"
+                        className="bg-gray-900 text-white py-2 px-6 rounded-lg font-medium hover:bg-black transition-colors duration-300"
                       >
                         Попробовать снова
                       </button>
@@ -236,13 +236,13 @@ export default function ServicesPage() {
                             <div className="flex flex-col sm:flex-row gap-4 md:gap-5">
                               <Link 
                                 href="/#contacts"
-                                className="bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
+                                className="bg-gradient-to-r from-gray-900 to-black text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
                               >
                                 Заказать услугу
                               </Link>
                               <button 
                                 onClick={() => setSelectedSubcategory(null)}
-                                className="border-2 border-accentGreen text-accentGreen py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-accentGreen hover:text-white transition-all duration-300 text-base md:text-lg"
+                                className="border-2 border-gray-700 text-gray-700 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-gray-900 hover:text-white transition-all duration-300 text-base md:text-lg"
                               >
                                 Все услуги
                               </button>
@@ -290,7 +290,7 @@ export default function ServicesPage() {
                                   <div className="mb-6">
                                     <button
                                       onClick={() => handleServiceSubcategoryToggle(service.id)}
-                                      className="flex items-center gap-2 text-accentGreen hover:text-accentGreen-dark transition-colors duration-200 mb-4"
+                                      className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 mb-4"
                                     >
                                       <span className="font-medium">Подкатегории</span>
                                       {expandedServiceSubcategories.has(service.id) ? (
@@ -320,13 +320,13 @@ export default function ServicesPage() {
                                 <div className="flex flex-col sm:flex-row gap-4 md:gap-5">
                                   <Link 
                                     href="/#contacts"
-                                    className="bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
+                                    className="bg-gradient-to-r from-gray-900 to-black text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
                                   >
                                     Заказать услугу
                                   </Link>
                                   <button 
                                     onClick={() => setSelectedService(null)}
-                                    className="border-2 border-accentGreen text-accentGreen py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-accentGreen hover:text-white transition-all duration-300 text-base md:text-lg"
+                                    className="border-2 border-gray-700 text-gray-700 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-gray-900 hover:text-white transition-all duration-300 text-base md:text-lg"
                                   >
                                     Все услуги
                                   </button>
@@ -346,7 +346,7 @@ export default function ServicesPage() {
                               <div
                                 key={service.id}
                                 data-service-slug={service.slug}
-                                className="group bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl border-2 border-gray-100 hover:border-accentGreen/30 transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col h-full"
+                                className="group bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col h-full"
                                 onClick={() => handleServiceClick(service)}
                               >
                                 <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/10 to-accentGreen/5 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110">
@@ -390,8 +390,8 @@ export default function ServicesPage() {
                               onClick={() => setPage(p)}
                               className={`h-10 md:h-12 min-w-10 md:min-w-12 px-3 md:px-4 rounded-lg border-2 text-sm md:text-base font-bold transition-all duration-300 ${
                                 p === page 
-                                  ? 'bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white border-accentGreen shadow-lg scale-105' 
-                                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-accentGreen/30 hover:shadow-md'
+                                  ? 'bg-gradient-to-r from-gray-900 to-black text-white border-gray-900 shadow-lg scale-105' 
+                                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-gray-400 hover:shadow-md'
                               }`}
                             >
                               {p}
@@ -415,7 +415,7 @@ export default function ServicesPage() {
            </section>
 
           {/* CTA Section */}
-          <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-r from-accentGreen via-accentGreen-dark to-accentGreen text-white">
+          <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 md:mb-6">
                 Готовы начать проект?
@@ -426,7 +426,7 @@ export default function ServicesPage() {
               <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center">
                 <Link 
                   href="/#contact"
-                  className="bg-white text-accentGreen py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
+                  className="bg-white text-gray-900 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
                 >
                   Связаться с нами
                 </Link>
