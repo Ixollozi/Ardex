@@ -36,7 +36,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 items-center">
           {/* Text Content */}
           <div className="lg:col-span-6 space-y-3 md:space-y-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight pt-4 sm:pt-6 md:pt-8 lg:pt-10">
               {pageSeo?.title || t.hero.title}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed font-normal">

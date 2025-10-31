@@ -25,27 +25,15 @@ class APIDocumentationView(View):
                 "example_response": '{"title": "Услуга", "description": "Описание"}'
             },
             {
-                "url": f"{request.scheme}://{request.get_host()}/api/cases/",
-                "method": "GET",
-                "description": "Получить список всех кейсов",
-                "example_response": "[]"
-            },
-            {
-                "url": f"{request.scheme}://{request.get_host()}/api/cases/<slug>/",
-                "method": "GET",
-                "description": "Получить детали кейса по slug", 
-                "example_response": '{"title": "Кейс", "description": "Описание"}'
-            },
-            {
-                "url": f"{request.scheme}://{request.get_host()}/api/pricing/",
-                "method": "GET",
-                "description": "Получить список тарифных планов",
-                "example_response": "[]"
-            },
-            {
                 "url": f"{request.scheme}://{request.get_host()}/api/faq/",
                 "method": "GET",
                 "description": "Получить список часто задаваемых вопросов",
+                "example_response": "[]"
+            },
+            {
+                "url": f"{request.scheme}://{request.get_host()}/api/workplan/",
+                "method": "GET",
+                "description": "Получить список этапов работы",
                 "example_response": "[]"
             },
             {

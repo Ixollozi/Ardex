@@ -35,7 +35,7 @@ export default function FAQ() {
   const displayFAQ = faqItems;
 
   return (
-    <section id="faq" className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section id="faq" className="pt-10 md:pt-14 lg:pt-16 pb-12 md:pb-16 lg:pb-20 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
@@ -46,7 +46,7 @@ export default function FAQ() {
         {loading ? (
           <SkeletonList items={5} />
         ) : displayFAQ.length > 0 ? (
-          <Accordion type="single" collapsible className="space-y-3 md:space-y-4">
+          <Accordion type="single" collapsible className="space-y-3 md:space-y-4 pb-12 md:pb-16">
             {displayFAQ.map((item) => {
               return (
                 <AccordionItem

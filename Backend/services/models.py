@@ -42,7 +42,7 @@ class Service(models.Model):
     title_uz = models.CharField(max_length=255, verbose_name=_("Название (Узбекский)"))
     description_ru = models.TextField(blank=True, verbose_name=_("Описание (Русский)"))
     description_uz = models.TextField(blank=True, verbose_name=_("Описание (Узбекский)"))
-    icon = models.CharField(max_length=50, verbose_name=_("Иконка"), help_text=_("Название иконки из Lucide React"), default="Settings")
+    image = models.ImageField(upload_to="services/", verbose_name=_("Изображение"), blank=True, null=True)
     subcategory = models.ForeignKey(
         ServiceSubcategory, 
         on_delete=models.SET_NULL, 

@@ -143,18 +143,8 @@
         </div>
         
         <div class="stat-card">
-            <h3>Всего кейсов</h3>
-            <p class="number">{{ total_cases }}</p>
-        </div>
-        
-        <div class="stat-card">
             <h3>Услуги</h3>
             <p class="number">{{ total_services }}</p>
-        </div>
-        
-        <div class="stat-card">
-            <h3>Тарифы</h3>
-            <p class="number">{{ total_pricing }}</p>
         </div>
         
         <div class="stat-card">
@@ -172,14 +162,8 @@
         <a href="{% url 'ardex_admin:contacts_order_changelist' %}" class="quick-action">
             Управление заказами
         </a>
-        <a href="{% url 'ardex_admin:cases_case_changelist' %}" class="quick-action">
-            Управление кейсами
-        </a>
         <a href="{% url 'ardex_admin:services_service_changelist' %}" class="quick-action">
             Управление услугами
-        </a>
-        <a href="{% url 'ardex_admin:pricing_pricingplan_changelist' %}" class="quick-action">
-            Управление тарифами
         </a>
         <a href="{% url 'ardex_admin:faq_faq_changelist' %}" class="quick-action">
             Управление FAQ

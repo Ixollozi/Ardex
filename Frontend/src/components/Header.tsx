@@ -25,13 +25,13 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex flex-col items-start">
             <button
               onClick={goToHome}
-              className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              className="cursor-pointer hover:opacity-80 transition-opacity duration-200 -translate-y-[10px] md:-translate-y-[10px]"
             >
               <img 
                 src="/logo.svg" 
@@ -39,6 +39,9 @@ export default function Header() {
                 className="h-40 md:h-40 w-auto"
               />
             </button>
+            <span className="mt-2 text-[12px] md:text-sm font-medium pointer-events-none -translate-y-[70px] md:-translate-y-[70px]" style={{ color: '#706c62' }}>
+              консалтинговая компания
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -54,18 +57,6 @@ export default function Header() {
               className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
             >
               {t.nav.services}
-            </Link>
-            <Link
-              href="/#cases"
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              {t.nav.cases}
-            </Link>
-            <Link
-              href={anchorHref('pricing')}
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              {t.nav.pricing}
             </Link>
             <Link
               href={anchorHref('faq')}
@@ -133,20 +124,6 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t.nav.services}
-              </Link>
-              <Link
-                href="/#cases"
-                className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors text-left"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {t.nav.cases}
-              </Link>
-              <Link
-                href={anchorHref('pricing')}
-                className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors text-left"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {t.nav.pricing}
               </Link>
               <Link
                 href={anchorHref('faq')}

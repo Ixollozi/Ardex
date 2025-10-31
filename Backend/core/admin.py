@@ -8,9 +8,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 from contacts.models import Order
-from cases.models import Case
 from services.models import Service
-from pricing.models import PricingPlan
 from faq.models import FAQ
 from pages.models import Page
 
@@ -35,9 +33,7 @@ class CustomAdminSite(AdminSite):
         recent_orders = Order.objects.filter(created_at__gte=thirty_days_ago).count()
         
         # Общее количество записей
-        total_cases = Case.objects.count()
         total_services = Service.objects.count()
-        total_pricing = PricingPlan.objects.count()
         total_faq = FAQ.objects.count()
         total_orders = Order.objects.count()
         total_whyus = WhyUsItem.objects.count()
@@ -48,9 +44,7 @@ class CustomAdminSite(AdminSite):
         context = {
             'title': 'Панель управления',
             'recent_orders': recent_orders,
-            'total_cases': total_cases,
             'total_services': total_services,
-            'total_pricing': total_pricing,
             'total_faq': total_faq,
             'total_orders': total_orders,
             'total_whyus': total_whyus,
@@ -69,7 +63,6 @@ class CustomAdminSite(AdminSite):
         
         extra_context.update({
             'recent_orders': recent_orders,
-            'total_cases': Case.objects.count(),
             'total_services': Service.objects.count(),
             'total_orders': Order.objects.count(),
             'total_whyus': WhyUsItem.objects.count(),
@@ -83,29 +76,26 @@ admin_site = CustomAdminSite(name='ardex_admin')
 
 # Регистрируем модели в кастомном админ сайте
 from contacts.models import CompanyContact, Order
-from cases.models import Case
 from services.models import Service, ServiceSubcategory
-from pricing.models import PricingPlan
 from faq.models import FAQ
 from pages.models import Page
 from whyus.models import WhyUsItem
+from workplan.models import WorkStep
 
 # Импортируем админ классы
 from contacts.admin import CompanyContactAdmin, OrderAdmin
-from cases.admin import CaseAdmin
 from services.admin import ServiceAdmin, ServiceSubcategoryAdmin
-from pricing.admin import PricingPlanAdmin
 from faq.admin import FAQAdmin
 from pages.admin import PageAdmin
 from whyus.admin import WhyUsItemAdmin
+from workplan.admin import WorkStepAdmin
 
 # Регистрируем модели
 admin_site.register(CompanyContact, CompanyContactAdmin)
 admin_site.register(Order, OrderAdmin)
-admin_site.register(Case, CaseAdmin)
 admin_site.register(Service, ServiceAdmin)
 admin_site.register(ServiceSubcategory, ServiceSubcategoryAdmin)
-admin_site.register(PricingPlan, PricingPlanAdmin)
 admin_site.register(FAQ, FAQAdmin)
 admin_site.register(Page, PageAdmin)
 admin_site.register(WhyUsItem, WhyUsItemAdmin)
+admin_site.register(WorkStep, WorkStepAdmin)

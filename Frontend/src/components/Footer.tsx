@@ -112,16 +112,6 @@ export default function Footer() {
                   {t.nav.services}
                 </a>
               </li>
-              <li>
-                <a href="/#cases" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
-                  {t.nav.cases}
-                </a>
-              </li>
-              <li>
-                <a href="/#pricing" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
-                  {t.nav.pricing}
-                </a>
-              </li>
             </ul>
           </div>
 

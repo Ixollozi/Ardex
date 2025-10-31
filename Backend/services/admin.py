@@ -64,7 +64,7 @@ class ServiceAdmin(admin.ModelAdmin):
             "fields": ("title_uz", "description_uz")
         }),
         ("Общие настройки", {
-            "fields": ("subcategory", "slug", "icon", "order")
+            "fields": ("subcategory", "slug", "image", "order")
         }),
     )
     list_per_page = 20
@@ -77,37 +77,6 @@ class ServiceAdmin(admin.ModelAdmin):
             for field_name in ['description_ru', 'description_uz']:
                 if field_name in form.base_fields:
                     form.base_fields[field_name].widget = CKEditorWidget()
-        
-        return form
-    
-    def get_form(self, request, obj=None, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
-        
-        # Добавляем help_text для поля icon с категоризированным списком иконок
-        if 'icon' in form.base_fields:
-            icon_categories = [
-                "Инструменты: Settings, Cog, Wrench, Tool",
-                "Достижения: Award, Star, Trophy, Medal",
-                "Пользователи: Users, User, UserCheck",
-                "Безопасность: Shield, Lock, Unlock",
-                "Энергия: Lightbulb, Zap, Bolt",
-                "Цели: Target, Crosshair, Focus",
-                "Устройства: Monitor, Smartphone, Laptop",
-                "Технологии: Database, Server, Cpu",
-                "Связь: Wifi, Bluetooth, Power",
-                "Статусы: CheckCircle, Check, Plus, Minus",
-                "Аналитика: TrendingUp, BarChart, PieChart",
-                "Коммуникация: Phone, Mail, MessageCircle",
-                "Файлы: Download, Upload, File, Folder",
-                "Время: Calendar, Clock, Timer",
-                "Медиа: Camera, Video, Image, Play",
-                "Местоположение: Home, Building, MapPin, Globe",
-                "Транспорт: Rocket, Plane, Car, Truck",
-                "Эмоции: Heart, Smile, ThumbsUp, ThumbsDown"
-            ]
-            
-            icons_list = '<br>'.join(icon_categories)
-            form.base_fields['icon'].help_text = f'Доступные иконки по категориям:\n{icons_list}'
         
         return form
 

@@ -63,6 +63,7 @@ class ServiceSubcategorySerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
     subcategory = ServiceSubcategorySerializer(read_only=True)
     
     class Meta:
@@ -71,11 +72,19 @@ class ServiceSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "icon",
+            "image",
             "slug",
             "order",
             "subcategory",
         ]
+    
+    def get_image(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return None
     
     def get_title(self, obj):
         # Получаем язык из контекста запроса

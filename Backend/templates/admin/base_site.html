@@ -17,6 +17,153 @@
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
 <script src="{% static 'admin/js/text_formatting.js' %}"></script>
+<script>
+// Принудительная темная тема - блокируем все попытки переключения
+(function() {
+    'use strict';
+    
+    // Устанавливаем темную тему сразу при загрузке
+    if (document.documentElement) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+    }
+    
+    if (document.body) {
+        document.body.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark');
+        document.body.classList.remove('light');
+    }
+    
+    // Удаляем все переключатели темы
+    function removeThemeToggles() {
+        const selectors = [
+            '.theme-toggle',
+            '[data-theme-toggle]',
+            '[data-theme]',
+            '#theme-toggle',
+            '.theme-switcher',
+            'button[onclick*="theme"]',
+            'button[onclick*="Theme"]'
+        ];
+        
+        selectors.forEach(selector => {
+            try {
+                document.querySelectorAll(selector).forEach(el => {
+                    if (el.onclick && el.onclick.toString().includes('theme')) {
+                        el.remove();
+                    } else if (el.classList.contains('theme-toggle') || 
+                               el.id === 'theme-toggle' || 
+                               el.hasAttribute('data-theme-toggle')) {
+                        el.remove();
+                    }
+                });
+            } catch(e) {}
+        });
+    }
+    
+    // Блокируем попытки изменения темы через localStorage
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+        if (key && (key.toLowerCase().includes('theme') || key.toLowerCase().includes('dark'))) {
+            // Блокируем сохранение светлой темы
+            if (value && (value === 'light' || value === 'Light' || value === 'LIGHT')) {
+                return; // Не сохраняем светлую тему
+            }
+            // Принудительно устанавливаем темную
+            if (key.toLowerCase().includes('theme')) {
+                originalSetItem.call(localStorage, key, 'dark');
+                return;
+            }
+        }
+        originalSetItem.call(localStorage, key, value);
+    };
+    
+    // Принудительно устанавливаем темную тему в localStorage
+    try {
+        ['theme', 'darkMode', 'colorScheme', 'appearance'].forEach(key => {
+            localStorage.setItem(key, 'dark');
+            localStorage.setItem(key.toLowerCase(), 'dark');
+        });
+    } catch(e) {}
+    
+    // Перехватываем попытки изменения атрибута data-theme
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && 
+                (mutation.attributeName === 'data-theme' || mutation.attributeName === 'class')) {
+                const target = mutation.target;
+                if (target.hasAttribute && target.hasAttribute('data-theme')) {
+                    const theme = target.getAttribute('data-theme');
+                    if (theme && theme !== 'dark') {
+                        target.setAttribute('data-theme', 'dark');
+                    }
+                }
+                if (target.classList) {
+                    if (target.classList.contains('light')) {
+                        target.classList.remove('light');
+                        target.classList.add('dark');
+                    }
+                    if (!target.classList.contains('dark')) {
+                        target.classList.add('dark');
+                    }
+                }
+            }
+        });
+    });
+    
+    // Запускаем при загрузке и периодически проверяем
+    function enforceDarkTheme() {
+        removeThemeToggles();
+        
+        if (document.documentElement) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme', 'class']
+            });
+        }
+        
+        if (document.body) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.body.classList.add('dark');
+            document.body.classList.remove('light');
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['data-theme', 'class']
+            });
+        }
+        
+        // Принудительно устанавливаем стили
+        const style = document.createElement('style');
+        style.id = 'forced-dark-theme';
+        style.textContent = `
+            html, body { 
+                background-color: #0f172a !important; 
+                color: #f8fafc !important; 
+            }
+            html[data-theme], body[data-theme] {
+                background-color: #0f172a !important;
+            }
+        `;
+        if (!document.getElementById('forced-dark-theme')) {
+            document.head.appendChild(style);
+        }
+    }
+    
+    // Выполняем сразу и после загрузки DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', enforceDarkTheme);
+    } else {
+        enforceDarkTheme();
+    }
+    
+    // Периодически проверяем (на случай динамической загрузки элементов)
+    setInterval(removeThemeToggles, 1000);
+})();
+</script>
 <style>
 /* Форматирование кнопок - принудительные стили */
 .formatting-toolbar {

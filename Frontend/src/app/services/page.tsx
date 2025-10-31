@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MessageSquare, Settings, Zap, Code, GraduationCap, FileSearch, ArrowLeft, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
+import { MessageSquare, Settings, ArrowLeft, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import { apiClient, Service, ServiceSubcategory, PageSeo } from '@/lib/api';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const icons = [MessageSquare, Settings, Zap, Code, GraduationCap, FileSearch];
 
 export default function ServicesPage() {
   const { t } = useLanguage();
@@ -254,27 +254,22 @@ export default function ServicesPage() {
                         (() => {
                           const service = services.find(s => s.id === selectedService);
                           if (!service) return null;
-                          const index = services.findIndex(s => s.id === selectedService);
-                          const Icon = icons[index % icons.length];
                           
                           return (
                             <div className="bg-white rounded-xl shadow-lg border-2 border-gray-100 p-6 md:p-9">
-                              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 md:gap-6 mb-6 md:mb-8">
-                                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-accentGreen/10 to-accentGreen/5 rounded-xl flex items-center justify-center flex-shrink-0 border-2 border-accentGreen/20">
-                                  <Icon className="text-accentGreen" size={32} />
-                                </div>
-                                <div>
-                                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">{service.title}</h2>
-                                  <p className="text-gray-600 mt-2 text-base md:text-lg font-medium">Подробная информация об услуге</p>
-                                </div>
+                              <div className="mb-6 md:mb-8">
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">{service.title}</h2>
+                                <p className="text-gray-600 mt-2 text-base md:text-lg font-medium">Подробная информация об услуге</p>
                               </div>
                               
                               {service.image && (
-                                <div className="mb-6 md:mb-8">
-                                  <img 
-                                    src={service.image} 
+                                <div className="mb-6 md:mb-8 relative w-full h-56 md:h-72 rounded-xl overflow-hidden shadow-lg bg-gray-100 group/image">
+                                  <Image
+                                    src={service.image}
                                     alt={service.title}
-                                    className="w-full h-56 md:h-72 object-cover rounded-xl shadow-lg"
+                                    fill
+                                    className="object-cover group-hover/image:scale-105 transition-transform duration-300 ease-out"
+                                    sizes="(max-width: 768px) 100vw, 70vw"
                                   />
                                 </div>
                               )}
@@ -339,9 +334,7 @@ export default function ServicesPage() {
                         // Показать все услуги
                         <>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                          {services.map((service, index) => {
-                            const Icon = icons[index % icons.length];
-                            
+                          {services.map((service) => {
                             return (
                               <div
                                 key={service.id}
@@ -349,9 +342,21 @@ export default function ServicesPage() {
                                 className="group bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col h-full"
                                 onClick={() => handleServiceClick(service)}
                               >
-                                <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/10 to-accentGreen/5 rounded-xl flex items-center justify-center mb-5 md:mb-6 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110">
-                                  <Icon className="text-accentGreen group-hover:text-white transition-colors duration-300" size={28} />
-                                </div>
+                                {service.image ? (
+                                  <div className="relative w-full h-48 md:h-56 mb-5 rounded-xl overflow-hidden bg-gray-100 shadow-md">
+                                    <Image
+                                      src={service.image}
+                                      alt={service.title}
+                                      fill
+                                      className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                                      sizes="(max-width: 768px) 100vw, 50vw"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="w-full h-48 md:h-56 mb-5 rounded-xl bg-gray-100 flex items-center justify-center">
+                                    <span className="text-gray-400">Нет изображения</span>
+                                  </div>
+                                )}
                                 <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4">
                                   {service.title}
                                 </h3>
@@ -359,15 +364,6 @@ export default function ServicesPage() {
                                   className="text-gray-700 leading-relaxed font-normal mb-4 md:mb-6 formatted-content text-base md:text-lg"
                                   dangerouslySetInnerHTML={{ __html: service.description }}
                                 />
-                                {service.image && (
-                                  <div className="mb-5">
-                                    <img 
-                                      src={service.image} 
-                                      alt={service.title}
-                                      className="w-full h-48 md:h-56 object-cover rounded-xl shadow-md"
-                                    />
-                                  </div>
-                                )}
                                 <button 
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -429,12 +425,6 @@ export default function ServicesPage() {
                   className="bg-white text-gray-900 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
                 >
                   Связаться с нами
-                </Link>
-                <Link 
-                  href="/#pricing"
-                  className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 text-base md:text-lg transform hover:scale-105"
-                >
-                  Посмотреть цены
                 </Link>
               </div>
             </div>

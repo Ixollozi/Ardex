@@ -2,12 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MessageSquare, Settings, Zap, Code, GraduationCap, FileSearch } from 'lucide-react';
 import { apiClient, Service } from '@/lib/api';
 import { Fallback, SkeletonGrid } from '@/components/ui/fallback';
 import Link from 'next/link';
-
-const icons = [MessageSquare, Settings, Zap, Code, GraduationCap, FileSearch];
+import Image from 'next/image';
 
 export default function Services() {
   const { t } = useLanguage();
@@ -36,7 +34,7 @@ export default function Services() {
   const displayServices = services;
 
   return (
-    <section id="services" className="py-10 md:py-14 lg:py-16 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section id="services" className="py-10 md:py-14 lg:py-16 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3">
@@ -45,7 +43,7 @@ export default function Services() {
         </div>
 
         {loading ? (
-          <SkeletonGrid columns={3} />
+          <SkeletonGrid columns={5} />
         ) : error ? (
           <Fallback
             type="error"
@@ -56,25 +54,31 @@ export default function Services() {
           />
         ) : displayServices.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {displayServices.map((service, index) => {
-                const Icon = icons[index % icons.length];
-                
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5">
+              {displayServices.map((service) => {
                 return (
                   <div
                     key={service.id}
-                    className="group bg-white p-6 md:p-7 rounded-xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-gray-300 transition-all duration-300 hover:-translate-y-1"
+                    className="group bg-white p-4 md:p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col items-center text-center"
                   >
-                    <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-accentGreen/10 to-accentGreen/5 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:bg-accentGreen transition-all duration-300 transform group-hover:scale-110">
-                      <Icon className="text-accentGreen group-hover:text-white transition-colors duration-300" size={28} />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4">
+                    {service.image ? (
+                      <div className="w-full h-40 md:h-48 mb-3 md:mb-4 relative rounded-lg overflow-hidden bg-gray-100">
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full h-40 md:h-48 mb-3 md:mb-4 rounded-lg bg-gray-100 flex items-center justify-center">
+                        <span className="text-gray-400 text-sm">Нет изображения</span>
+                      </div>
+                    )}
+                    <h3 className="text-sm md:text-base font-semibold text-gray-900 leading-tight">
                       {service.title}
                     </h3>
-                  <div 
-                    className="text-gray-700 leading-relaxed font-normal formatted-content text-base md:text-lg"
-                    dangerouslySetInnerHTML={{ __html: service.description }}
-                  />
                   </div>
                 );
               })}

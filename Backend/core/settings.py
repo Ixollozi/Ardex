@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     # Local apps
     "core",
     "services",
-    "cases",
-    "pricing",
+    "workplan",
     "faq",
     "contacts",
     "pages",
