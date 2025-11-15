@@ -22,7 +22,6 @@ export default function FAQ() {
         const data = await apiClient.getFAQ();
         setFaqItems(data);
       } catch (error) {
-        console.error('Failed to fetch FAQ:', error);
       } finally {
         setLoading(false);
       }

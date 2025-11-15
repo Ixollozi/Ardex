@@ -16,7 +16,6 @@ export default function Hero() {
         const seo = await apiClient.getPageSeo('home', language);
         setPageSeo(seo);
       } catch (error) {
-        console.error('Failed to fetch home page SEO:', error);
       }
     };
 

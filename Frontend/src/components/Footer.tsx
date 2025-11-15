@@ -15,21 +15,15 @@ export default function Footer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Fetching data...');
         const [contactData, servicesData, homePageSeo] = await Promise.all([
           apiClient.getContacts(language),
           apiClient.getServices(),
           apiClient.getPageSeo('home', language)
         ]);
-        console.log('Contact data:', contactData);
-        console.log('Contact address:', contactData?.address);
-        console.log('Services data:', servicesData);
-        console.log('Home page SEO:', homePageSeo);
         setContactInfo(contactData);
         setServices(servicesData);
         setPageSeo(homePageSeo);
       } catch (error) {
-        console.error('Failed to fetch data:', error);
       } finally {
         setLoading(false);
       }

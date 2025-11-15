@@ -19,10 +19,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Отладочная информация
-  console.log('Contact component rendered with language:', language);
-  console.log('Contact translations:', t.contact);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -44,7 +40,6 @@ export default function Contact() {
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Failed to send order:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

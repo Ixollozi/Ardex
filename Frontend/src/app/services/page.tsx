@@ -44,7 +44,6 @@ export default function ServicesPage() {
           }
         }
       } catch (error) {
-        console.error('Failed to fetch services:', error);
         setError('Не удалось загрузить услуги');
       } finally {
         setLoading(false);

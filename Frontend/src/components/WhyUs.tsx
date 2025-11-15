@@ -18,12 +18,9 @@ export default function WhyUs() {
     const fetchWhyUsItems = async () => {
       try {
         setError(null);
-        console.log('Fetching WhyUs items for language:', language);
         const data = await apiClient.getWhyUsItems(language);
-        console.log('WhyUs data received:', data);
         setWhyUsItems(data);
       } catch (err) {
-        console.error('Error fetching WhyUs items:', err);
         setError('Failed to load advantages');
       } finally {
         setLoading(false);

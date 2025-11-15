@@ -17,13 +17,10 @@ export default function WorkPlan() {
       try {
         setError(null);
         const data = await apiClient.getWorkPlan();
-        console.log('WorkPlan data received:', data);
         // сортируем по order на всякий случай
         const sortedData = [...data].sort((a, b) => a.order - b.order);
         setSteps(sortedData);
-        console.log('WorkPlan steps set:', sortedData);
       } catch (e) {
-        console.error('WorkPlan fetch error:', e);
         setError('Не удалось загрузить этапы работы');
       } finally {
         setLoading(false);

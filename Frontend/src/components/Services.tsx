@@ -20,7 +20,6 @@ export default function Services() {
         const data = await apiClient.getServices();
         setServices(data);
       } catch (error) {
-        console.error('Failed to fetch services:', error);
         setError('Не удалось загрузить услуги');
       } finally {
         setLoading(false);
