@@ -3,6 +3,16 @@ FROM node:18 AS builder
 
 WORKDIR /app
 
+# Build arguments для переменных окружения
+# Пустая строка для NEXT_PUBLIC_API_URL означает использование относительных путей
+ARG NEXT_PUBLIC_API_URL=
+ARG NEXT_PUBLIC_ADMIN_URL=https://ardex.uz
+
+# Устанавливаем переменные окружения для сборки
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_ADMIN_URL=$NEXT_PUBLIC_ADMIN_URL
+ENV NODE_ENV=production
+
 # Копируем только package.json и package-lock.json
 COPY package*.json ./
 

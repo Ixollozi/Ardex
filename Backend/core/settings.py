@@ -11,9 +11,9 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "changeme-in-prod")
-DEBUG = os.getenv("DEBUG", "true").lower() == "true"
+DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
-ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "*").split(",") if h.strip()]
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "ardex.uz,www.ardex.uz").split(",") if h.strip()]
 
 LANGUAGE_CODE = "ru"
 TIME_ZONE = "Asia/Tashkent"
@@ -127,7 +127,7 @@ REST_FRAMEWORK = {
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    o.strip() for o in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()
+    o.strip() for o in os.getenv("CORS_ALLOWED_ORIGINS", "https://ardex.uz,https://www.ardex.uz").split(",") if o.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # Разрешить все источники в режиме разработки
@@ -173,6 +173,7 @@ LOGGING = {
 
 # Sitemaps
 SITEMAP_PROTOCOL = os.getenv("SITEMAP_PROTOCOL", "https")
+SITEMAP_DOMAIN = os.getenv("SITEMAP_DOMAIN", "ardex.uz")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
