@@ -15,8 +15,17 @@ order_logger = logging.getLogger("order")
 
 
 class CompanyContactRetrieveAPIView(generics.ListAPIView):
+    """
+    API для получения контактной информации компании.
+    Возвращает пустой список, если контакты не настроены.
+    """
     queryset = CompanyContact.objects.all()
     serializer_class = CompanyContactSerializer
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 
 class OrderSendAPIView(generics.CreateAPIView):

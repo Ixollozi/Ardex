@@ -9,14 +9,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 # Копируем requirements
-COPY requirements.txt .
+COPY Backend/requirements.txt .
 
 # Устанавливаем Python зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем исходники
-COPY . .
+COPY Backend/ .
+
+# Копируем и делаем исполняемым entrypoint скрипт
+COPY Backend/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]

@@ -11,6 +11,7 @@ from contacts.models import Order
 from services.models import Service
 from faq.models import FAQ
 from pages.models import Page
+from whyus.models import WhyUsItem
 
 
 class CustomAdminSite(AdminSite):

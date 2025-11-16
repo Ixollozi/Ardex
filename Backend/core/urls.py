@@ -28,6 +28,7 @@ urlpatterns = [
     path("api/", include("workplan.urls")),
     path("api/", include("contacts.urls")),
     path("api/", include("pages.urls")),
+    path("api/", include("cases.urls")),
     path("api/whyus/", include("whyus.urls")),
     re_path(r"^sitemap\.xml$", sitemap, {"sitemaps": {"pages": StaticPagesSitemap}}, name="sitemap"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
