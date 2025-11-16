@@ -4,24 +4,20 @@ import path from "node:path";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
-      },
+      { protocol: 'https', hostname: '**' },
+      { protocol: 'http', hostname: '**' },
     ],
   },
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
-  // Отключаем индикатор разработки Next.js
   devIndicators: {
     buildActivity: false,
     buildActivityPosition: 'bottom-right',
   },
-  // Отключаем заголовок X-Powered-By
   poweredByHeader: false,
+  webpack(config) {
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+    return config;
+  },
   async redirects() {
     return [
       {

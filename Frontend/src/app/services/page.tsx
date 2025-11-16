@@ -38,7 +38,7 @@ export default function ServicesPage() {
         // Проверяем URL hash для автоматического открытия услуги
         const hash = window.location.hash.replace('#', '');
         if (hash) {
-          const service = data.results.find(s => s.slug === hash);
+          const service = data.results.find((s: Service) => s.slug === hash);
           if (service) {
             setSelectedService(service.id);
           }
