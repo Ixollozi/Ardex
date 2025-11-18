@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { FaTelegram, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
@@ -43,7 +44,6 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
-          {/* Company Info */}
           <div>
             <h3 className="text-xl md:text-2xl font-bold text-accentGreen mb-2 md:mb-3">
               ARDEX
@@ -90,26 +90,24 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {language === 'ru' ? 'Быстрые ссылки' : 'Tez havolalar'}
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
+                <Link href="/" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
                   {t.nav.home}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/services" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
+                <Link href="/services" className="text-gray-300 hover:text-accentGreen transition-colors text-sm md:text-base">
                   {t.nav.services}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {t.nav.services}
@@ -128,10 +126,8 @@ export default function Footer() {
                       href={`/services#${service.slug}`} 
                       className="hover:text-accentGreen transition-colors"
                       onClick={(e) => {
-                        // Если мы уже на странице услуг, предотвращаем переход
                         if (window.location.pathname === '/services') {
                           e.preventDefault();
-                          // Находим элемент услуги и кликаем по нему
                           const serviceElement = document.querySelector(`[data-service-slug="${service.slug}"]`) as HTMLElement;
                           if (serviceElement) {
                             serviceElement.click();
@@ -152,7 +148,6 @@ export default function Footer() {
             )}
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
               {t.nav.contacts}
@@ -196,8 +191,6 @@ export default function Footer() {
             )}
           </div>
         </div>
-
-        
       </div>
     </footer>
   );
