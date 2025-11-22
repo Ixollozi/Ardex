@@ -1,0 +1,1226 @@
+/* Formatting toolbar positioning for case forms */
+
+/* Точная привязка к контейнеру, который вы указали */
+#case_form fieldset .form-row.field-description_ru > div > div > div.formatting-toolbar,
+#case_form fieldset .form-row.field-description_uz > div > div > div.formatting-toolbar {
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+/* Кнопки внутри конкретного контейнера */
+#case_form .formatting-toolbar .formatting-btn {
+    height: 32px;
+    padding: 0 10px;
+}
+/* Красивая и гармоничная админ панель Ardex */
+
+/* Кнопки форматирования текста */
+.formatting-toolbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    backdrop-filter: blur(6px);
+}
+
+.formatting-toolbar .formatting-btn {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    height: 34px !important;
+    padding: 0 12px !important;
+    border-radius: 10px !important;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease, color .12s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 36px !important;
+    justify-content: center;
+    box-shadow: 0 1px 0 0 rgba(255,255,255,0.03) inset;
+    position: relative;
+    user-select: none;
+}
+
+.formatting-toolbar .formatting-btn:hover {
+    background: linear-gradient(180deg, var(--primary-color), var(--primary-hover));
+    border-color: var(--primary-color) !important;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 6px 14px -6px rgba(59,130,246,0.45);
+}
+
+.formatting-toolbar .formatting-btn.active {
+    background: linear-gradient(180deg, var(--primary-color), var(--primary-hover));
+    border-color: var(--primary-color) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 14px -6px rgba(59,130,246,0.45);
+}
+
+.formatting-toolbar .formatting-btn:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* Всплывающие подсказки */
+.formatting-toolbar .formatting-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .12s ease, transform .12s ease;
+}
+
+.formatting-toolbar .formatting-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.formatting-btn.bold {
+    font-weight: bold;
+}
+
+.formatting-btn.italic {
+    font-style: italic;
+}
+
+.formatting-btn.underline {
+    text-decoration: underline;
+}
+
+.formatting-btn.strikethrough {
+    text-decoration: line-through;
+}
+
+.formatting-toolbar .formatting-btn.code {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-primary);
+    border-color: #2b3446;
+}
+
+.formatting-btn.quote {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 8px;
+}
+
+.formatting-toolbar .formatting-btn.link {
+    color: #93c5fd;
+    border-color: #1e3a8a;
+}
+
+.formatting-toolbar .formatting-btn.heading {
+    font-weight: 700;
+    font-size: 13px;
+    border-color: #2f4b3f;
+}
+
+.formatting-btn.list {
+    position: relative;
+}
+
+.formatting-toolbar .formatting-btn.list::before {
+    content: "•";
+    margin-right: 4px;
+    color: #8bc4ba;
+}
+
+.formatting-btn.numbered-list {
+    position: relative;
+}
+
+.formatting-toolbar .formatting-btn.numbered-list::before {
+    content: "1.";
+    margin-right: 4px;
+    color: #8bc4ba;
+}
+
+/* Сепаратор между кнопками */
+.formatting-toolbar > div[style*="width: 1px"] {
+    background: linear-gradient(180deg, transparent, var(--border-color), transparent) !important;
+    height: 26px !important;
+}
+
+/* Стили для текстовых полей с форматированием */
+.form-row textarea {
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.form-row textarea.formatted {
+    min-height: 200px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    resize: vertical;
+}
+
+/* Стили для заголовков в тексте */
+.formatted-text h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 16px 0 8px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 14px 0 6px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 12px 0 4px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 4px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 8px 0 4px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text h6 {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 6px 0 4px 0;
+    color: var(--text-primary);
+}
+
+.formatted-text p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.formatted-text strong {
+    font-weight: bold;
+}
+
+.formatted-text em {
+    font-style: italic;
+}
+
+.formatted-text u {
+    text-decoration: underline;
+}
+
+.formatted-text s {
+    text-decoration: line-through;
+}
+
+.formatted-text code {
+    background: var(--bg-primary);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.formatted-text blockquote {
+    border-left: 4px solid var(--primary-color);
+    margin: 16px 0;
+    padding: 8px 16px;
+    background: var(--bg-secondary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.formatted-text ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.formatted-text ol {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.formatted-text li {
+    margin: 4px 0;
+}
+
+.formatted-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.formatted-text a:hover {
+    text-decoration: underline;
+}
+
+/* CSS переменные для темной темы (всегда активна) */
+:root {
+    /* Темная тема по умолчанию */
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-light: #1e3a8a;
+    --secondary-color: #94a3b8;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-card: #1e293b;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    
+    --border-color: #334155;
+    --border-light: #475569;
+    --border-focus: #3b82f6;
+    
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+}
+
+/* Базовые стили */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Заголовок сайта */
+#header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 100;
+}
+
+#header h1 {
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: var(--spacing-md) 0;
+}
+
+/* Навигация */
+#nav-global {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-sm) 0;
+}
+
+#nav-global a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-right: var(--spacing-xs);
+}
+
+#nav-global a:hover {
+    color: var(--primary-color);
+    background: var(--bg-tertiary);
+    text-decoration: none;
+}
+
+/* Основной контент */
+#content {
+    background: var(--bg-primary);
+    min-height: calc(100vh - 120px);
+    padding: var(--spacing-lg);
+}
+
+/* Карточки */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    gap: var(--spacing-xs);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #059669;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+}
+
+.btn-lg {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+}
+
+/* Таблицы */
+.results {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: var(--spacing-lg);
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.results th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.results td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.results tr:hover {
+    background: var(--bg-secondary);
+}
+
+.results tr:last-child td {
+    border-bottom: none;
+}
+
+/* Формы */
+.form-row {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-row label {
+    display: block;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus,
+.form-row select:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Поиск */
+#toolbar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+#searchbar {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+#searchbar:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Фильтры */
+#changelist-filter {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: var(--spacing-lg);
+}
+
+#changelist-filter h2 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 var(--spacing-md) 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+#changelist-filter h3 {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+#changelist-filter a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: var(--spacing-xs) 0;
+    display: block;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+#changelist-filter a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#changelist-filter a.selected {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Пагинация */
+.paginator {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.paginator a {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0 var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.paginator a:hover {
+    background: var(--bg-tertiary);
+    color: var(--primary-hover);
+    text-decoration: none;
+}
+
+.paginator .this-page {
+    background: var(--primary-color);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0 var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+/* Сообщения */
+.messagelist {
+    margin: var(--spacing-lg) 0;
+}
+
+.messagelist li {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.messagelist .success {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+.messagelist .warning {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #fde68a;
+}
+
+.messagelist .error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+/* Переключатель темы полностью скрыт и отключен */
+.theme-toggle,
+button[data-theme],
+[data-theme-toggle],
+.theme-switcher,
+#theme-toggle {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Принудительная темная тема для всех элементов */
+html,
+html[data-theme],
+html[data-theme="dark"],
+body,
+body.dark,
+body[data-theme="dark"] {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Переопределение всех светлых элементов на темные */
+.module,
+.module h2,
+.module h3,
+.content-related,
+.object-tools,
+.object-tools a,
+.object-tools .addlink,
+.object-tools .changelink,
+.object-tools .historylink,
+.object-tools .viewsitelink,
+.breadcrumbs,
+.breadcrumbs a,
+.changelist-actions,
+.changelist-actions .button,
+.submit-row,
+.submit-row input,
+.submit-row a,
+fieldset,
+fieldset h2,
+fieldset.module,
+form .form-row,
+form .form-row input,
+form .form-row textarea,
+form .form-row select,
+form .form-row label,
+.help,
+.help-block,
+.vLargeTextField,
+.vTextField,
+.vIntegerField,
+.vDateField,
+.vTimeField,
+.vURLField,
+.vEmailField,
+.vBigIntegerField,
+.vSmallIntegerField,
+.vPositiveSmallIntegerField,
+.vPositiveIntegerField,
+.vSlugField,
+.vNullBooleanField,
+.vBooleanField select,
+.aligned label,
+.aligned input,
+.aligned textarea,
+.aligned select,
+.inline-group,
+.inline-group h2,
+.inline-group .tabular,
+.inline-group .tabular table,
+.readonly {
+    background-color: var(--bg-primary) !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Специально для input полей */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+textarea,
+select {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Убираем все светлые фоны */
+.results,
+.results table,
+.results th,
+.results td,
+#toolbar,
+#changelist-filter,
+.module,
+.module h2,
+.module h3 {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Заголовки и ссылки */
+h1, h2, h3, h4, h5, h6,
+a, a:link, a:visited {
+    color: var(--text-primary) !important;
+}
+
+a:hover, a:focus {
+    color: var(--primary-color) !important;
+}
+
+/* Кнопки всегда темные */
+input[type="submit"],
+input[type="button"],
+button,
+.default,
+.submit-row input,
+.object-tools a {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover,
+.default:hover {
+    background-color: var(--primary-hover) !important;
+}
+
+/* Дополнительные принудительные стили для всех элементов Django */
+.admin,
+.admin *,
+#header,
+#user-tools,
+#user-tools a,
+#changelist,
+#changelist-form,
+#result_list,
+#result_list tr,
+#result_list th,
+#result_list td,
+.inline-related,
+.inline-related h3,
+.inline-related table,
+.inline-related .tabular,
+.stacked,
+.stacked .inline-related,
+.form-row .field-box,
+.form-row .readonly,
+.readonly,
+.readonly input,
+.readonly textarea,
+fieldset.collapsed,
+fieldset.collapsed h2,
+.module,
+.module table,
+.module caption,
+.sorted .sortoptions,
+.sorted .sortoptions a,
+.sorted .sortoptions a.sorted,
+#content-main,
+#content-main *,
+.object-tools,
+.object-tools li,
+.object-tools a,
+.addlink,
+.changelink,
+.historylink,
+.viewsitelink,
+.deletelink,
+.paginator,
+.paginator a,
+.paginator .this-page,
+.paginator .end,
+.breadcrumbs,
+.breadcrumbs a,
+.selector,
+.selector-available,
+.selector-chosen,
+.selector select,
+.selector .selector-available h2,
+.selector .selector-chosen h2,
+.inline-group .tabular,
+.inline-group .tabular table,
+.inline-group .tabular td,
+.inline-group .tabular th,
+.inline-group .tabular tr,
+.related-widget-wrapper,
+.related-widget-wrapper select,
+.related-widget-wrapper input,
+.clearable-file-input,
+.clearable-file-input input,
+.file-upload,
+.vLargeTextField,
+.vTextField,
+.vIntegerField,
+.vDateField,
+.vTimeField,
+.vURLField,
+.vEmailField,
+.vBigIntegerField,
+.vSmallIntegerField,
+.vPositiveSmallIntegerField,
+.vPositiveIntegerField,
+.vSlugField,
+.vNullBooleanField,
+.vBooleanField,
+.radiolist,
+.radiolist input,
+.radiolist label,
+.checkbox-row,
+.checkbox-row input,
+.checkbox-row label,
+.timezonewarning,
+.help,
+.help-block,
+form p,
+form ul,
+form ul li,
+form ul.errorlist,
+form ul.errorlist li,
+.errornote,
+.errorlist,
+.errorlist li,
+.system-message,
+.info,
+.warning,
+.error,
+.success,
+.message,
+.messagelist,
+.messagelist li,
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6,
+.delete,
+.deletelink-box,
+.action-select,
+.action-counter,
+.action-counter + input,
+#toolbar,
+#searchbar,
+#changelist-filter,
+#changelist-filter h2,
+#changelist-filter h3,
+#changelist-filter ul,
+#changelist-filter li,
+#changelist-filter a,
+.date-hierarchy,
+.date-hierarchy a,
+.change-list,
+.change-list .actions,
+.change-list .actions select,
+.change-list .actions button,
+.change-list .actions input,
+.submit-row,
+.submit-row input,
+.submit-row a,
+.submit-row .deletelink,
+#changelist-search,
+.change-list .results,
+.change-list .paginator {
+    background-color: var(--bg-primary) !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Специально для таблиц */
+.results table,
+#result_list,
+.change-list .results table {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+.results th,
+#result_list th,
+.change-list .results th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.results td,
+#result_list td,
+.change-list .results td {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-light) !important;
+}
+
+.results tr:hover,
+#result_list tr:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Убираем белые фоны полностью */
+.module,
+.module h2,
+.module h3,
+fieldset,
+fieldset.module {
+    background: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Ссылки всегда светлые */
+a,
+a:link,
+a:visited,
+#user-tools a,
+.breadcrumbs a,
+.object-tools a {
+    color: var(--text-secondary) !important;
+}
+
+a:hover,
+a:active,
+a:focus,
+#user-tools a:hover,
+.breadcrumbs a:hover {
+    color: var(--primary-color) !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    background-color: var(--bg-primary) !important;
+    border-color: var(--border-color) !important;
+    accent-color: var(--primary-color) !important;
+}
+
+/* Принудительно темный фон для body и html */
+html {
+    background: var(--bg-primary) !important;
+    color-scheme: dark !important;
+}
+
+body {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Блокируем светлую тему через color-scheme */
+@media (prefers-color-scheme: light) {
+    html,
+    body,
+    * {
+        color-scheme: dark !important;
+    }
+}
+
+/* Дашборд */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card h3 {
+    margin: 0 0 var(--spacing-md) 0;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.stat-card .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.quick-action {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.quick-action:hover {
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-color) 100%);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .quick-actions {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    #content {
+        padding: var(--spacing-md);
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .results table {
+        font-size: 0.875rem;
+    }
+    
+    .results th,
+    .results td {
+        padding: var(--spacing-sm);
+    }
+    
+    .theme-toggle {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .results {
+        overflow-x: auto;
+    }
+    
+    .results table {
+        min-width: 600px;
+    }
+}
+
+/* Стили для темной темы (всегда активны) */
+.messagelist .success {
+    background: #064e3b;
+    color: #6ee7b7;
+    border-color: #047857;
+}
+
+.messagelist .warning {
+    background: #451a03;
+    color: #fbbf24;
+    border-color: #d97706;
+}
+
+.messagelist .error {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-color: #dc2626;
+}
+
+/* Специальные стили для Django админки */
+.default,
+input[type="submit"],
+input[type="button"],
+/* Убираем конфликты с оригинальными стилями Django */
+.admin .results th {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.admin .results td {
+    color: var(--text-primary) !important;
+}
+
+.admin #toolbar {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.admin #changelist-filter {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Упрощенные стили: удалены агрессивные переопределения для select */

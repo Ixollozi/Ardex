@@ -3,35 +3,16 @@
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
-{% block branding %}
-<h1 id="site-name">
-    <a href="{% url 'admin:index' %}">
-        Ardex Админ Панель
-    </a>
-</h1>
-{% endblock %}
-
-{% block userlinks %}
-    {% if user.is_active and user.is_staff %}
-        {% url 'django-admindocs-docroot' as docsroot %}
-        {% if docsroot %}
-            <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
-        {% endif %}
-    {% endif %}
-    {% if user.has_usable_password %}
-    <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
-    {% endif %}
-    <a href="{% url 'admin:logout' %}">{% translate 'Log out' %}</a>
-{% endblock %}
-
-
-
 {% block extrahead %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
-<script src="{% static 'admin/js/text_formatting.js' %}"></script>
-<script>
-// Принудительная темная тема - блокируем все попытки переключения
+    {{ block.super }}
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">Ardex Админ Панель</a>
+    </h1>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
+    <script src="{% static 'admin/js/text_formatting.js' %}"></script>
+    <script>
+        // Принудительная темная тема - блокируем все попытки переключения
 (function() {
     'use strict';
     
@@ -176,9 +157,9 @@
     // Периодически проверяем (на случай динамической загрузки элементов)
     setInterval(removeThemeToggles, 1000);
 })();
-</script>
-<style>
-/* Форматирование кнопок - принудительные стили */
+    </script>
+    <style>
+        /* Форматирование кнопок - принудительные стили */
 .formatting-toolbar {
     display: flex !important;
     gap: 4px !important;
@@ -460,5 +441,22 @@
             margin-bottom: var(--spacing-xs);
         }
     }
-</style>
+    </style>
 {% endblock %}
+
+
+{% block userlinks %}
+    {% if user.is_active and user.is_staff %}
+        {% url 'django-admindocs-docroot' as docsroot %}
+        {% if docsroot %}
+            <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
+        {% endif %}
+    {% endif %}
+    {% if user.has_usable_password %}
+    <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
+    {% endif %}
+    <a href="{% url 'admin:logout' %}">{% translate 'Log out' %}</a>
+{% endblock %}
+
+
+
