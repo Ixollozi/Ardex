@@ -11,9 +11,9 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "changeme-in-prod")
-DEBUG = os.getenv("DEBUG", "false").lower() == "true"
+DEBUG = True
 
-ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "ardex.uz,www.ardex.uz").split(",") if h.strip()]
+ALLOWED_HOSTS = ["*"]
 
 LANGUAGE_CODE = "ru"
 TIME_ZONE = "Asia/Tashkent"
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # "ckeditor_uploader",
 
     # Local apps
+    "cases",
     "core",
     "services",
     "workplan",
@@ -48,6 +49,9 @@ INSTALLED_APPS = [
     "pages",
     "whyus",
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
 
 SITE_ID = int(os.getenv("SITE_ID", "1"))
 
@@ -86,16 +90,26 @@ FRONTEND_DEV_SERVER = "http://localhost:3000"
 WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.asgi.application"
 
+
+
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB", "ardex"),
-        "USER": os.getenv("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
-        "HOST": os.getenv("POSTGRES_HOST", "db"),
-        "PORT": int(os.getenv("POSTGRES_PORT", "5432")),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',        # Движок SQLite
+        'NAME': BASE_DIR / 'db.sqlite3',              # Файл базы в корне проекта
     }
 }
+
+#DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": os.getenv("POSTGRES_DB", "ardex"),
+#        "USER": os.getenv("POSTGRES_USER", "postgres"),
+#        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
+#        "HOST": os.getenv("POSTGRES_HOST", "db"),
+#        "PORT": int(os.getenv("POSTGRES_PORT", "5432")),
+#    }
+#}
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -200,5 +214,4 @@ CKEDITOR_CONFIGS = {
         ],
     },
 }
-
 
