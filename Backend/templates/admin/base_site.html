@@ -3,13 +3,13 @@
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
+{% endblock %}
+
 {% block extrahead %}
     {{ block.super }}
-    <h1 id="site-name">
-        <a href="{% url 'admin:index' %}">Ardex Админ Панель</a>
-    </h1>
-    
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
     <script src="{% static 'admin/js/text_formatting.js' %}"></script>
     <script>
         // Принудительная темная тема - блокируем все попытки переключения

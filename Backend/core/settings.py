@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",
     "corsheaders",
-    # "ckeditor",
-    # "ckeditor_uploader",
+    "ckeditor",
+    "ckeditor_uploader",
 
     # Local apps
     "cases",

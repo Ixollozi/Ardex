@@ -40,7 +40,7 @@ export default function Header() {
               />
             </button>
             <span className="mt-2 text-[12px] md:text-sm font-medium pointer-events-none -translate-y-[70px] md:-translate-y-[70px]" style={{ color: '#706c62' }}>
-              консалтинговая компания
+            Проектный консалтинг
             </span>
           </div>
 

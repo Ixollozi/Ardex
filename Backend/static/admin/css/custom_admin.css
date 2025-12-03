@@ -179,6 +179,23 @@
     resize: vertical;
 }
 
+/* Стили для контейнера предварительного просмотра */
+.preview-container {
+    margin-top: 8px !important;
+    padding: 12px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-sm) !important;
+    background: var(--bg-card) !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.preview-container .formatted-text {
+    color: var(--text-primary) !important;
+    line-height: 1.6 !important;
+}
+
 /* Стили для заголовков в тексте */
 .formatted-text h1 {
     font-size: 24px;
@@ -1224,3 +1241,120 @@ input[type="button"],
 }
 
 /* Упрощенные стили: удалены агрессивные переопределения для select */
+
+/* Стили для CKEditor */
+.cke_chrome {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--bg-card) !important;
+}
+
+/* Скрываем панель инструментов CKEditor */
+.cke_top,
+#cke_1_top,
+.cke_toolbar,
+.cke_toolgroup {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+.cke_bottom {
+    background: var(--bg-secondary) !important;
+    border-top: 1px solid var(--border-color) !important;
+}
+
+.cke_contents {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.cke_wysiwyg_div {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.cke_editable {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.cke_button {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.cke_button:hover {
+    background: var(--primary-color) !important;
+}
+
+.cke_button_on {
+    background: var(--primary-color) !important;
+}
+
+/* Улучшенные стили для предварительного просмотра */
+.preview-container {
+    position: relative;
+}
+
+.preview-container::before {
+    content: 'Предварительный просмотр';
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.preview-container .formatted-text {
+    color: var(--text-primary) !important;
+    line-height: 1.6 !important;
+    font-size: 0.875rem;
+}
+
+.preview-container .formatted-text h1,
+.preview-container .formatted-text h2,
+.preview-container .formatted-text h3,
+.preview-container .formatted-text h4,
+.preview-container .formatted-text h5,
+.preview-container .formatted-text h6 {
+    color: var(--text-primary) !important;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.preview-container .formatted-text p {
+    margin: 0.5em 0;
+    color: var(--text-primary) !important;
+}
+
+.preview-container .formatted-text a {
+    color: var(--primary-color) !important;
+}
+
+.preview-container .formatted-text code {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.preview-container .formatted-text blockquote {
+    border-left-color: var(--primary-color) !important;
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.preview-container .formatted-text ul,
+.preview-container .formatted-text ol {
+    color: var(--text-primary) !important;
+}
+
+.preview-container .formatted-text li {
+    color: var(--text-primary) !important;
+}

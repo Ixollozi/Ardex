@@ -320,9 +320,11 @@ class ApiClient {
   // Pages SEO API
   async getPageSeo(slug: string, language: string = 'ru'): Promise<PageSeo | null> {
     try {
-      return await this.request<PageSeo>(`/api/pages/${slug}/?lang=${language}`);
+      const data = await this.request<PageSeo | null>(`/api/pages/${slug}/?lang=${language}`);
+      // Если API вернул null или пустой ответ, возвращаем null без ошибки
+      return data || null;
     } catch (error) {
-      console.error(`Failed to fetch page SEO for ${slug}:`, error);
+      // Тихая обработка - не логируем ошибку, просто возвращаем null
       return null;
     }
   }

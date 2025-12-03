@@ -7,6 +7,7 @@ import base64
 from faq.models import FAQ
 from contacts.models import CompanyContact
 from whyus.models import WhyUsItem
+from pages.models import Page
 
 
 class Command(BaseCommand):
@@ -33,6 +34,7 @@ class Command(BaseCommand):
             self.create_faqs()
             self.create_company_contact()
             self.create_whyus_data()
+            self.create_pages()
 
         self.stdout.write(
             self.style.SUCCESS('Successfully created test data!')
@@ -303,3 +305,31 @@ class Command(BaseCommand):
                 self.stdout.write(f'Created WhyUs item: {item.title_ru}')
             else:
                 self.stdout.write(f'WhyUs item already exists: {item.title_ru}')
+
+    def create_pages(self):
+        """Create default pages"""
+        pages_data = [
+            {
+                'page_type': 'home',
+                'slug': 'home',
+                'title_ru': 'ARDEX - Проектирование и консалтинг',
+                'title_uz': 'ARDEX - Loyihalash va konsalting',
+                'description_ru': 'Профессиональные услуги по проектированию и консалтингу для вашего бизнеса',
+                'description_uz': 'Biznesingiz uchun professional loyihalash va konsalting xizmatlari',
+                'seo_title_ru': 'ARDEX - Проектирование и консалтинг в Узбекистане',
+                'seo_title_uz': 'ARDEX - O\'zbekistonda loyihalash va konsalting',
+                'meta_description_ru': 'Профессиональные услуги по проектированию и консалтингу. Работаем по всему Узбекистану.',
+                'meta_description_uz': 'Professional loyihalash va konsalting xizmatlari. Butun O\'zbekiston bo\'ylab ishlaymiz.',
+                'is_active': True,
+            },
+        ]
+
+        for page_data in pages_data:
+            page, created = Page.objects.get_or_create(
+                slug=page_data['slug'],
+                defaults=page_data
+            )
+            if created:
+                self.stdout.write(f'Created page: {page.slug}')
+            else:
+                self.stdout.write(f'Page already exists: {page.slug}')

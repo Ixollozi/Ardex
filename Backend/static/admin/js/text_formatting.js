@@ -1,11 +1,12 @@
 // Форматирование текста в админке Django
 document.addEventListener('DOMContentLoaded', function() {
     // Создаем панель форматирования для каждого текстового поля
-    const textareas = document.querySelectorAll('textarea[name*="description"]');
+    const textareas = document.querySelectorAll('textarea[name*="description"], textarea[name*="answer"]');
     
     textareas.forEach(function(textarea) {
-        if (textarea.id && textarea.name.includes('description')) {
+        if (textarea.id && (textarea.name.includes('description') || textarea.name.includes('answer'))) {
             createFormattingToolbar(textarea);
+            addPreviewToggle(textarea);
         }
     });
 });
@@ -125,6 +126,11 @@ function formatText(textarea, tag, command) {
 
 // Добавляем предварительный просмотр форматированного текста
 function addPreviewToggle(textarea) {
+    // Проверяем, не добавлен ли уже предварительный просмотр
+    if (textarea.nextElementSibling && textarea.nextElementSibling.classList.contains('preview-container')) {
+        return;
+    }
+    
     const previewContainer = document.createElement('div');
     previewContainer.className = 'preview-container';
     previewContainer.style.display = 'none';
@@ -133,6 +139,8 @@ function addPreviewToggle(textarea) {
     previewContainer.style.border = '1px solid var(--border-color)';
     previewContainer.style.borderRadius = 'var(--radius-sm)';
     previewContainer.style.background = 'var(--bg-card)';
+    previewContainer.style.maxHeight = '400px';
+    previewContainer.style.overflowY = 'auto';
     
     const previewContent = document.createElement('div');
     previewContent.className = 'formatted-text';
@@ -142,21 +150,41 @@ function addPreviewToggle(textarea) {
     const toggleBtn = document.createElement('button');
     toggleBtn.type = 'button';
     toggleBtn.className = 'formatting-btn';
-    toggleBtn.innerHTML = '👁️ Предварительный просмотр';
-    toggleBtn.onclick = function() {
+    toggleBtn.innerHTML = '👁️ Предпросмотр';
+    toggleBtn.setAttribute('data-tooltip', 'Предварительный просмотр');
+    toggleBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         if (previewContainer.style.display === 'none') {
-            previewContent.innerHTML = textarea.value.replace(/\n/g, '<br>');
+            // Обновляем содержимое предварительного просмотра
+            previewContent.innerHTML = textarea.value || '<em style="color: var(--text-muted);">Нет содержимого для предварительного просмотра</em>';
             previewContainer.style.display = 'block';
             toggleBtn.innerHTML = '✕ Скрыть';
+            toggleBtn.setAttribute('data-tooltip', 'Скрыть предварительный просмотр');
         } else {
             previewContainer.style.display = 'none';
-            toggleBtn.innerHTML = '👁️ Предварительный просмотр';
+            toggleBtn.innerHTML = '👁️ Предпросмотр';
+            toggleBtn.setAttribute('data-tooltip', 'Предварительный просмотр');
         }
     };
+    
+    // Обновляем предварительный просмотр при изменении текста
+    textarea.addEventListener('input', function() {
+        if (previewContainer.style.display !== 'none') {
+            previewContent.innerHTML = textarea.value || '<em style="color: var(--text-muted);">Нет содержимого для предварительного просмотра</em>';
+        }
+    });
     
     // Добавляем кнопку в панель инструментов
     const toolbar = textarea.previousElementSibling;
     if (toolbar && toolbar.classList.contains('formatting-toolbar')) {
+        // Добавляем сепаратор перед кнопкой предпросмотра
+        const separator = document.createElement('div');
+        separator.style.width = '1px';
+        separator.style.height = '24px';
+        separator.style.background = 'var(--border-color)';
+        separator.style.margin = '0 4px';
+        toolbar.appendChild(separator);
         toolbar.appendChild(toggleBtn);
         textarea.parentNode.insertBefore(previewContainer, textarea.nextSibling);
     }

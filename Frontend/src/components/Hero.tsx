@@ -5,10 +5,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { apiClient, PageSeo } from '@/lib/api';
+import Image from 'next/image';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 export default function Hero() {
   const { t, language } = useLanguage();
   const [pageSeo, setPageSeo] = useState<PageSeo | null>(null);
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: false })
+  );
 
   useEffect(() => {
     const fetchPageSeo = async () => {
@@ -50,15 +60,41 @@ export default function Hero() {
             </Button>
           </div>
 
-          {/* Hero Image */}
+          {/* Hero Image Carousel */}
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-gray-200/50">
-              <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop"
-                alt="Modern office building"
-                className="w-full h-[300px] sm:h-[400px] md:h-[550px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                plugins={[autoplayPlugin.current]}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {[
+                    '/gettyimages-1482140442-612x612.jpg',
+                    '/gettyimages-1728002245-612x612.jpg',
+                    '/gettyimages-2189495681-612x612.jpg',
+                    '/gettyimages-503015273-612x612.jpg',
+                    '/gettyimages-537682635-612x612.jpg',
+                  ].map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[550px]">
+                        <Image
+                          src={image}
+                          alt={`Hero image ${index + 1}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover"
+                          priority={index === 0}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
           </div>
         </div>

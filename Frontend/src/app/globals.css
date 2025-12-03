@@ -145,6 +145,83 @@
   @apply text-gray-700 hover:text-gray-900 underline;
 }
 
+/* Стили для форматированного контента на темном фоне (WorkPlan) */
+.text-white\/90 .formatted-content,
+.text-white .formatted-content {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-white\/90 .formatted-content h1,
+.text-white .formatted-content h1,
+.text-white\/90 .formatted-content h2,
+.text-white .formatted-content h2,
+.text-white\/90 .formatted-content h3,
+.text-white .formatted-content h3,
+.text-white\/90 .formatted-content h4,
+.text-white .formatted-content h4,
+.text-white\/90 .formatted-content h5,
+.text-white .formatted-content h5,
+.text-white\/90 .formatted-content h6,
+.text-white .formatted-content h6 {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.text-white\/90 .formatted-content p,
+.text-white .formatted-content p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-white\/90 .formatted-content strong,
+.text-white .formatted-content strong {
+  color: white !important;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.text-white\/90 .formatted-content em,
+.text-white .formatted-content em {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-white\/90 .formatted-content code,
+.text-white .formatted-content code {
+  background: rgba(0, 0, 0, 0.3) !important;
+  color: white !important;
+  text-shadow: none;
+}
+
+.text-white\/90 .formatted-content blockquote,
+.text-white .formatted-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-white\/90 .formatted-content ul,
+.text-white .formatted-content ul,
+.text-white\/90 .formatted-content ol,
+.text-white .formatted-content ol {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-white\/90 .formatted-content li,
+.text-white .formatted-content li {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-white\/90 .formatted-content a,
+.text-white .formatted-content a {
+  color: rgba(255, 255, 255, 1) !important;
+  text-decoration: underline;
+}
+
+.text-white\/90 .formatted-content a:hover,
+.text-white .formatted-content a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
 /* Стили для компонентов */
 .text-gray-600 h1,
 .text-gray-600 h2,

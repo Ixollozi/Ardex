@@ -12,7 +12,6 @@ export default function Contact() {
   const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
     message: '',
   });
@@ -28,14 +27,13 @@ export default function Contact() {
       const dataToSend = {
         name: formData.name.trim(),
         message: formData.message.trim(),
-        email: formData.email?.trim() || undefined,
         phone: formData.phone?.trim() || undefined,
       };
       
       const result = await apiClient.sendOrder(dataToSend);
       if (result.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ name: '', phone: '', message: '' });
       } else {
         setSubmitStatus('error');
       }
@@ -85,15 +83,7 @@ export default function Contact() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder={t.contact.email}
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="h-14 md:h-16 px-5 md:px-6 rounded-xl border-2 border-gray-200 focus:border-accentGreen focus:ring-2 focus:ring-accentGreen/20 text-base md:text-lg font-medium shadow-sm"
-                  />
+                <div>
                   <Input
                     type="tel"
                     name="phone"
@@ -162,12 +152,8 @@ export default function Contact() {
               </h3>
               <div className="space-y-3 text-gray-700 text-base md:text-lg font-medium">
                 <div className="flex justify-between">
-                  <span>{language === 'ru' ? 'Понедельник - Пятница' : 'Dushanba - Juma'}</span>
+                  <span>{language === 'ru' ? 'Понедельник - Суббота' : 'Dushanba - Shanba'}</span>
                   <span className="font-medium">9:00 - 18:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>{language === 'ru' ? 'Суббота' : 'Shanba'}</span>
-                  <span className="font-medium">10:00 - 15:00</span>
                 </div>
                 <div className="flex justify-between">
                   <span>{language === 'ru' ? 'Воскресенье' : 'Yakshanba'}</span>

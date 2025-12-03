@@ -1,6 +1,8 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
+{% block extrahead %}
+{{ block.super }}
 <style>
     /* Темная тема всегда активна */
     body {
@@ -254,6 +256,7 @@
         }
     }
 </style>
+{% endblock %}
 
 {% block content %}
 <div class="dashboard">
