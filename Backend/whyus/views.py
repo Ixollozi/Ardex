@@ -8,6 +8,7 @@ class WhyUsListAPIView(generics.ListAPIView):
     """
     API для получения списка преимуществ
     """
-    queryset = WhyUsItem.objects.filter(is_active=True)
+    queryset = WhyUsItem.objects.filter(is_active=True).order_by('order', 'created_at')
     serializer_class = WhyUsItemSerializer
     permission_classes = [AllowAny]
+    pagination_class = None  # Отключаем пагинацию, чтобы вернуть все элементы
