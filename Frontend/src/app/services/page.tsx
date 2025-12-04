@@ -338,11 +338,11 @@ export default function ServicesPage() {
                               <div
                                 key={service.id}
                                 data-service-slug={service.slug}
-                                className="group bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col h-full"
+                                className="group bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col h-[600px] md:h-[650px]"
                                 onClick={() => handleServiceClick(service)}
                               >
                                 {service.image ? (
-                                  <div className="relative w-full h-48 md:h-56 mb-5 rounded-xl overflow-hidden bg-gray-100 shadow-md">
+                                  <div className="relative w-full h-48 md:h-56 mb-5 rounded-xl overflow-hidden bg-gray-100 shadow-md flex-shrink-0">
                                     <Image
                                       src={service.image}
                                       alt={service.title}
@@ -352,15 +352,15 @@ export default function ServicesPage() {
                                     />
                                   </div>
                                 ) : (
-                                  <div className="w-full h-48 md:h-56 mb-5 rounded-xl bg-gray-100 flex items-center justify-center">
+                                  <div className="w-full h-48 md:h-56 mb-5 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
                                     <span className="text-gray-400">Нет изображения</span>
                                   </div>
                                 )}
-                                <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4 flex-shrink-0">
+                                <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4 flex-shrink-0 line-clamp-2">
                                   {service.title}
                                 </h3>
                                 <div 
-                                  className="text-gray-700 leading-relaxed font-normal mb-4 md:mb-6 formatted-content text-base md:text-lg flex-1 overflow-hidden"
+                                  className="text-gray-700 leading-relaxed font-normal mb-4 md:mb-6 formatted-content text-base md:text-lg flex-1 overflow-hidden service-card-description"
                                   dangerouslySetInnerHTML={{ __html: service.description }}
                                 />
                                 <button 
