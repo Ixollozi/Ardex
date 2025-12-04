@@ -12,14 +12,14 @@ import { Fallback, SkeletonList } from '@/components/ui/fallback';
 import { apiClient, type FAQ } from '@/lib/api';
 
 export default function FAQ() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [faqItems, setFaqItems] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchFAQ = async () => {
       try {
-        const data = await apiClient.getFAQ();
+        const data = await apiClient.getFAQ(language);
         setFaqItems(data);
       } catch (error) {
       } finally {
@@ -28,7 +28,7 @@ export default function FAQ() {
     };
 
     fetchFAQ();
-  }, []);
+  }, [language]);
 
   // Показываем только данные с бэкенда
   const displayFAQ = faqItems;
@@ -45,7 +45,7 @@ export default function FAQ() {
         {loading ? (
           <SkeletonList items={5} />
         ) : displayFAQ.length > 0 ? (
-          <Accordion type="single" collapsible className="space-y-3 md:space-y-4 pb-12 md:pb-16">
+          <Accordion type="single" collapsible className="space-y-3 md:space-y-4">
             {displayFAQ.map((item) => {
               return (
                 <AccordionItem

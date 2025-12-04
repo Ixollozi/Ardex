@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 
 export default function ServicesPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ export default function ServicesPage() {
     const fetchServices = async () => {
       try {
         setError(null);
-        const data = await apiClient.getServicesPaged(page);
+        const data = await apiClient.getServicesPaged(page, language);
         setServices(data.results);
         setTotalCount(data.count || data.results.length);
         // SEO data for services page
@@ -51,7 +51,7 @@ export default function ServicesPage() {
     };
 
     fetchServices();
-  }, [page]);
+  }, [page, language]);
 
   const handleServiceClick = (service: Service) => {
     if (service.subcategory) {
@@ -356,11 +356,11 @@ export default function ServicesPage() {
                                     <span className="text-gray-400">Нет изображения</span>
                                   </div>
                                 )}
-                                <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4">
+                                <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4 flex-shrink-0">
                                   {service.title}
                                 </h3>
                                 <div 
-                                  className="text-gray-700 leading-relaxed font-normal mb-4 md:mb-6 formatted-content text-base md:text-lg"
+                                  className="text-gray-700 leading-relaxed font-normal mb-4 md:mb-6 formatted-content text-base md:text-lg flex-1 overflow-hidden"
                                   dangerouslySetInnerHTML={{ __html: service.description }}
                                 />
                                 <button 
@@ -369,7 +369,7 @@ export default function ServicesPage() {
                                     setSelectedService(service.id);
                                     setSelectedSubcategory(null);
                                   }}
-                                  className="mt-auto w-full bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
+                                  className="mt-auto w-full bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 flex-shrink-0"
                                 >
                                   Подробнее
                                 </button>

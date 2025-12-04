@@ -5,6 +5,11 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 export const metadata: Metadata = {
   title: "ARDEX",
   description: "ARDEX — современный веб-сайт",
+  icons: {
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

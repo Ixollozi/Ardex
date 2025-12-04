@@ -29,8 +29,8 @@ export default function Services() {
     fetchServices();
   }, []);
 
-  // Показываем только данные с бэкенда
-  const displayServices = services;
+  // Показываем только данные с бэкенда, максимум 10 штук
+  const displayServices = services.slice(0, 10);
 
   return (
     <section id="services" className="py-10 md:py-14 lg:py-16 bg-gray-100">
