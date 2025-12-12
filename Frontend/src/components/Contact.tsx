@@ -131,13 +131,13 @@ export default function Contact() {
 
               {submitStatus === 'success' && (
                 <div className="p-3 md:p-4 bg-green-50 border border-green-200 text-green-800 rounded-xl text-sm md:text-base">
-                  {language === 'ru' ? 'Заказ успешно отправлен!' : 'Buyurtma muvaffaqiyatli yuborildi!'}
+                  {t.contactForm.orderSuccess}
                 </div>
               )}
               
               {submitStatus === 'error' && (
                 <div className="p-3 md:p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-sm md:text-base">
-                  {language === 'ru' ? 'Ошибка при отправке заказа. Попробуйте еще раз.' : 'Buyurtmani yuborishda xatolik. Qayta urinib ko\'ring.'}
+                  {t.contactForm.orderError}
                 </div>
               )}
             </form>
@@ -148,16 +148,16 @@ export default function Contact() {
           <div className="lg:col-span-5">
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-7 border-2 border-gray-100 shadow-lg">
               <h3 className="text-lg md:text-xl font-extrabold text-gray-900 mb-4 md:mb-5">
-                {language === 'ru' ? 'Режим работы' : 'Ish vaqti'}
+                {t.contactForm.workingHours}
               </h3>
               <div className="space-y-3 text-gray-700 text-base md:text-lg font-medium">
                 <div className="flex justify-between">
-                  <span>{language === 'ru' ? 'Понедельник - Суббота' : 'Dushanba - Shanba'}</span>
+                  <span>{t.contactForm.mondaySaturday}</span>
                   <span className="font-medium">9:00 - 18:00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>{language === 'ru' ? 'Воскресенье' : 'Yakshanba'}</span>
-                  <span className="font-medium">{language === 'ru' ? 'Выходной' : 'Dam olish'}</span>
+                  <span>{t.contactForm.sunday}</span>
+                  <span className="font-medium">{t.contactForm.dayOff}</span>
                 </div>
               </div>
             </div>

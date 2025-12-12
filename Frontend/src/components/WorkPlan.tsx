@@ -23,7 +23,7 @@ export default function WorkPlan() {
         const sortedData = [...data].sort((a, b) => a.order - b.order);
         setSteps(sortedData);
       } catch (e) {
-        setError('Не удалось загрузить этапы работы');
+        setError(language === 'ru' ? 'Не удалось загрузить этапы работы' : 'Ish bosqichlarini yuklab bo\'lmadi');
       } finally {
         setLoading(false);
       }
@@ -64,10 +64,10 @@ export default function WorkPlan() {
         {loading ? (
           <SkeletonGrid columns={3} />
         ) : error ? (
-          <Fallback type="error" title="Ошибка" description={error} />
+          <Fallback type="error" title={t.fallback.errorOccurred} description={error} />
         ) : steps.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Этапы работы будут добавлены в ближайшее время</p>
+            <p className="text-gray-500 text-lg">{language === 'ru' ? 'Этапы работы будут добавлены в ближайшее время' : 'Ish bosqichlari yaqin orada qo\'shiladi'}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">

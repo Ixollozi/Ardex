@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FallbackProps {
   type: 'loading' | 'error' | 'empty';
@@ -19,25 +22,27 @@ export function Fallback({
   showRetry = false,
   onRetry,
 }: FallbackProps) {
+  const { t } = useLanguage();
+  
   const getContent = () => {
     switch (type) {
       case 'loading':
         return {
           icon: <Loader2 className="w-8 h-8 text-[#1F6B5E] animate-spin" />,
-          title: title || 'Загрузка...',
-          description: description || 'Пожалуйста, подождите',
+          title: title || t.fallback.loading,
+          description: description || t.fallback.pleaseWait,
         };
       case 'error':
         return {
           icon: <AlertCircle className="w-8 h-8 text-red-500" />,
-          title: title || 'Произошла ошибка',
-          description: description || 'Не удалось загрузить данные',
+          title: title || t.fallback.errorOccurred,
+          description: description || t.fallback.failedToLoad,
         };
       case 'empty':
         return {
           icon: <AlertCircle className="w-8 h-8 text-grey-400" />,
-          title: title || 'Данные отсутствуют',
-          description: description || 'На данный момент информация недоступна',
+          title: title || t.fallback.noData,
+          description: description || t.fallback.infoUnavailable,
         };
     }
   };
@@ -60,7 +65,7 @@ export function Fallback({
           onClick={onRetry}
           className="bg-[#1F6B5E] text-white py-2 px-6 rounded-lg font-medium hover:bg-[#2A8B7A] transition-colors duration-300"
         >
-          Попробовать снова
+          {t.common.retry}
         </button>
       )}
     </div>

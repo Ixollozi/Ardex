@@ -107,7 +107,7 @@ export default function WhyUs() {
         ) : error ? (
           <Fallback
             type="error"
-            title={language === 'ru' ? 'Ошибка загрузки преимуществ' : 'Afzalliklarni yuklashda xatolik'}
+            title={t.fallback.errorOccurred}
             description={error}
             showRetry={true}
             onRetry={() => window.location.reload()}
@@ -166,7 +166,7 @@ export default function WhyUs() {
         ) : (
           <Fallback
             type="empty"
-            title={language === 'ru' ? 'Преимущества недоступны' : 'Afzalliklar mavjud emas'}
+            title={t.fallback.noData}
             description={language === 'ru' 
               ? 'На данный момент преимущества не добавлены'
               : 'Hozircha afzalliklar qo\'shilmagan'

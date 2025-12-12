@@ -66,8 +66,8 @@ export default function FAQ() {
         ) : (
           <Fallback
             type="empty"
-            title="FAQ недоступен"
-            description="На данный момент часто задаваемые вопросы не добавлены"
+            title={t.fallback.noData}
+            description={language === 'ru' ? 'На данный момент часто задаваемые вопросы не добавлены' : 'Hozircha ko\'p beriladigan savollar qo\'shilmagan'}
           />
         )}
       </div>

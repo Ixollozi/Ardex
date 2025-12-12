@@ -44,7 +44,7 @@ export default function ServicesPage() {
           }
         }
       } catch (error) {
-        setError('Не удалось загрузить услуги');
+        setError(t.servicesPage.errorLoading);
       } finally {
         setLoading(false);
       }
@@ -102,7 +102,7 @@ export default function ServicesPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-4 md:mb-6 tracking-tight">
-                  {pageSeo?.title || 'Наши услуги'}
+                  {pageSeo?.title || t.servicesPage.title}
                 </h1>
                 {pageSeo?.description && (
                   <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-medium">
@@ -120,7 +120,7 @@ export default function ServicesPage() {
                 {/* Sidebar Menu */}
                 <div className="lg:w-80 flex-shrink-0 lg:-ml-[calc(50vw-50%)]">
                   <div className="bg-white rounded-xl shadow-lg border-2 border-gray-100 p-5 md:p-6 sticky top-20 md:top-24 min-h-[400px] md:min-h-[600px] max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto">
-                    <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-5 md:mb-6">Услуги</h3>
+                    <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-5 md:mb-6">{t.servicesPage.services}</h3>
                     <nav className="space-y-2 md:space-y-3">
                       {services.map((service, index) => (
                         <div key={service.id}>
@@ -147,7 +147,7 @@ export default function ServicesPage() {
                                        setSelectedSubcategory(null);
                                      }}
                                      className="p-1 rounded hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-                                     title="Открыть услугу"
+                                     title={t.servicesPage.openService}
                                    >
                                  <ExternalLink className="w-4 h-4 text-gray-600" />
                                    </div>
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                   {loading ? (
                     <div className="text-center py-12">
                       <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                      <p className="mt-4 text-gray-600">Загрузка услуг...</p>
+                      <p className="mt-4 text-gray-600">{t.servicesPage.loading}</p>
                     </div>
                   ) : error ? (
                     <div className="text-center py-12">
@@ -207,7 +207,7 @@ export default function ServicesPage() {
                         onClick={() => window.location.reload()}
                         className="bg-gray-900 text-white py-2 px-6 rounded-lg font-medium hover:bg-black transition-colors duration-300"
                       >
-                        Попробовать снова
+                        {t.common.retry}
                       </button>
                     </div>
                   ) : services.length > 0 ? (
@@ -221,7 +221,7 @@ export default function ServicesPage() {
                             </div>
                             <div>
                               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">{selectedSubcategory.title}</h2>
-                              <p className="text-gray-600 text-base md:text-lg font-medium">Подробная информация о подкатегории</p>
+                              <p className="text-gray-600 text-base md:text-lg font-medium">{t.servicesPage.subcategoryDetails}</p>
                             </div>
                           </div>
                           
@@ -237,13 +237,13 @@ export default function ServicesPage() {
                                 href="/#contacts"
                                 className="bg-gradient-to-r from-gray-900 to-black text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
                               >
-                                Заказать услугу
+                                {t.servicesPage.orderService}
                               </Link>
                               <button 
                                 onClick={() => setSelectedSubcategory(null)}
                                 className="border-2 border-gray-700 text-gray-700 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-gray-900 hover:text-white transition-all duration-300 text-base md:text-lg"
                               >
-                                Все услуги
+                                {t.servicesPage.allServices}
                               </button>
                             </div>
                           </div>
@@ -258,7 +258,7 @@ export default function ServicesPage() {
                             <div className="bg-white rounded-xl shadow-lg border-2 border-gray-100 p-6 md:p-9">
                               <div className="mb-6 md:mb-8">
                                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">{service.title}</h2>
-                                <p className="text-gray-600 mt-2 text-base md:text-lg font-medium">Подробная информация об услуге</p>
+                                <p className="text-gray-600 mt-2 text-base md:text-lg font-medium">{t.servicesPage.serviceDetails}</p>
                               </div>
                               
                               {service.image && (
@@ -286,7 +286,7 @@ export default function ServicesPage() {
                                       onClick={() => handleServiceSubcategoryToggle(service.id)}
                                       className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 mb-4"
                                     >
-                                      <span className="font-medium">Подкатегории</span>
+                                      <span className="font-medium">{t.servicesPage.subcategories}</span>
                                       {expandedServiceSubcategories.has(service.id) ? (
                                         <ChevronDown className="w-4 h-4" />
                                       ) : (
@@ -304,7 +304,7 @@ export default function ServicesPage() {
                                           onClick={() => handleSubcategoryClick(service.subcategory!)}
                                           className="text-accentGreen hover:text-accentGreen-dark text-base md:text-lg font-bold transition-all duration-200 transform hover:translate-x-1"
                                         >
-                                          Подробнее о подкатегории →
+                                          {t.servicesPage.moreAboutSubcategory}
                                         </button>
                                       </div>
                                     )}
@@ -316,13 +316,13 @@ export default function ServicesPage() {
                                     href="/#contacts"
                                     className="bg-gradient-to-r from-gray-900 to-black text-white py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 text-center"
                                   >
-                                    Заказать услугу
+                                    {t.servicesPage.orderService}
                                   </Link>
                                   <button 
                                     onClick={() => setSelectedService(null)}
                                     className="border-2 border-gray-700 text-gray-700 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:bg-gray-900 hover:text-white transition-all duration-300 text-base md:text-lg"
                                   >
-                                    Все услуги
+                                    {t.servicesPage.allServices}
                                   </button>
                                 </div>
                               </div>
@@ -353,7 +353,7 @@ export default function ServicesPage() {
                                   </div>
                                 ) : (
                                   <div className="w-full h-48 md:h-56 mb-5 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
-                                    <span className="text-gray-400">Нет изображения</span>
+                                    <span className="text-gray-400">{t.common.noImage}</span>
                                   </div>
                                 )}
                                 <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-3 md:mb-4 flex-shrink-0 line-clamp-2">
@@ -371,7 +371,7 @@ export default function ServicesPage() {
                                   }}
                                   className="mt-auto w-full bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 flex-shrink-0"
                                 >
-                                  Подробнее
+                                  {language === 'ru' ? 'Подробнее' : 'Batafsil'}
                                 </button>
                               </div>
                             );
@@ -399,7 +399,7 @@ export default function ServicesPage() {
                   ) : (
                     <div className="text-center py-12">
                       <p className="text-gray-500 italic text-lg">
-                        На данный момент услуги не добавлены
+                        {t.servicesPage.noServices}
                       </p>
                     </div>
                   )}
@@ -413,17 +413,17 @@ export default function ServicesPage() {
           <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 md:mb-6">
-                Готовы начать проект?
+                {t.servicesPage.readyToStart}
               </h2>
               <p className="text-xl md:text-2xl text-white/90 mb-8 md:mb-10 max-w-2xl mx-auto font-medium">
-                Свяжитесь с нами для обсуждения ваших потребностей и получения персонального предложения.
+                {t.servicesPage.readyToStartDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center">
                 <Link 
                   href="/#contact"
                   className="bg-white text-gray-900 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
                 >
-                  Связаться с нами
+                  {t.servicesPage.contactUs}
                 </Link>
               </div>
             </div>

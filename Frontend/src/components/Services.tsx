@@ -20,7 +20,7 @@ export default function Services() {
         const data = await apiClient.getServices();
         setServices(data);
       } catch (error) {
-        setError('Не удалось загрузить услуги');
+        setError(t.servicesPage.errorLoading);
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ export default function Services() {
         ) : error ? (
           <Fallback
             type="error"
-            title="Ошибка загрузки услуг"
+            title={t.errors.servicesError}
             description={error}
             showRetry={true}
             onRetry={() => window.location.reload()}
@@ -72,7 +72,7 @@ export default function Services() {
                       </div>
                     ) : (
                       <div className="w-full h-40 md:h-48 mb-3 md:mb-4 rounded-lg bg-gray-100 flex items-center justify-center">
-                        <span className="text-gray-400 text-sm">Нет изображения</span>
+                        <span className="text-gray-400 text-sm">{t.common.noImage}</span>
                       </div>
                     )}
                     <h3 className="text-sm md:text-base font-semibold text-gray-900 leading-tight">
@@ -87,15 +87,15 @@ export default function Services() {
                 href="/services"
                 className="inline-flex items-center bg-gradient-to-r from-gray-800 to-black text-white py-4 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
               >
-                Посмотреть все услуги
+                {t.servicesPage.viewAllServices}
               </Link>
             </div>
           </>
         ) : (
           <Fallback
             type="empty"
-            title="Услуги недоступны"
-            description="На данный момент услуги не добавлены"
+            title={t.fallback.noData}
+            description={t.servicesPage.noServices}
           />
         )}
       </div>

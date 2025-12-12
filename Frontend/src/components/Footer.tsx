@@ -49,10 +49,7 @@ export default function Footer() {
               ARDEX
             </h3>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-              {language === 'ru' 
-                ? 'Профессиональный консалтинг и инжиниринг для развития вашего бизнеса'
-                : 'Biznesingizni rivojlantirish uchun professional konsalting va muhandislik'
-              }
+              {t.footer.description}
             </p>
             <div className="flex space-x-3 md:space-x-4 mt-3 md:mt-4">
               <a
@@ -92,7 +89,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-base md:text-lg font-bold mb-2 md:mb-3">
-              {language === 'ru' ? 'Быстрые ссылки' : 'Tez havolalar'}
+              {t.footer.quickLinks}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -141,7 +138,7 @@ export default function Footer() {
                 ))}
                 {services.length === 0 && (
                   <li className="text-gray-500 italic">
-                    {language === 'ru' ? 'Услуги загружаются...' : 'Xizmatlar yuklanmoqda...'}
+                    {t.footer.servicesLoading}
                   </li>
                 )}
               </ul>
@@ -162,7 +159,7 @@ export default function Footer() {
               <ul className="space-y-2 text-gray-300">
                 {contactInfo?.email && (
                   <li>
-                    {language === 'ru' ? 'Email:' : 'Elektron pochta:'}<br />
+                    {t.footer.email}<br />
                     <a href={`mailto:${contactInfo.email}`} className="hover:text-accentGreen transition-colors">
                       {contactInfo.email}
                     </a>
@@ -170,7 +167,7 @@ export default function Footer() {
                 )}
                 {contactInfo?.phone && (
                   <li>
-                    {language === 'ru' ? 'Телефон:' : 'Telefon:'}<br />
+                    {t.footer.phone}<br />
                     <a href={`tel:${contactInfo.phone}`} className="hover:text-accentGreen transition-colors">
                       {contactInfo.phone}
                     </a>
@@ -184,7 +181,7 @@ export default function Footer() {
                 )}
                 {!contactInfo?.email && !contactInfo?.phone && !contactInfo?.address && (
                   <li className="text-gray-500 italic">
-                    {language === 'ru' ? 'Контактная информация загружается...' : 'Aloqa ma\'lumotlari yuklanmoqda...'}
+                    {t.footer.contactInfoLoading}
                   </li>
                 )}
               </ul>
