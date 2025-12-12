@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export default function Services() {
     const fetchServices = async () => {
       try {
         setError(null);
-        const data = await apiClient.getServices();
+        const data = await apiClient.getServices(language);
         setServices(data);
       } catch (error) {
         setError(t.servicesPage.errorLoading);
@@ -27,7 +27,7 @@ export default function Services() {
     };
 
     fetchServices();
-  }, []);
+  }, [language]);
 
   // Показываем только данные с бэкенда, максимум 10 штук
   const displayServices = services.slice(0, 10);

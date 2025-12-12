@@ -12,3 +12,8 @@ class WhyUsListAPIView(generics.ListAPIView):
     serializer_class = WhyUsItemSerializer
     permission_classes = [AllowAny]
     pagination_class = None  # Отключаем пагинацию, чтобы вернуть все элементы
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context

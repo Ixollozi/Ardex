@@ -183,7 +183,12 @@ class ApiClient {
 
   async getServicesPaged(page: number = 1, language?: string): Promise<PaginatedResponse<Service>> {
     try {
-      const data = await this.request<any>(`/api/services/?page=${page}`, language);
+      // Строим URL с учетом пагинации и языка
+      let endpoint = `/api/services/?page=${page}`;
+      if (language) {
+        endpoint += `&lang=${language}`;
+      }
+      const data = await this.request<any>(endpoint);
       if (Array.isArray(data)) {
         return { count: data.length, next: null, previous: null, results: data };
       }
@@ -243,7 +248,7 @@ class ApiClient {
   async getContacts(language: string = 'ru'): Promise<CompanyContact | null> {
     try {
       console.log('Fetching contacts from API...');
-      const data = await this.request<any>(`/api/contacts/?lang=${language}`);
+      const data = await this.request<any>('/api/contacts/', language);
       const contacts = this.normalizeList<any>(data);
       console.log('Contacts response:', data);
       if (contacts.length === 0) return null;
@@ -283,7 +288,7 @@ class ApiClient {
   // WhyUs API
   async getWhyUsItems(language: string = 'ru'): Promise<WhyUsItem[]> {
     try {
-      const data = await this.request<any>(`/api/whyus/?lang=${language}`);
+      const data = await this.request<any>('/api/whyus/', language);
       return this.normalizeList<WhyUsItem>(data);
     } catch (error) {
       console.error('Failed to fetch WhyUs items:', error);
@@ -320,7 +325,7 @@ class ApiClient {
   // Pages SEO API
   async getPageSeo(slug: string, language: string = 'ru'): Promise<PageSeo | null> {
     try {
-      const data = await this.request<PageSeo | null>(`/api/pages/${slug}/?lang=${language}`);
+      const data = await this.request<PageSeo | null>(`/api/pages/${slug}/`, language);
       // Если API вернул null или пустой ответ, возвращаем null без ошибки
       return data || null;
     } catch (error) {

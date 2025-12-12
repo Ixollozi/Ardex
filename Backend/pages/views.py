@@ -12,6 +12,11 @@ class PageSeoRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Page.objects.filter(is_active=True)
     serializer_class = PageSeoSerializer
     
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+    
     def retrieve(self, request, *args, **kwargs):
         try:
             instance = self.get_object()

@@ -18,7 +18,7 @@ export default function WorkPlan() {
     const fetchSteps = async () => {
       try {
         setError(null);
-        const data = await apiClient.getWorkPlan();
+        const data = await apiClient.getWorkPlan(language);
         // сортируем по order на всякий случай
         const sortedData = [...data].sort((a, b) => a.order - b.order);
         setSteps(sortedData);
@@ -29,7 +29,7 @@ export default function WorkPlan() {
       }
     };
     fetchSteps();
-  }, []);
+  }, [language]);
 
   // Функция для переключения раскрытия карточки
   const toggleExpand = (itemId: number) => {
@@ -67,7 +67,7 @@ export default function WorkPlan() {
           <Fallback type="error" title={t.fallback.errorOccurred} description={error} />
         ) : steps.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">{language === 'ru' ? 'Этапы работы будут добавлены в ближайшее время' : 'Ish bosqichlari yaqin orada qo\'shiladi'}</p>
+            <p className="text-gray-500 text-lg">{t.workplan.willBeAdded}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -120,7 +120,7 @@ export default function WorkPlan() {
                             />
                             {showExpandButton && (
                               <div className="mt-3 flex items-center text-white/90 font-medium text-sm transition-colors duration-200 self-start pointer-events-none">
-                                {language === 'ru' ? 'Подробнее' : 'Batafsil'}
+                                {t.workplan.more}
                                 <ChevronDown className="ml-1 transition-transform duration-200" size={16} />
                               </div>
                             )}
@@ -128,7 +128,7 @@ export default function WorkPlan() {
                         )}
                         {isExpanded && showExpandButton && (
                           <div className="mt-3 flex items-center text-white/90 font-medium text-sm transition-colors duration-200 self-start pointer-events-none">
-                            {language === 'ru' ? 'Свернуть' : 'Yig\'ish'}
+                            {t.workplan.collapse}
                             <ChevronDown className="ml-1 rotate-180 transition-transform duration-200" size={16} />
                           </div>
                         )}
@@ -157,7 +157,7 @@ export default function WorkPlan() {
                               toggleExpand(step.id);
                             }}
                             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                            aria-label={language === 'ru' ? 'Свернуть' : 'Yig\'ish'}
+                            aria-label={t.workplan.collapse}
                           >
                             <ChevronDown className="rotate-180 transition-transform" size={20} />
                           </button>

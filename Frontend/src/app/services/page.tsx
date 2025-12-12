@@ -32,7 +32,7 @@ export default function ServicesPage() {
         setServices(data.results);
         setTotalCount(data.count || data.results.length);
         // SEO data for services page
-        const seo = await apiClient.getPageSeo('services');
+        const seo = await apiClient.getPageSeo('services', language);
         setPageSeo(seo);
         
         // Проверяем URL hash для автоматического открытия услуги
@@ -371,7 +371,7 @@ export default function ServicesPage() {
                                   }}
                                   className="mt-auto w-full bg-gradient-to-r from-accentGreen to-accentGreen-dark text-white py-4 px-6 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105 flex-shrink-0"
                                 >
-                                  {language === 'ru' ? 'Подробнее' : 'Batafsil'}
+                                  {t.common.more}
                                 </button>
                               </div>
                             );
@@ -420,7 +420,7 @@ export default function ServicesPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center">
                 <Link 
-                  href="/#contact"
+                  href="/#contacts"
                   className="bg-white text-gray-900 py-4 md:py-5 px-8 md:px-10 rounded-xl font-bold hover:shadow-xl transition-all duration-300 text-base md:text-lg transform hover:scale-105"
                 >
                   {t.servicesPage.contactUs}
